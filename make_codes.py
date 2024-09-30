@@ -11,3 +11,7 @@ db_connection = mysql.connector.connect(
          password='pekka',
          autocommit=True
          )
+
+
+# selects 5 random location from airport tabel and adds them to locations table
+def location():
