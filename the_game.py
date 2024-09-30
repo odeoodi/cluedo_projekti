@@ -24,7 +24,7 @@ def accuse_weapon_suspect():
     weapon_accusation = input("Make your weapon accusation: ")
     suspect_accusation = input("Who do you suspect: ")
     #suspect_airport = location_now()
-    suspect_airport = "Belgium"
+    #suspect_airport = "Belgium"
     sql = f'insert into accusations(weapon_accusations,airport_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -113,21 +113,24 @@ while check_money(1) > 0 and not victory:
         if game_round.lower() == "accuse":
             accuse_weapon_suspect()
             #accusation_counter += 1
-            #accuse_suspect()
-            #accuse_location()
             #print(check_if_correct())
             command_counter += 1
+            game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             destination = input("Where would you like to fly next: ")
             command_counter = 0
+            game_round = input("What would you like to do: ")
             #fly()
         elif game_round.lower() == "check accusations":
             check_accusations()
+            game_round = input("What would you like to do: ")
         elif game_round == "help":
             print("hello")
+            game_round = input("What would you like to do: ")
             #print(help_ville())
         else:
             print("Check spelling on your command.")
+            game_round = input("What would you like to do: ")
     if command_counter == 1:
         destination = input("Where would you like to fly next: ")
         command_counter = 0
