@@ -53,7 +53,6 @@ def win():
 
 
 
-
 """
 pseudo code for one round:
 
