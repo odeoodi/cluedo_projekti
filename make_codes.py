@@ -12,7 +12,7 @@ db_connection = mysql.connector.connect(
          autocommit=True
          )
 
-
+'''
 def location():
     # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table.
     sql1= (f'DELETE FROM LOCATIONS;')
@@ -24,3 +24,20 @@ def location():
     return
 
 location()
+'''
+
+def start_location():
+    # select one random loaction from locations tabel as location where the game starts
+    sql= (f'insert into game(location) SELECT name FROM locations ORDER BY RAND() limit 1;')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    db_connection.commit()
+    return
+
+# def fly():
+
+start_location()
+
+
+
+
