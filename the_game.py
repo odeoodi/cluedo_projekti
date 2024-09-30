@@ -11,46 +11,35 @@ def check_money(saved_game):
     money_now = money[0]
     return money_now
 
-#def accuse_weapon():
+def accuse_weapon():
     #adds the accused weapon to accusations table
-
-
-def correct_weapon():
-    # tarvitsen right_answers taulusta oikeat vastaukset ja accusations taulusta syytökset. Vertaan, onko kaikki right_answers
-    # taulun tiedot accusations taulussa. Periaatteessa toimii, jos yhdistän taulut ja katson onko right_answers.id_weapons
-    # (ja sama kuin weapons -taulun id, josta saadaan weaponin nimi) myös accusations taulussa ja sama locationille ja suspecteille.
-    sql = f'from right_answers inner join goal_reached on goal_reached.right_answers_id = right_answers.id_weapons inner join weapons on weapons.id = right_answers.id_weapons where right_answers.id_weapons = weapons.id'
+    weapon_accusation = input("Make your weapon accusation: ")
+    sql = f'insert into accusations(weapon_accusations) values("{weapon_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    right_weapon = cursor.fetchall()
-    if len(right_weapon) == 1:
-        first_right = True
-    return first_right
+    #fff = cursor.fetchone()
+    return
 
-def correct_suspect():
-    #tarvitsen right_answers taulusta oikeat vastaukset ja accusations taulusta syytökset. Vertaan, onko kaikki right_answers
-    # taulun tiedot accusations taulussa. Periaatteessa toimii, jos yhdistän taulut ja katson onko right_answers.id_weapons
-    # (ja sama kuin weapons -taulun id, josta saadaan weaponin nimi) myös accusations taulussa ja sama locationille ja suspecteille.
-    sql = f''
+def accuse_suspect():
+    suspect_accusation = input("Who do you suspect: ")
+    sql = f'insert into accusations(suspect_accusations) values("{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    right_suspect = cursor.fetchall()
-    if right_suspect:
-        second_right = True
-    return second_right
-
-def correct_location():
-    #tarvitsen right_answers taulusta oikeat vastaukset ja accusations taulusta syytökset. Vertaan, onko kaikki right_answers
-    # taulun tiedot accusations taulussa. Periaatteessa toimii, jos yhdistän taulut ja katson onko right_answers.id_weapons
-    # (ja sama kuin weapons -taulun id, josta saadaan weaponin nimi) myös accusations taulussa ja sama locationille ja suspecteille.
-    sql = f''
+    #fff = cursor.fetchone()
+    return
+'''
+def accuse_location():
+    airport_accusation = location_now()
+    sql = f'insert into accusations(airport_accusations) values("{airport_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    right_location = cursor.fetchall()
-    if right_location:
-        third_right = True
-    return third_right
+    #fff = cursor.fetchone()
+    return
+'''
 
+
+'''
+angelinan koodi check if correct
 def win():
     loc_true = correct_location()
     sus_true = correct_suspect()
@@ -58,7 +47,7 @@ def win():
     if loc_true and sus_true and wea_true:
         victory = True
     return victory
-
+'''
 
 
 
@@ -120,9 +109,9 @@ while check_money(1) > 0 and not victory:
     game_round = input("What would you like to do: ")
 
     if game_round.lower() == "accuse":
-        weapon_accusation = input("Make your weapon accusation: ")
-        suspect_accusation = input("Who do you suspect: ")
-        location_accusation = location_now()
+        accuse_weapon()
+        accuse_suspect()
+        #accuse_location()
         #print(check_if_correct())
     elif game_round.lower() == "fly":
         destination = input("Where would you like to fly next: ")
