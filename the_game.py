@@ -3,6 +3,17 @@ from tabnanny import check
 import mysql.connector
 import random
 
+def location():
+    # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table.
+    sql1= (f'DELETE FROM LOCATIONS;')
+    sql2= (f'insert into locations(name) SELECT name FROM airport WHERE continent = "EU" and type = "large_airport" ORDER BY RAND() limit 5;')
+    cursor = db_connection.cursor()
+    cursor.execute(sql1)
+    cursor.execute(sql2)
+    db_connection.commit()
+    return
+
+
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
