@@ -21,11 +21,7 @@ def check_money(saved_game):
     return money_now
 
 def location_now():
-    sql = (f'SELECT airport.name from airport inner join locations on airport.ident = locations.icao '
-           f'inner join right_answers on right_answers.id_locations = locations.id '
-           f'inner join goal_reached on goal_reached.right_answers_id = right_answers.id '
-           f'inner join game on goal_reached.game_id = game.location '
-           f'where game.location = airport.ident')
+    sql = (f'SELECT location from game')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     current_location = cursor.fetchall()
