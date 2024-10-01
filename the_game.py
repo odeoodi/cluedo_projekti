@@ -11,6 +11,7 @@ def location():
     cursor.execute(sql2)
     db_connection.commit()
     return
+
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
