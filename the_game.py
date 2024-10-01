@@ -37,7 +37,11 @@ def check_accusations():
     cursor.execute(sql)
     made_accusations = cursor.fetchall()
     for acc in made_accusations:
-        print(acc)
+        print(f"{acc[0]} ", end="")
+        print(f"{acc[1]} ", end="")
+        print(f"{acc[2]} ", end="")
+        print("")
+    print("")
     return made_accusations
 
 '''
