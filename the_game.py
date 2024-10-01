@@ -21,8 +21,8 @@ def start_location():
     db_connection.commit()
     return
 
-def start_money():
-    sql = (f'insert into game(money) values (500)')
+def start_money(game_id):
+    sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     current_location = cursor.fetchall()
@@ -129,10 +129,10 @@ db_connection = mysql.connector.connect(
 victory = False
 #accusation_counter = 0
 start_location()
-start_money()
-while check_money(2) > 0 and not victory:
+start_money(1)
+while check_money(1) > 0 and not victory:
     #saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    print(f"You have {check_money(2)}€ left.\n")
+    print(f"You have {check_money(1)}€ left.\n")
     print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
     command_counter = 0
@@ -165,7 +165,7 @@ while check_money(2) > 0 and not victory:
         # fly()
 
 #These can be changed to work better with the outro.
-if check_money(2) <= 0:
+if check_money(1) <= 0:
     print("You ran out of money.")
 elif victory:
     print("You solved the mystery!")
