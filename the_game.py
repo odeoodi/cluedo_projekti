@@ -11,6 +11,7 @@ def location():
     cursor.execute(sql2)
     db_connection.commit()
     return
+
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
@@ -19,13 +20,19 @@ def check_money(saved_game):
     money_now = money[0]
     return money_now
 
+def location_now():
+    sql = (f'SELECT location from game')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    current_location = cursor.fetchall()
+    return
+
 def accuse_weapon_suspect():
     #adds the accused weapon to accusations table
     weapon_accusation = input("Make your weapon accusation: ")
     suspect_accusation = input("Who do you suspect: ")
-    #suspect_airport = location_now()
-    #suspect_airport = "Belgium"
-    sql = f'insert into accusations(weapon_accusations,airport_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
+    #suspect_airport =
+    sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
@@ -107,9 +114,9 @@ victory = False
 
 while check_money(1) > 0 and not victory:
     #saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    print(f"You have {check_money(1)}€ left.")
-    print("")
-    print('See the options by typing "help".')
+    location()
+    print(f"You have {check_money(1)}€ left.\n")
+    print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
     command_counter = 0
 
