@@ -2,13 +2,18 @@ from tabnanny import check
 
 import mysql.connector
 import random
-def location():
-    # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table.
+def start_location():
+    # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table,
+    # selects one of the airports as starting airport.
+    sql = (f'DELETE FROM game;')
     sql1= (f'DELETE FROM LOCATIONS;')
-    sql2= (f'insert into locations(name) SELECT name FROM airport WHERE continent = "EU" and type = "large_airport" ORDER BY RAND() limit 5;')
+    sql2= (f'insert into locations(name, icao) SELECT name, ident FROM airport WHERE continent = "EU" and type = "large_airport" ORDER BY RAND() limit 5;')
+    sql3= (f'insert into game(location) SELECT name FROM locations ORDER BY RAND() limit 1;')
     cursor = db_connection.cursor()
+    cursor.execute(sql)
     cursor.execute(sql1)
     cursor.execute(sql2)
+    cursor.execute(sql3)
     db_connection.commit()
     return
 
