@@ -20,12 +20,22 @@ def check_money(saved_game):
     money_now = money[0]
     return money_now
 
+def location_now():
+    sql = (f'SELECT airport.name from airport inner join locations on airport.ident = locations.icao '
+           f'inner join right_answers on right_answers.id_locations = locations.id '
+           f'inner join goal_reached on goal_reached.right_answers_id = right_answers.id '
+           f'inner join game on goal_reached.game_id = game.location '
+           f'where game.location = airport.ident')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    current_location = cursor.fetchall()
+    return
+
 def accuse_weapon_suspect():
     #adds the accused weapon to accusations table
     weapon_accusation = input("Make your weapon accusation: ")
     suspect_accusation = input("Who do you suspect: ")
-    #suspect_airport = location_now()
-    #suspect_airport = "Belgium"
+    #suspect_airport =
     sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
