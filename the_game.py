@@ -107,6 +107,7 @@ victory = False
 
 while check_money(1) > 0 and not victory:
     #saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
+    location()
     print(f"You have {check_money(1)}€ left.")
     print("")
     print('See the options by typing "help".')
