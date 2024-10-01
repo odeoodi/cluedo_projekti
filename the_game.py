@@ -26,7 +26,7 @@ def accuse_weapon_suspect():
     suspect_accusation = input("Who do you suspect: ")
     #suspect_airport = location_now()
     #suspect_airport = "Belgium"
-    sql = f'insert into accusations(weapon_accusations,airport_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
+    sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
@@ -109,9 +109,8 @@ victory = False
 while check_money(1) > 0 and not victory:
     #saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     location()
-    print(f"You have {check_money(1)}€ left.")
-    print("")
-    print('See the options by typing "help".')
+    print(f"You have {check_money(1)}€ left.\n")
+    print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
     command_counter = 0
 
