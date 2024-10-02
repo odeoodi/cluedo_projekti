@@ -82,6 +82,50 @@ def check_accusations(game_id):
     return made_accusations
 
 
+def fly():
+    # Player flys to new location.
+    def locations_available():
+        sql = (
+            f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
+        cursor = db_connection.cursor()
+        cursor.execute(sql)
+        airports = cursor.fetchall()
+        for airport in airports:
+            print(f'{airport[1]}, Icao: {airport[0]}. ')
+        return
+
+    def location_check(destination):
+        sql = (f'SELECT location FROM game ;')
+        sql2 = (f'SELECT name FROM locations WHERE icao = "{destination}";')
+        cursor = db_connection.cursor()
+        cursor.execute(sql)
+        location_game = cursor.fetchall()
+        cursor.execute(sql2)
+        locations = cursor.fetchall()
+        if location_game != locations:
+            return True
+        elif location_game == locations:
+            return False
+
+    def flying_new_port(destination):
+        sql = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
+        cursor = db_connection.cursor()
+        cursor.execute(sql)
+        db_connection.commit()
+        return
+
+    print(f'You are currently at the {location_now(1)}.')
+    print(f'Available airports for you to fly are:')
+    print(locations_available())
+    destination = input("Where would you like to fly next, use the Icao-code: ")
+    if location_check(destination) == True:
+        flying_new_port(destination)
+        print(f'Welcome to {location_now(1)}.')
+    elif location_check(destination) == False:
+        print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+    
+
+
 '''
 angelinan koodi check if correct
 
