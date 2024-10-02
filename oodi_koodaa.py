@@ -55,7 +55,9 @@ def location_now(game_id):
 
 def accuse_weapon_suspect(game_id):
     # --- adds the accused weapon to accusations table
+    print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
     weapon_accusation = input("Make your weapon accusation: ")
+    print("Suspects to choose from: Make, Iida, Ode, Angelina, Ville")
     suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(game_id)
     #testi airport_accusation = "Belgium"
@@ -63,7 +65,7 @@ def accuse_weapon_suspect(game_id):
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
-    check_accusations(game_id)
+    #check_accusations(game_id)
     return
 
 def check_accusations(game_id):
@@ -156,18 +158,17 @@ while check_money(select_game) > 0 and not victory:
             accuse_weapon_suspect(select_game)
             # accusation_counter += 1
             # print(check_if_correct())
-            command_counter += 1
-            game_round = input("What would you like to do: ")
+            #game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             destination = input("Where would you like to fly next: ")
             command_counter = 0
-            game_round = input("What would you like to do: ")
+            #game_round = input("What would you like to do: ")
             # fly()
         elif game_round.lower() == "check accusations":
             check_accusations(select_game)
             game_round = input("What would you like to do: ")
         elif game_round == "help":
-            print("hello")
+            print("hello") # this is only here to keep the game intact until we have a working help function
             game_round = input("What would you like to do: ")
             # print(help_ville())
         else:
