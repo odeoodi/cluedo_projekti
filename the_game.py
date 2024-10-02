@@ -17,12 +17,20 @@ def start_location():
     db_connection.commit()
     return
 
+def start_accusations():
+    sql1 = f"delete from accusations"
+    #sql2 = (f"")
+    cursor = db_connection.cursor()
+    cursor.execute(sql1)
+    hints = cursor.fetchall()
+    return hints
 
 def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     current_location = cursor.fetchall()
+    return
 
 
 def check_money(saved_game):
@@ -37,35 +45,36 @@ def check_money(saved_game):
     return money_now
 
 
-def location_now():
-    sql = (f'SELECT location from game')
+def location_now(game_id):
+    sql = (f'SELECT location from game where id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    current_location = cursor.fetchall()
+    current_location = cursor.fetchall()[0][0]
     return current_location
 
 
-def accuse_weapon_suspect():
-    #adds the accused weapon to accusations table
+def accuse_weapon_suspect(game_id):
+    # --- adds the accused weapon to accusations table
     weapon_accusation = input("Make your weapon accusation: ")
     suspect_accusation = input("Who do you suspect: ")
-    #airport_accusation = location_now()
-    airport_accusation = "Belgium"
+    airport_accusation = location_now(game_id)
+    #testi airport_accusation = "Belgium"
     sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{airport_accusation}","{suspect_accusation}")'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
+    check_accusations(game_id)
     return
 
-def check_accusations():
-    sql = f'select weapon_accusations,suspect_accusations,airport_accusations from accusations'
+def check_accusations(game_id):
+    sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     made_accusations = cursor.fetchall()
     for acc in made_accusations:
-        print(f"{acc[0]} ", end="")
-        print(f"{acc[1]} ", end="")
-        print(f"{acc[2]} ", end="")
+        print(f"| {acc[0]} | ", end="")
+        print(f"{acc[1]} | ", end="")
+        print(f"{acc[2]} |", end="")
         print("")
     print("")
     return made_accusations
@@ -125,13 +134,16 @@ db_connection = mysql.connector.connect(
 # intro()
 
 victory = False
+select_game = 1
 # accusation_counter = 0
 start_location()
-start_money(1)
-print(location_now())
-while check_money(1) > 0 and not victory:
+start_money(select_game)
+print(location_now(select_game))
+start_accusations()
+
+while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    print(f"You have {check_money(1)}€ left.\n")
+    print(f"You have {check_money(select_game)}€ left.\n")
     print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
     accusation_counter = command_counter = 0
@@ -141,7 +153,7 @@ while check_money(1) > 0 and not victory:
         if game_round.lower() == "accuse":
             accusation_counter += 1
             command_counter += 1
-            accuse_weapon_suspect()
+            accuse_weapon_suspect(select_game)
             # accusation_counter += 1
             # print(check_if_correct())
             command_counter += 1
@@ -152,7 +164,7 @@ while check_money(1) > 0 and not victory:
             game_round = input("What would you like to do: ")
             # fly()
         elif game_round.lower() == "check accusations":
-            check_accusations()
+            check_accusations(select_game)
             game_round = input("What would you like to do: ")
         elif game_round == "help":
             print("hello")
@@ -163,7 +175,7 @@ while check_money(1) > 0 and not victory:
             game_round = input("What would you like to do: ")
     if command_counter == 1:
         print("Here are your current accusations.")
-        check_accusations()
+        check_accusations(select_game)
         print("")
         destination = input("Where would you like to fly next: ")
         command_counter = 0
