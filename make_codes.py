@@ -12,7 +12,7 @@ db_connection = mysql.connector.connect(
          autocommit=True
          )
 
-
+'''
 def start_location():
     # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table,
     # selects one of the airports as starting airport.
@@ -27,10 +27,7 @@ def start_location():
     return
 
 
-
-
 start_location()
-
 
 '''
 
@@ -38,18 +35,27 @@ start_location()
 
 
 
+def location_now():
+    sql = (f'SELECT location from game')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    current_location = cursor.fetchall()
+    return current_location
+
 def locations():
-    sql = (f'SELECT icao, name FROM locations WHERE name NOT IN ;')
+    sql = (f'SELECT icao, name FROM locations;')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     airports = cursor.fetchall()
+    if location_now() in airports:
+        airports.remove(location_now())
     for airport in airports:
         print(f' Icao: {airport[0]}, {airport[1]}. ')
     return
 
 
 locations()
-'''
+print(location_now())
 '''
 def is_location_current(destination):
     sql = (f'SELECT icao, FROM locations;')
@@ -68,8 +74,8 @@ def fly():
     destination = input("Where would you like to fly next, use the Icao-code: ")
     if is_location_current(destination) == True:
         else:
-'''
 
+'''
 
 
 
