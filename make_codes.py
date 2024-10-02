@@ -61,53 +61,76 @@ def is_location_current(destination):
 '''
 
 def fly():
+# Druing this funktion player can fly to the new location.
 
     def locations_available():
-        sql = (
-            f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
+        # This print all the airports and their ICAO-codes where player can fly.
+        # Execludin the location where player is currently
+        availabled = (f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
         cursor = db_connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
             print(f'{airport[1]}, Icao: {airport[0]}. ')
         return
 
-    def location_check(destination):
-        sql = (f'SELECT location FROM game ;')
-        sql2 = (f'SELECT name FROM locations WHERE icao = "{destination}";')
+    def icao_in_locations(destination):
+        # Checks if the icao code is writen correctly.
+        check = (f'SELECT name FROM locations; ')
+        getname = (f'SELECT name FROM locations WHERE icao = "{destination}";')
         cursor = db_connection.cursor()
-        cursor.execute(sql)
-        location_game = cursor.fetchall()
-        cursor.execute(sql2)
-        locations = cursor.fetchall()
-        if location_game != locations:
+        cursor.execute(check)
+        locations_check = cursor.fetchall()
+        cursor.execute(getname)
+        locations_icao_name = cursor.fetchall()
+        if not locations_icao_name:
+            return False
+        elif locations_icao_name[0] in locations_check:
             return True
-        elif location_game == locations:
+
+
+    def location_check(destination):
+        # Checks if the destination where player wants to go is current location or not.
+        # Returns True or False.
+        getlocation = (f'SELECT location FROM game ;')
+        getname = (f'SELECT name FROM locations WHERE icao = "{destination}";')
+        cursor = db_connection.cursor()
+        cursor.execute(getlocation)
+        location_game = cursor.fetchall()
+        cursor.execute(getname)
+        locations_icao = cursor.fetchall()
+        if location_game != locations_icao:
+            return True
+        else:
             return False
 
     def flying_new_port(destination):
-        sql = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
+        # Uppdates a new location to the database where player has flown.
+        flying = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
         cursor = db_connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(flying)
         db_connection.commit()
         return
         
+    while True:
+        print(f'You are currently at the {location_now(1)}.')
+        print(f'Available airports for you to fly are:')
+        print(locations_available())
+        destination = input("Where would you like to fly next, use the Icao-code: ")
+        destination = destination.upper()
+        if icao_in_locations(destination) == True:
+            if location_check(destination) == True:
+                flying_new_port(destination)
+                print(f'Welcome to {location_now(1)}.')
+                break
+            elif location_check(destination) == False:
+                print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+        else :
+            print("Sorry your Icao-code was not in the list, please try again.")
 
-    print(f'You are currently at the {location_now(1)}.')
-    print(f'Available airports for you to fly are:')
-    print(locations_available())
-    destination = input("Where would you like to fly next, use the Icao-code: ")
-    if location_check(destination) == True:
-        flying_new_port(destination)
-        print(f'Welcome to {location_now(1)}.')
-    elif location_check(destination) == False:
-        print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
-        fly()
 
 
-while True:
-    fly()
-
+fly()
 
 
 
