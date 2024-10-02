@@ -176,7 +176,6 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-
 # intro()
 
 victory = False
@@ -184,16 +183,18 @@ select_game = 1
 # accusation_counter = 0
 start_location()
 start_money(select_game)
-print(location_now(select_game))
+#print(location_now(select_game))
 start_accusations()
+print('See the options by typing "help".\n')
+print(f"You have {check_money(select_game)}€ left.\n")
+
 
 while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    print(f"You have {check_money(select_game)}€ left.\n")
-    print('See the options by typing "help".\n')
+    #print(f"You have {check_money(select_game)}€ left.\n")
+    #print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
     accusation_counter = command_counter = 0
-
 
     while command_counter == 0:
         if game_round.lower() == "accuse":
@@ -202,17 +203,16 @@ while check_money(select_game) > 0 and not victory:
             accuse_weapon_suspect(select_game)
             # accusation_counter += 1
             # print(check_if_correct())
-            #game_round = input("What would you like to do: ")
+            # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
-            destination = input("Where would you like to fly next: ")
+            fly()
             command_counter = 0
-            #game_round = input("What would you like to do: ")
-            # fly()
+            game_round = input("What would you like to do: ")
         elif game_round.lower() == "check accusations":
             check_accusations(select_game)
             game_round = input("What would you like to do: ")
         elif game_round == "help":
-            print("hello") # this is only here to keep the game intact until we have a working help function
+            print("hello")  # this is only here to keep the game intact until we have a working help function
             game_round = input("What would you like to do: ")
             # print(help_ville())
         else:
@@ -222,9 +222,8 @@ while check_money(select_game) > 0 and not victory:
         print("Here are your current accusations.")
         check_accusations(select_game)
         print("")
-        destination = input("Where would you like to fly next: ")
+        fly()
         command_counter = 0
-        # fly()
 
 # These can be changed to work better with the outro.
 if check_money(1) <= 0:
