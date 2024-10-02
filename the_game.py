@@ -160,7 +160,7 @@ select_game = 1
 # accusation_counter = 0
 start_location()
 start_money(select_game)
-print(location_now(select_game))
+#print(location_now(select_game))
 start_accusations()
 
 while check_money(select_game) > 0 and not victory:
