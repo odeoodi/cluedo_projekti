@@ -42,14 +42,17 @@ def location_now():
     cursor = db_connection.cursor()
     cursor.execute(sql)
     current_location = cursor.fetchall()
-    return
+    return current_location
 
 def accuse_weapon_suspect():
     #adds the accused weapon to accusations table
     weapon_accusation = input("Make your weapon accusation: ")
     suspect_accusation = input("Who do you suspect: ")
-    #suspect_airport =
-    sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{suspect_airport}","{suspect_accusation}")'
+    location_accusation = location_now()
+    sql = (f'UPDATE accusations SET weapon_accusations = "{weapon_accusation}",'
+           f'location_accusations = "{location_accusation}",)'
+           f'suspect_accusations = "{suspect_accusation}"'
+           f'WHERE id = "{game_id}"'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
