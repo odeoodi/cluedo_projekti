@@ -28,13 +28,13 @@ def start_location():
 
 
 start_location()
-
 '''
 
 
 
 
 
+'''
 def location_now():
     sql = (f'SELECT location from game')
     cursor = db_connection.cursor()
@@ -43,7 +43,7 @@ def location_now():
     return current_location
 
 def locations():
-    sql = (f'SELECT icao, name FROM locations;')
+    sql = (f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
     cursor = db_connection.cursor()
     cursor.execute(sql)
     airports = cursor.fetchall()
@@ -55,8 +55,8 @@ def locations():
 
 
 locations()
-print(location_now())
-'''
+
+
 def is_location_current(destination):
     sql = (f'SELECT icao, FROM locations;')
     sql2 = (f'SELECT icao, FROM game;')

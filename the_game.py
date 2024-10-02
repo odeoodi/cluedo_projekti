@@ -33,6 +33,28 @@ def start_money(game_id):
     return
 
 
+def random_location(locations):
+    sql = f"SELECT name FROM locations ORDER BY RAND() LIMIT 1";
+    kursori=db_connection.cursor()
+    kursori.execute(sql)
+    result=kursori.fetchone()
+    return result
+
+def random_weapon(weapons):
+    sql = f"SELECT weapon FROM weapons ORDER BY RAND() LIMIT 1";
+    kursori=db_connection.cursor()
+    kursori.execute(sql)
+    result=kursori.fetchone()
+    return result
+
+def random_suspect(suspects):
+    sql = f"SELECT names FROM suspects ORDER BY RAND() LIMIT 1";
+    kursori=db_connection.cursor()
+    kursori.execute(sql)
+    result=kursori.fetchone()
+    return result
+
+
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
