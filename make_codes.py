@@ -42,7 +42,16 @@ def location_now(game_id):
     current_location = cursor.fetchall()[0][0]
     return current_location
 
-
+def check_money(saved_game):
+    sql = f'select money from game where id = "{saved_game}"'
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    money = cursor.fetchone()
+    if money is None:
+        print(f"No money found for game ID: {saved_game}. Returning 0.")
+        return 0
+    money_now = int(money[0])
+    return money_now
 
 
 
@@ -71,7 +80,7 @@ def fly():
         cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
-            print(f'{airport[1]}, Icao: {airport[0]}. ')
+            print(f'Icao: {airport[0]}, {airport[1]}. ')
         return
 
     def icao_in_locations(destination):
@@ -111,7 +120,17 @@ def fly():
         cursor.execute(flying)
         db_connection.commit()
         return
-        
+
+    def cost_of_flying():
+        # Subtracts flying cost from the money player has.
+        # Change (SELECT money -'125'....) to change cost.
+        moneycost=(f'UPDATE game SET money =( SELECT money -125 FROM game ) ')
+        cursor = db_connection.cursor()
+        cursor.execute(moneycost)
+        db_connection.commit()
+        return
+
+
     while True:
         print(f'You are currently at the {location_now(1)}.')
         print(f'Available airports for you to fly are:')
@@ -121,13 +140,14 @@ def fly():
         if icao_in_locations(destination) == True:
             if location_check(destination) == True:
                 flying_new_port(destination)
-                print(f'Welcome to {location_now(1)}.')
+                cost_of_flying()
+                print(f'Welcome to {location_now(1)} you have {check_money(1)} euros.')
+
                 break
             elif location_check(destination) == False:
                 print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
         else :
             print("Sorry your Icao-code was not in the list, please try again.")
-
 
 
 fly()
