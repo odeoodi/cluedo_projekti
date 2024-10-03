@@ -231,7 +231,6 @@ while check_money(select_game) > 0 and not victory:
     while command_counter == 0:
         if game_round.lower() == "accuse":
             accusation_counter += 1
-            print(accusation_counter)
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
             # print(check_if_correct())
