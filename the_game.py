@@ -168,19 +168,18 @@ def fly():
         return made_accusations
 
     def fly():
-        # During this funktion player can fly to the new location.
+        # Druing this funktion player can fly to the new location.
 
         def locations_available():
             # This print all the airports and their ICAO-codes where player can fly.
             # Execludin the location where player is currently
             availabled = (
-                f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
+                f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL ;")
             cursor = db_connection.cursor()
             cursor.execute(availabled)
             airports = cursor.fetchall()
             for airport in airports:
                 print(f'Icao: {airport[0]}, {airport[1]}. ')
-            return
 
         def icao_in_locations(destination):
             # Checks if the icao code is writen correctly.
@@ -231,7 +230,7 @@ def fly():
         while True:
             print(f'You are currently at the {location_now(1)}.')
             print(f'Available airports for you to fly are:')
-            print(locations_available())
+            locations_available()
             destination = input("Where would you like to fly next, use the Icao-code: ")
             destination = destination.upper()
             if icao_in_locations(destination) == True:

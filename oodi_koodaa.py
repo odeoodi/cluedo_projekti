@@ -88,21 +88,18 @@ def check_accusations(game_id):
     print("")
     return made_accusations
 
-
 def fly():
-    # During this funktion player can fly to the new location.
+# Druing this funktion player can fly to the new location.
 
     def locations_available():
         # This print all the airports and their ICAO-codes where player can fly.
         # Execludin the location where player is currently
-        availabled = (
-            f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
+        availabled = (f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL ;")
         cursor = db_connection.cursor()
         cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
             print(f'Icao: {airport[0]}, {airport[1]}. ')
-        return
 
     def icao_in_locations(destination):
         # Checks if the icao code is writen correctly.
@@ -117,6 +114,7 @@ def fly():
             return False
         elif locations_icao_name[0] in locations_check:
             return True
+
 
     def location_check(destination):
         # Checks if the destination where player wants to go is current location or not.
@@ -144,16 +142,17 @@ def fly():
     def cost_of_flying():
         # Subtracts flying cost from the money player has.
         # Change (SELECT money -'125'....) to change cost.
-        moneycost = (f'UPDATE game SET money =( SELECT money -125 FROM game ) ')
+        moneycost=(f'UPDATE game SET money =( SELECT money -125 FROM game ) ')
         cursor = db_connection.cursor()
         cursor.execute(moneycost)
         db_connection.commit()
         return
 
+
     while True:
         print(f'You are currently at the {location_now(1)}.')
         print(f'Available airports for you to fly are:')
-        print(locations_available())
+        locations_available()
         destination = input("Where would you like to fly next, use the Icao-code: ")
         destination = destination.upper()
         if icao_in_locations(destination) == True:
@@ -164,10 +163,10 @@ def fly():
 
                 break
             elif location_check(destination) == False:
-                print(
-                    "You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
-        else:
+                print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+        else :
             print("Sorry your Icao-code was not in the list, please try again.")
+
 
 
 '''
