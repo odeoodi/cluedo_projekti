@@ -38,9 +38,6 @@ def check_money(saved_game):
     cursor = db_connection.cursor()
     cursor.execute(sql)
     money = cursor.fetchone()
-    if money is None:
-        print(f"No money found for game ID: {saved_game}. Returning 0.")
-        return 0
     money_now = int(money[0])
     return money_now
 
