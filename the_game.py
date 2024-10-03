@@ -18,8 +18,8 @@ def start_location():
     return
 
 def start_accusations():
-    sql1 = f"delete from accusations"
-    #sql2 = (f"")
+    sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
+    #sql2 = f"alter table accusations auto_increment = 1"
     cursor = db_connection.cursor()
     cursor.execute(sql1)
     hints = cursor.fetchall()
@@ -53,15 +53,14 @@ def location_now(game_id):
     return current_location
 
 
-def accuse_weapon_suspect(game_id):
+def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
     weapon_accusation = input("Make your weapon accusation: ")
     print("Suspects to choose from: Make, Iida, Ode, Angelina, Ville")
     suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(game_id)
-    #testi airport_accusation = "Belgium"
-    sql = f'insert into accusations(weapon_accusations,location_accusations,suspect_accusations) values("{weapon_accusation}","{airport_accusation}","{suspect_accusation}")'
+    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
@@ -69,7 +68,7 @@ def accuse_weapon_suspect(game_id):
     return
 
 def check_accusations(game_id):
-    sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations')
+    sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations where weapon_accusations is not NULL')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     made_accusations = cursor.fetchall()
@@ -83,17 +82,19 @@ def check_accusations(game_id):
 
 
 def fly():
-# Druing this funktion player can fly to the new location.
+    # During this funktion player can fly to the new location.
 
     def locations_available():
         # This print all the airports and their ICAO-codes where player can fly.
         # Execludin the location where player is currently
-        availabled = (f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL ;")
+        availabled = (
+            f"SELECT icao, name FROM locations LEFT JOIN game ON locations.name = game.location WHERE game.location IS NULL;")
         cursor = db_connection.cursor()
         cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
             print(f'Icao: {airport[0]}, {airport[1]}. ')
+        return
 
     def icao_in_locations(destination):
         # Checks if the icao code is writen correctly.
@@ -108,7 +109,6 @@ def fly():
             return False
         elif locations_icao_name[0] in locations_check:
             return True
-
 
     def location_check(destination):
         # Checks if the destination where player wants to go is current location or not.
@@ -136,17 +136,16 @@ def fly():
     def cost_of_flying():
         # Subtracts flying cost from the money player has.
         # Change (SELECT money -'125'....) to change cost.
-        moneycost=(f'UPDATE game SET money =( SELECT money -125 FROM game ) ')
+        moneycost = (f'UPDATE game SET money =( SELECT money -125 FROM game ) ')
         cursor = db_connection.cursor()
         cursor.execute(moneycost)
         db_connection.commit()
         return
 
-
     while True:
         print(f'You are currently at the {location_now(1)}.')
         print(f'Available airports for you to fly are:')
-        locations_available()
+        print(locations_available())
         destination = input("Where would you like to fly next, use the Icao-code: ")
         destination = destination.upper()
         if icao_in_locations(destination) == True:
@@ -157,10 +156,10 @@ def fly():
 
                 break
             elif location_check(destination) == False:
-                print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
-        else :
+                print(
+                    "You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+        else:
             print("Sorry your Icao-code was not in the list, please try again.")
-
 
 
 '''
@@ -224,21 +223,19 @@ start_money(select_game)
 start_accusations()
 print('See the options by typing "help".\n')
 print(f"You have {check_money(select_game)}€ left.\n")
-
+accusation_counter = 0
 
 while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    #print(f"You have {check_money(select_game)}€ left.\n")
-    #print('See the options by typing "help".\n')
     game_round = input("What would you like to do: ")
-    accusation_counter = command_counter = 0
+    command_counter = 0
 
     while command_counter == 0:
         if game_round.lower() == "accuse":
             accusation_counter += 1
+            print(accusation_counter)
             command_counter += 1
-            accuse_weapon_suspect(select_game)
-            # accusation_counter += 1
+            accuse_weapon_suspect(select_game,accusation_counter)
             # print(check_if_correct())
             # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
@@ -263,7 +260,7 @@ while check_money(select_game) > 0 and not victory:
         command_counter = 0
 
 # These can be changed to work better with the outro.
-if check_money(1) <= 0:
+if check_money(select_game) <= 0:
     print("You ran out of money.")
 elif victory:
     print("You solved the mystery!")
