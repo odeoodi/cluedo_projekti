@@ -20,10 +20,11 @@ def start_location():
 def start_accusations():
     sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
     #sql2 = f"alter table accusations auto_increment = 1"
+    sql1 = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
+    #sql2 = f'alter table accusations auto_increment = 1'
     cursor = db_connection.cursor()
     cursor.execute(sql1)
     hints = cursor.fetchall()
-    return hints
 
 def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
@@ -52,10 +53,18 @@ def location_now(game_id):
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
+    weapon_options = 'spoon','knife','poison','pencil','pistol'
+    suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
     weapon_accusation = input("Make your weapon accusation: ")
+    while weapon_accusation not in weapon_options:
+        print("Where did you find this? Put it back.")
+        weapon_accusation = input("Make your weapon accusation: ")
     print("Suspects to choose from: Make, Iida, Ode, Angelina, Ville")
     suspect_accusation = input("Who do you suspect: ")
+    while suspect_accusation not in suspect_options:
+        print("They are not here. Try again.")
+        suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(game_id)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()

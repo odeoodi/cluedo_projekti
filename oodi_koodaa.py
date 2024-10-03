@@ -18,12 +18,13 @@ def start_location():
     return
 
 def start_accusations():
+    sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
+    #sql2 = f"alter table accusations auto_increment = 1"
     sql1 = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
     #sql2 = f'alter table accusations auto_increment = 1'
     cursor = db_connection.cursor()
     cursor.execute(sql1)
     hints = cursor.fetchall()
-    return hints
 
 def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
@@ -38,9 +39,6 @@ def check_money(saved_game):
     cursor = db_connection.cursor()
     cursor.execute(sql)
     money = cursor.fetchone()
-    if money is None:
-        print(f"No money found for game ID: {saved_game}. Returning 0.")
-        return 0
     money_now = int(money[0])
     return money_now
 
@@ -87,6 +85,8 @@ def check_accusations(game_id):
         print("")
     print("")
     return made_accusations
+
+
 
 def fly():
 # Druing this funktion player can fly to the new location.
@@ -240,7 +240,6 @@ while check_money(select_game) > 0 and not victory:
     while command_counter == 0:
         if game_round.lower() == "accuse":
             accusation_counter += 1
-            print(accusation_counter)
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
             # print(check_if_correct())
