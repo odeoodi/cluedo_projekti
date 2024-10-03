@@ -56,18 +56,7 @@ def check_money(saved_game):
 
 
 
-'''
-def is_location_current(destination):
-    sql = (f'SELECT icao, FROM locations;')
-    sql2 = (f'SELECT icao, FROM game;')
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    airports = cursor.fetchall()
-    cursor.execute(sql2)
-    your_airport = cursor.fetchall()
-    if destination in airports and destination not in your_airport:
-        return True
-'''
+
 
 def fly():
 # Druing this funktion player can fly to the new location.
