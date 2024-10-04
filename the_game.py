@@ -388,6 +388,7 @@ while check_money(select_game) > 0 and not victory:
             check_accusations(select_game)
             print("")
             fly()
+            game_round = input("What would you like to do: ").lower()
             command_counter = 0
 
 
