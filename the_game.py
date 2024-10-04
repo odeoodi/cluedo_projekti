@@ -95,6 +95,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     #check_accusations(game_id)
     return
 
+
 def check_accusations(game_id):
     sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations where weapon_accusations is not NULL')
     cursor = db_connection.cursor()
