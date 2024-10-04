@@ -348,7 +348,7 @@ start_accusations()
 insert_right_answers()
 print_story()
 print('\nSee the options by typing "help".\n')
-print(f"You have {check_money(select_game)}€ left.\n")
+print(f"You have {check_money(select_game)} € left.\n")
 accusation_counter = 0
 command_counter = 0
 
