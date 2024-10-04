@@ -1,0 +1,43 @@
+from tabnanny import check
+
+import mysql.connector
+import random
+
+def help_command():
+    print(f"type 'help' for help! You may also try \n"
+          f"'accuse' to accuse, \n"
+          f"'fly' to fly to a new destination, \n"
+          f"'check accusations' to refresh your memory, \n"
+          f"'end game' to end the game, \n"
+          f"'gamble' to gamble your money")
+    return
+
+
+db_connection = mysql.connector.connect(
+    host='127.0.0.1',  # host='localhost'
+    port=3306,
+    database='detective_game2',
+    user='heikki',
+    password='pekka',
+    autocommit=True,
+    collation='latin1_swedish_ci'
+)
+
+def gamble_command(db_connection):
+    cursor = db_connection.cursor()
+    cursor.execute('UPDATE game SET money = money - 11')
+    money_gained_amount = random.randint(1, 20)
+    cursor.execute('UPDATE game SET money = money + %s', [money_gained_amount])
+    db_connection.commit()
+    cursor.execute("select money from game")
+    total_money = cursor.fetchone()
+
+    return total_money[0]
+
+try:
+    gained = gamble_command(db_connection)
+    print(f"You now have: {gained} money!")
+except Exception as e:
+    print(f"An error occurred: {e}")
+finally:
+    db_connection.close()
