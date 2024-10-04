@@ -393,7 +393,7 @@ while check_money(select_game) > 0 and not victory:
 
 
 # These can be changed to work better with the outro.
-if check_money(select_game) <= 0:
+if check_money(select_game) <= 0 and not victory:
     print("You ran out of money.")
 elif victory:
     print("You solved the mystery!")
