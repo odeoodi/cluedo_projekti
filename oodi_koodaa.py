@@ -34,6 +34,65 @@ def start_money(game_id):
     current_location = cursor.fetchall()
     return
 
+def help_command():
+    print(f"type 'help' for help! You may also try \n"
+          f"'accuse' to accuse, \n"
+          f"'fly' to fly to a new destination, \n"
+          f"'check accusations' to refresh your memory, \n"
+          f"'end game' to end the game, \n"
+          f"'gamble' to gamble your money")
+    return
+
+"""
+def gamble_command(db_connection):
+    cursor = db_connection.cursor()
+    cursor.execute('UPDATE game SET money = money - 11')
+    money_gained_amount = random.randint(1, 20)
+    cursor.execute('UPDATE game SET money = money + %s', [money_gained_amount])
+    db_connection.commit()
+    cursor.execute("select money from game")
+    total_money = cursor.fetchone()
+
+    return total_money[0]
+"""
+
+def insert_right_answers():
+
+    def random_location():
+        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_weapon():
+        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_suspect():
+        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    random_weapon()
+    random_suspect()
+    random_location()
+
+    return
 
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
@@ -54,6 +113,52 @@ def location_now(game_id):
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
+    def check_if_correct_weapon(weapon_accusation):
+        sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        sql2 = f"SELECT id_weapons FROM right_answers WHERE id = '{accusation_id}' "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
+    def check_if_correct_location(location_accusation):
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        print(accusation_id)
+        sql2 = f"SELECT id_locations FROM right_answers WHERE id = '{accusation_id}' "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        print(accusations)
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
+    def check_if_correct_suspect(suspect_accusation):
+        sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        print(accusation_id)
+        sql2 = f"SELECT id_suspects FROM right_answers WHERE id = {accusation_id} "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        print(accusations)
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
@@ -67,12 +172,21 @@ def accuse_weapon_suspect(game_id, the_accusation):
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(game_id)
-    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
+    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation+1}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    #fff = cursor.fetchone()
-    #check_accusations(game_id)
+    weapon_right = check_if_correct_weapon(weapon_accusation)
+    suspect_right = check_if_correct_suspect(suspect_accusation)
+    location_right = check_if_correct_location(airport_accusation)
+
+    if weapon_right:
+        print("You have the correct weapon!")
+    if suspect_right:
+        print("You have the correct suspect!")
+    if location_right:
+        print("You have the correct airport!")
     return
+
 
 def check_accusations(game_id):
     sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations where weapon_accusations is not NULL')
@@ -229,11 +343,13 @@ start_location()
 start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
+insert_right_answers()
 print('See the options by typing "help".\n')
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
+command_counter = 0
 
-while check_money(select_game) > 0 and not victory:
+while check_money(select_game) >= 0 or not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ")
     command_counter = 0
@@ -243,7 +359,7 @@ while check_money(select_game) > 0 and not victory:
             accusation_counter += 1
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
-            # print(check_if_correct())
+            # check_if_correct()
             # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             fly()
@@ -253,9 +369,8 @@ while check_money(select_game) > 0 and not victory:
             check_accusations(select_game)
             game_round = input("What would you like to do: ")
         elif game_round == "help":
-            print("hello")  # this is only here to keep the game intact until we have a working help function
+            help_command()
             game_round = input("What would you like to do: ")
-            # print(help_ville())
         else:
             print("Check spelling on your command.")
             game_round = input("What would you like to do: ")

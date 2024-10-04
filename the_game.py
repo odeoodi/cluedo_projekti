@@ -2,7 +2,6 @@ from tabnanny import check
 
 import mysql.connector
 import random
-import intro_story
 
 
 def start_location():
@@ -57,6 +56,44 @@ def gamble_command(db_connection):
     return total_money[0]
 """
 
+def insert_right_answers():
+
+    def random_location():
+        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_weapon():
+        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_suspect():
+        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    random_weapon()
+    random_suspect()
+    random_location()
+
+    return
+
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
@@ -76,6 +113,52 @@ def location_now(game_id):
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
+    def check_if_correct_weapon(weapon_accusation):
+        sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        sql2 = f"SELECT id_weapons FROM right_answers WHERE id = '{accusation_id}' "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
+    def check_if_correct_location(location_accusation):
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        print(accusation_id)
+        sql2 = f"SELECT id_locations FROM right_answers WHERE id = '{accusation_id}' "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        print(accusations)
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
+    def check_if_correct_suspect(suspect_accusation):
+        sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
+        kursori = db_connection.cursor()
+        kursori.execute(sql1)
+        accusation_id = kursori.fetchone()[0]
+        print(accusation_id)
+        sql2 = f"SELECT id_suspects FROM right_answers WHERE id = {accusation_id} "
+        kursori.execute(sql2)
+        accusations = kursori.fetchone()
+        print(accusations)
+        matches = []
+        if not accusations:
+            return False
+        elif accusations:
+            return True
+
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
@@ -92,8 +175,16 @@ def accuse_weapon_suspect(game_id, the_accusation):
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation+1}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    #fff = cursor.fetchone()
-    #check_accusations(game_id)
+    weapon_right = check_if_correct_weapon(weapon_accusation)
+    suspect_right = check_if_correct_suspect(suspect_accusation)
+    location_right = check_if_correct_location(airport_accusation)
+
+    if weapon_right:
+        print("You have the correct weapon!")
+    if suspect_right:
+        print("You have the correct suspect!")
+    if location_right:
+        print("You have the correct airport!")
     return
 
 
@@ -192,20 +283,6 @@ def fly():
             print("Sorry your Icao-code was not in the list, please try again.")
 
 
-def print_story():
-    while True:
-        question = input('Do you wish to read the introduction story? "yes" or "no": ')
-        question = question.lower()
-        if question == 'yes':
-            for line in intro_story.getStory():
-                print(line)
-            break
-        elif question == 'no':
-            print("Let the game begin!")
-            break
-        else:
-            print("check spelling.")
-    return
 
 '''
 angelinan koodi check if correct
@@ -257,8 +334,7 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-# Pelin aloitus
-
+# intro()
 
 victory = False
 select_game = 1
@@ -267,11 +343,13 @@ start_location()
 start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
+insert_right_answers()
 print('See the options by typing "help".\n')
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
+command_counter = 0
 
-while check_money(select_game) > 0 and not victory:
+while check_money(select_game) >= 0 or not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ")
     command_counter = 0
@@ -281,7 +359,7 @@ while check_money(select_game) > 0 and not victory:
             accusation_counter += 1
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
-            # print(check_if_correct())
+            # check_if_correct()
             # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             fly()
@@ -293,7 +371,6 @@ while check_money(select_game) > 0 and not victory:
         elif game_round == "help":
             help_command()
             game_round = input("What would you like to do: ")
-            # print(help_ville())
         else:
             print("Check spelling on your command.")
             game_round = input("What would you like to do: ")
