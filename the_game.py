@@ -5,17 +5,32 @@ import random
 import intro_story
 
 def start_location():
-    # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table,
+    # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
-    sql1 = (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
-    sql2 = (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
-    sql3 = (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
+    while True:
+        sql1= (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
+        sql1_1= (f"SELECT name FROM locations;")
+        cursor = db_connection.cursor()
+        cursor.execute(sql1)
+        cursor.execute(sql1_1)
+        sql1_1 = cursor.fetchall()
+        db_connection.commit()
+        dubles=0
+        for outter in sql1_1:
+            if sql1_1.count(outter) > 1:
+                dubles += 1
+            if dubles != 0:
+                continue
+        if dubles <= 0:
+            break
+    sql2= (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
+    sql3= (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
     cursor = db_connection.cursor()
-    cursor.execute(sql1)
     cursor.execute(sql2)
     cursor.execute(sql3)
     db_connection.commit()
     return
+
 
 def start_accusations():
     sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
@@ -183,7 +198,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
             return True
 
     def check_if_correct_location(location_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
+        sql1 = f"SELECT id FROM locations WHERE name = '{select_game}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
@@ -227,7 +242,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     cursor.execute(sql)
     weapon_right = check_if_correct_weapon(weapon_accusation)
     suspect_right = check_if_correct_suspect(suspect_accusation)
-    location_right = check_if_correct_location(location_now(1))
+    location_right = check_if_correct_location(select_game)
 
     if weapon_right:
         print("You have the correct weapon!")

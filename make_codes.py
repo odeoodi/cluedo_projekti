@@ -12,15 +12,29 @@ db_connection = mysql.connector.connect(
          autocommit=True
          )
 
-'''
+
 def start_location():
-    # Empties locations tabel. Selects 7 random location from airport tabel and adds them to locations table,
+    # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
-    sql1= (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
+    while True:
+        sql1= (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
+        sql1_1= (f"SELECT name FROM locations;")
+        cursor = db_connection.cursor()
+        cursor.execute(sql1)
+        cursor.execute(sql1_1)
+        sql1_1 = cursor.fetchall()
+        db_connection.commit()
+        dubles=0
+        for outter in sql1_1:
+            if sql1_1.count(outter) > 1:
+                dubles += 1
+            if dubles != 0:
+                continue
+        if dubles <= 0:
+            break
     sql2= (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
     sql3= (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
     cursor = db_connection.cursor()
-    cursor.execute(sql1)
     cursor.execute(sql2)
     cursor.execute(sql3)
     db_connection.commit()
@@ -30,11 +44,11 @@ def start_location():
 
 
 start_location()
+
+
+
+
 '''
-
-
-
-
 def location_now(game_id):
     sql = (f'SELECT location from game where id = "{game_id}"')
     cursor = db_connection.cursor()
@@ -140,5 +154,6 @@ def fly():
 
 fly()
 
+'''
 
 
