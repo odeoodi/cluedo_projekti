@@ -2,7 +2,7 @@ from tabnanny import check
 
 import mysql.connector
 import random
-
+import intro_story
 
 def start_location():
     # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table,
@@ -334,6 +334,20 @@ def fly():
 
 
 
+def print_story():
+    while True:
+        question = input('Do you wish to read the introduction story? "yes" or "no": ')
+        question = question.lower()
+        if question == 'yes':
+            for line in intro_story.getStory():
+                print(line)
+            break
+        elif question == 'no':
+            print("Let the game begin!")
+            break
+        else:
+            print("check spelling.")
+    return
 '''
 angelinan koodi check if correct
 
@@ -395,6 +409,7 @@ start_money(select_game)
 start_accusations()
 insert_right_answers()
 print('See the options by typing "help".\n')
+print_story()
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
 command_counter = 0
