@@ -216,6 +216,8 @@ def accuse_weapon_suspect(game_id, the_accusation):
         print("You have the correct airport!")
     elif not location_right:
         print("The murder did not happen here.")
+
+    press_enter_to_continue()
     return
 
 
@@ -396,6 +398,7 @@ while check_money(select_game) > 0 and not victory:
             print("\nHere are your current accusations:")
             check_accusations(select_game)
             print("")
+            press_enter_to_continue()
             fly()
             game_round = input("What would you like to do: ").lower()
             command_counter = 0
