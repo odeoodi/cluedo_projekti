@@ -242,7 +242,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     cursor.execute(sql)
     weapon_right = check_if_correct_weapon(weapon_accusation)
     suspect_right = check_if_correct_suspect(suspect_accusation)
-    location_right = check_if_correct_location(select_game)
+    location_right = check_if_correct_location(airport_accusation)
 
     if weapon_right:
         print("You have the correct weapon!")
