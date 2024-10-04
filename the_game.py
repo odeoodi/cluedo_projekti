@@ -111,6 +111,61 @@ def location_now(game_id):
     return current_location
 
 
+def insert_right_answers():
+
+    def random_location():
+        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_weapon():
+        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_suspect():
+        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    random_weapon()
+    random_suspect()
+    random_location()
+
+    return
+
+def check_money(saved_game):
+    sql = f'select money from game where id = "{saved_game}"'
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    money = cursor.fetchone()
+    money_now = int(money[0])
+    return money_now
+
+
+def location_now(game_id):
+    sql = (f'SELECT location from game where id = "{game_id}"')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    current_location = cursor.fetchall()[0][0]
+    return current_location
+
+
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
     def check_if_correct_weapon(weapon_accusation):
@@ -118,7 +173,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_weapons FROM right_answers WHERE id = '{accusation_id}' "
+        sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
         matches = []
@@ -128,16 +183,15 @@ def accuse_weapon_suspect(game_id, the_accusation):
             return True
 
     def check_if_correct_location(location_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_accusation}' "
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
         print(accusation_id)
-        sql2 = f"SELECT id_locations FROM right_answers WHERE id = '{accusation_id}' "
+        sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
         print(accusations)
-        matches = []
         if not accusations:
             return False
         elif accusations:
@@ -149,7 +203,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
         print(accusation_id)
-        sql2 = f"SELECT id_suspects FROM right_answers WHERE id = {accusation_id} "
+        sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
         print(accusations)
@@ -177,7 +231,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     cursor.execute(sql)
     weapon_right = check_if_correct_weapon(weapon_accusation)
     suspect_right = check_if_correct_suspect(suspect_accusation)
-    location_right = check_if_correct_location(airport_accusation)
+    location_right = check_if_correct_location(location_now(1))
 
     if weapon_right:
         print("You have the correct weapon!")
