@@ -354,7 +354,7 @@ command_counter = 0
 
 while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    game_round = input("What would you like to do: ")
+    game_round = input("What would you like to do: ").lower()
     command_counter = 0
 
     while command_counter == 0:
@@ -373,16 +373,16 @@ while check_money(select_game) > 0 and not victory:
             fly()
             command_counter = 0
             if check_money(select_game) > 0:
-                game_round = input("What would you like to do: ")
+                game_round = input("What would you like to do: ").lower()
         elif game_round.lower() == "check accusations":
             check_accusations(select_game)
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         elif game_round == "help":
             help_command()
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         else:
             print("Check spelling on your command.")
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         if command_counter == 1 and check_money(select_game) > 0:
             print("\nHere are your current accusations:")
             check_accusations(select_game)
