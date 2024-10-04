@@ -187,11 +187,9 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        print(accusation_id)
         sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
-        print(accusations)
         if not accusations:
             return False
         elif accusations:
@@ -202,11 +200,9 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        print(accusation_id)
         sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
-        print(accusations)
         matches = []
         if not accusations:
             return False
