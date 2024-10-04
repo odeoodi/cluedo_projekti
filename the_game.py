@@ -184,9 +184,9 @@ def accuse_weapon_suspect(game_id, the_accusation):
     print("Suspects to choose from: Make, Iida, Ode, Angelina, Ville")
     suspect_accusation = input("Who do you suspect: ")
     while suspect_accusation not in suspect_options:
-        print("They are not here. Try again.")
+        print("They are not here. Try again. Remember to write the name with a capital letter.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(game_id)
+    airport_accusation = location_now(1)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -340,18 +340,23 @@ start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
 insert_right_answers()
-print('See the options by typing "help".\n')
 print_story()
+print('\nSee the options by typing "help".\n')
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
 command_counter = 0
 
-while check_money(select_game) >= 0 or not victory:
+while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ")
     command_counter = 0
 
     while command_counter == 0:
+        if check_money(select_game) == 0:
+            print("\nMake your final accusations.")
+            accusation_counter += 1
+            accuse_weapon_suspect(select_game, accusation_counter)
+            break
         if game_round.lower() == "accuse":
             accusation_counter += 1
             command_counter += 1
@@ -361,7 +366,8 @@ while check_money(select_game) >= 0 or not victory:
         elif game_round.lower() == "fly":
             fly()
             command_counter = 0
-            game_round = input("What would you like to do: ")
+            if check_money(select_game) > 0:
+                game_round = input("What would you like to do: ")
         elif game_round.lower() == "check accusations":
             check_accusations(select_game)
             game_round = input("What would you like to do: ")
@@ -371,12 +377,14 @@ while check_money(select_game) >= 0 or not victory:
         else:
             print("Check spelling on your command.")
             game_round = input("What would you like to do: ")
-    if command_counter == 1:
-        print("Here are your current accusations.")
-        check_accusations(select_game)
-        print("")
-        fly()
-        command_counter = 0
+        if command_counter == 1 and check_money(select_game) > 0:
+            print("\nHere are your current accusations:")
+            check_accusations(select_game)
+            print("")
+            fly()
+            command_counter = 0
+
+
 
 # These can be changed to work better with the outro.
 if check_money(select_game) <= 0:
