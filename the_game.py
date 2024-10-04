@@ -177,7 +177,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
-    weapon_accusation = input("Make your weapon accusation: ")
+    weapon_accusation = input("Make your weapon accusation: ").lower()
     while weapon_accusation not in weapon_options:
         print("Where did you find this? Put it back.")
         weapon_accusation = input("Make your weapon accusation: ")
