@@ -17,3 +17,4 @@ question = input('Do you wish to read the introduction story? (Yes or No): ')
 if question == 'Yes':
     for line in getStory():
         print(line)
+
