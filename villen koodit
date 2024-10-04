@@ -22,7 +22,7 @@ db_connection = mysql.connector.connect(
     autocommit=True,
     collation='latin1_swedish_ci'
 )
-
+"""
 def gamble_command(db_connection):
     cursor = db_connection.cursor()
     cursor.execute('UPDATE game SET money = money - 11')
@@ -33,9 +33,18 @@ def gamble_command(db_connection):
     total_money = cursor.fetchone()
 
     return total_money[0]
+"""
+
+def start_money(db_connection):
+    cursor = db_connection.cursor()
+    cursor.execute('UPDATE game SET money = 500')
+    db_connection.commit()
+    cursor.execute("select money from game")
+    total_money = cursor.fetchone()
+    return total_money[0]
 
 try:
-    gained = gamble_command(db_connection)
+    gained = start_money(db_connection)
     print(f"You now have: {gained} money!")
 except Exception as e:
     print(f"An error occurred: {e}")
