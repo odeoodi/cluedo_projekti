@@ -59,6 +59,7 @@ def help_command():
     return
 
 def press_enter_to_continue():
+    # Makes prints to take breaks and look pretty :3
     while True:
         enter=input(f"Press Enter to Continue:")
         if enter=='':
@@ -298,7 +299,10 @@ def fly():
 
 
     while True:
+        print()
         print(f'You are currently at the {location_now(1)}.')
+        press_enter_to_continue()
+        print()
         print(f'Available airports for you to fly are:')
         locations_available()
         destination = input("Where would you like to fly next, use the ICAO-code: ")
@@ -307,13 +311,21 @@ def fly():
             if location_check(destination) == True:
                 flying_new_port(destination)
                 cost_of_flying()
+                print()
                 print(f'Welcome to {location_now(1)} you have {check_money(1)} euros.')
-
+                press_enter_to_continue()
+                print()
                 break
             elif location_check(destination) == False:
+                print()
                 print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+                press_enter_to_continue()
+                print()
         else :
+            print()
             print("Sorry your ICAO-code was not in the list, please try again.")
+            press_enter_to_continue()
+            print()
 
 
 def print_story():
