@@ -196,10 +196,16 @@ def accuse_weapon_suspect(game_id, the_accusation):
 
     if weapon_right:
         print("You have the correct weapon!")
+    elif not weapon_right:
+        print("This was not the murder weapon.")
     if suspect_right:
         print("You have the correct suspect!")
+    elif not suspect_right:
+        print("They are innocent.")
     if location_right:
         print("You have the correct airport!")
+    elif not location_right:
+        print("The murder did not happen here.")
     return
 
 
