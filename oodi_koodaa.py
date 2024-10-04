@@ -177,7 +177,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
-    weapon_accusation = input("Make your weapon accusation: ")
+    weapon_accusation = input("Make your weapon accusation: ").lower()
     while weapon_accusation not in weapon_options:
         print("Where did you find this? Put it back.")
         weapon_accusation = input("Make your weapon accusation: ")
@@ -348,13 +348,13 @@ start_accusations()
 insert_right_answers()
 print_story()
 print('\nSee the options by typing "help".\n')
-print(f"You have {check_money(select_game)}€ left.\n")
+print(f"You have {check_money(select_game)} € left.\n")
 accusation_counter = 0
 command_counter = 0
 
 while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
-    game_round = input("What would you like to do: ")
+    game_round = input("What would you like to do: ").lower()
     command_counter = 0
 
     while command_counter == 0:
@@ -373,16 +373,16 @@ while check_money(select_game) > 0 and not victory:
             fly()
             command_counter = 0
             if check_money(select_game) > 0:
-                game_round = input("What would you like to do: ")
+                game_round = input("What would you like to do: ").lower()
         elif game_round.lower() == "check accusations":
             check_accusations(select_game)
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         elif game_round == "help":
             help_command()
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         else:
             print("Check spelling on your command.")
-            game_round = input("What would you like to do: ")
+            game_round = input("What would you like to do: ").lower()
         if command_counter == 1 and check_money(select_game) > 0:
             print("\nHere are your current accusations:")
             check_accusations(select_game)
@@ -393,7 +393,7 @@ while check_money(select_game) > 0 and not victory:
 
 
 # These can be changed to work better with the outro.
-if check_money(select_game) <= 0:
+if check_money(select_game) <= 0 and not victory:
     print("You ran out of money.")
 elif victory:
     print("You solved the mystery!")
