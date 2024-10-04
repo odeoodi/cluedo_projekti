@@ -186,7 +186,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(1)
+    airport_accusation = location_now(game_id)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
