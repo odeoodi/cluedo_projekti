@@ -2,6 +2,7 @@ from tabnanny import check
 
 import mysql.connector
 import random
+import intro_story
 
 
 def start_location():
@@ -242,7 +243,12 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-# intro()
+# Pelin aloitus
+
+question = input('Let the game begin! Do you wish to read the introduction story? (Yes or No): ')
+if question == 'Yes':
+    for line in intro_story.getStory():
+        print(line)
 
 victory = False
 select_game = 1

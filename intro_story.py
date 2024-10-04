@@ -12,9 +12,3 @@ intro_list = wrapper.wrap(text=story)
 def getStory():
     return intro_list
 
-
-question = input('Do you wish to read the introduction story? (Yes or No): ')
-if question == 'Yes':
-    for line in getStory():
-        print(line)
-
