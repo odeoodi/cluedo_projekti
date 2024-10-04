@@ -25,6 +25,7 @@ def start_accusations():
     cursor = db_connection.cursor()
     cursor.execute(sql1)
     hints = cursor.fetchall()
+    return
 
 def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
@@ -33,6 +34,27 @@ def start_money(game_id):
     current_location = cursor.fetchall()
     return
 
+def help_command():
+    print(f"type 'help' for help! You may also try \n"
+          f"'accuse' to accuse, \n"
+          f"'fly' to fly to a new destination, \n"
+          f"'check accusations' to refresh your memory, \n"
+          f"'end game' to end the game, \n"
+          f"'gamble' to gamble your money")
+    return
+
+"""
+def gamble_command(db_connection):
+    cursor = db_connection.cursor()
+    cursor.execute('UPDATE game SET money = money - 11')
+    money_gained_amount = random.randint(1, 20)
+    cursor.execute('UPDATE game SET money = money + %s', [money_gained_amount])
+    db_connection.commit()
+    cursor.execute("select money from game")
+    total_money = cursor.fetchone()
+
+    return total_money[0]
+"""
 
 def check_money(saved_game):
     sql = f'select money from game where id = "{saved_game}"'
@@ -66,7 +88,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(game_id)
-    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
+    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation+1}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     #fff = cursor.fetchone()
@@ -252,7 +274,7 @@ while check_money(select_game) > 0 and not victory:
             check_accusations(select_game)
             game_round = input("What would you like to do: ")
         elif game_round == "help":
-            print("hello")  # this is only here to keep the game intact until we have a working help function
+            help_command()
             game_round = input("What would you like to do: ")
             # print(help_ville())
         else:
