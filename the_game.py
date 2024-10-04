@@ -192,6 +192,20 @@ def fly():
             print("Sorry your Icao-code was not in the list, please try again.")
 
 
+def print_story():
+    while True:
+        question = input('Do you wish to read the introduction story? "yes" or "no": ')
+        question = question.lower()
+        if question == 'yes':
+            for line in intro_story.getStory():
+                print(line)
+            break
+        elif question == 'no':
+            print("Let the game begin!")
+            break
+        else:
+            print("check spelling.")
+    return
 
 '''
 angelinan koodi check if correct
@@ -245,10 +259,6 @@ db_connection = mysql.connector.connect(
 )
 # Pelin aloitus
 
-question = input('Let the game begin! Do you wish to read the introduction story? (Yes or No): ')
-if question == 'Yes':
-    for line in intro_story.getStory():
-        print(line)
 
 victory = False
 select_game = 1
