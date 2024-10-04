@@ -2,20 +2,35 @@ from tabnanny import check
 
 import mysql.connector
 import random
-
+import intro_story
 
 def start_location():
-    # Empties locations tabel. Selects 5 random location from airport tabel and adds them to locations table,
+    # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
-    sql1 = (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
-    sql2 = (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
-    sql3 = (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
+    while True:
+        sql1= (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
+        sql1_1= (f"SELECT name FROM locations;")
+        cursor = db_connection.cursor()
+        cursor.execute(sql1)
+        cursor.execute(sql1_1)
+        sql1_1 = cursor.fetchall()
+        db_connection.commit()
+        dubles=0
+        for outter in sql1_1:
+            if sql1_1.count(outter) > 1:
+                dubles += 1
+            if dubles != 0:
+                continue
+        if dubles <= 0:
+            break
+    sql2= (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
+    sql3= (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
     cursor = db_connection.cursor()
-    cursor.execute(sql1)
     cursor.execute(sql2)
     cursor.execute(sql3)
     db_connection.commit()
     return
+
 
 def start_accusations():
     sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
@@ -102,6 +117,61 @@ def check_money(saved_game):
     money_now = int(money[0])
     return money_now
 
+'''
+def location_now(game_id):
+    sql = (f'SELECT location from game where id = {game_id}')
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    current_location = cursor.fetchall()[0][0]
+    return current_location
+'''
+
+def insert_right_answers():
+
+    def random_location():
+        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_weapon():
+        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    def random_suspect():
+        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
+        kursori=db_connection.cursor()
+        kursori.execute(sql)
+        result=kursori.fetchone()
+        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
+        kursori.execute(sql2)
+        db_connection.commit()
+        return result
+
+    random_weapon()
+    random_suspect()
+    random_location()
+
+    return
+
+def check_money(saved_game):
+    sql = f'select money from game where id = "{saved_game}"'
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    money = cursor.fetchone()
+    money_now = int(money[0])
+    return money_now
+
 
 def location_now(game_id):
     sql = (f'SELECT location from game where id = "{game_id}"')
@@ -118,7 +188,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_weapons FROM right_answers WHERE id = '{accusation_id}' "
+        sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
         matches = []
@@ -128,16 +198,13 @@ def accuse_weapon_suspect(game_id, the_accusation):
             return True
 
     def check_if_correct_location(location_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_accusation}' "
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(location_accusation)}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        print(accusation_id)
-        sql2 = f"SELECT id_locations FROM right_answers WHERE id = '{accusation_id}' "
+        sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
-        print(accusations)
-        matches = []
         if not accusations:
             return False
         elif accusations:
@@ -148,11 +215,9 @@ def accuse_weapon_suspect(game_id, the_accusation):
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
-        print(accusation_id)
-        sql2 = f"SELECT id_suspects FROM right_answers WHERE id = {accusation_id} "
+        sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
         kursori.execute(sql2)
         accusations = kursori.fetchone()
-        print(accusations)
         matches = []
         if not accusations:
             return False
@@ -171,8 +236,8 @@ def accuse_weapon_suspect(game_id, the_accusation):
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(game_id)
-    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation+1}'
+    airport_accusation = location_now(select_game)
+    sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
     weapon_right = check_if_correct_weapon(weapon_accusation)
@@ -284,6 +349,20 @@ def fly():
 
 
 
+def print_story():
+    while True:
+        question = input('Do you wish to read the introduction story? "yes" or "no": ')
+        question = question.lower()
+        if question == 'yes':
+            for line in intro_story.getStory():
+                print(line)
+            break
+        elif question == 'no':
+            print("Let the game begin!")
+            break
+        else:
+            print("check spelling.")
+    return
 '''
 angelinan koodi check if correct
 
@@ -344,7 +423,9 @@ start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
 insert_right_answers()
-print('See the options by typing "help".\n')
+
+print_story()
+print('\nSee the options by typing "help".')
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
 command_counter = 0
