@@ -58,6 +58,16 @@ def help_command():
           f"'gamble' to gamble your money")
     return
 
+def press_enter_to_continue():
+    while True:
+        enter=input(f"Press Enter to Continue:")
+        if enter=='':
+            break
+        else:
+            continue
+    return
+
+
 """
 def gamble_command(db_connection):
     cursor = db_connection.cursor()
@@ -235,7 +245,7 @@ def fly():
         cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
-            print(f'Icao: {airport[0]}, {airport[1]}. ')
+            print(f'ICAO: {airport[0]}, {airport[1]}. ')
 
     def icao_in_locations(destination):
         # Checks if the icao code is writen correctly.
@@ -289,7 +299,7 @@ def fly():
         print(f'You are currently at the {location_now(1)}.')
         print(f'Available airports for you to fly are:')
         locations_available()
-        destination = input("Where would you like to fly next, use the Icao-code: ")
+        destination = input("Where would you like to fly next, use the ICAO-code: ")
         destination = destination.upper()
         if icao_in_locations(destination) == True:
             if location_check(destination) == True:
@@ -301,8 +311,7 @@ def fly():
             elif location_check(destination) == False:
                 print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
         else :
-            print("Sorry your Icao-code was not in the list, please try again.")
-
+            print("Sorry your ICAO-code was not in the list, please try again.")
 
 
 def print_story():
