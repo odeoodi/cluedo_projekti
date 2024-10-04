@@ -198,7 +198,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
             return True
 
     def check_if_correct_location(location_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{select_game}' "
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(location_accusation)}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
@@ -236,7 +236,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(game_id)
+    airport_accusation = location_now(select_game)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation+1}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
