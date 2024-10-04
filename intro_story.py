@@ -25,5 +25,3 @@ def print_story():
         else:
             print("check spelling.")
         return
-
-print_story()
