@@ -117,69 +117,19 @@ def check_money(saved_game):
     money_now = int(money[0])
     return money_now
 
-'''
-def location_now(game_id):
-    sql = (f'SELECT location from game where id = {game_id}')
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    current_location = cursor.fetchall()[0][0]
-    return current_location
-'''
-
-def insert_right_answers():
-
-    def random_location():
-        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
-
-    def random_weapon():
-        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
-
-    def random_suspect():
-        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
-
-    random_weapon()
-    random_suspect()
-    random_location()
-
-    return
-
-def check_money(saved_game):
-    sql = f'select money from game where id = "{saved_game}"'
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    money = cursor.fetchone()
-    money_now = int(money[0])
-    return money_now
-
 
 def location_now(game_id):
-    sql = (f'SELECT location from game where id = "{game_id}"')
+    sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    current_location = cursor.fetchall()[0][0]
-    return current_location
+    results = cursor.fetchall()
 
+    if results:
+        current_location = results[0][0]
+        return current_location
+    else:
+        print(f"No location found for game_id {game_id}.")
+        return None
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
@@ -197,8 +147,8 @@ def accuse_weapon_suspect(game_id, the_accusation):
         elif accusations:
             return True
 
-    def check_if_correct_location(location_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(location_accusation)}' "
+    def check_if_correct_location(airport_accusation):
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
@@ -236,7 +186,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(select_game)
+    airport_accusation = location_now(1)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -372,39 +322,6 @@ def win():
     return victory
 '''
 
-"""
-pseudo code for one round:
-
-intro() 
-
-
-while money > 0 or not right_answers in accusations:
-    print(check_money())
-
-    round = input("What would you like to do: ")
-    print('See the options by typing "help"')
-
-    if round == "help":
-        print(help())
-    elif round == "accuse":
-        weapon_accusation = input("Make your weapon accusations: ")
-        suspect_accusation = input("Make your suspect accusations: ")
-        location_accusation = location_now()
-        print(check_if_correct())
-    elif round == "fly":
-        destination = input("Where would you like to travel: ")
-        fly()
-    elif round == "check accusations":
-        print(accusations)
-    elif round == "end game":
-        end_game()
-
-if money <= 0:
-    print("you lost the game")
-else:
-    print("you won")
-"""
-
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
     port=3306,
@@ -423,9 +340,8 @@ start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
 insert_right_answers()
-
+print('See the options by typing "help".\n')
 print_story()
-print('\nSee the options by typing "help".')
 print(f"You have {check_money(select_game)}€ left.\n")
 accusation_counter = 0
 command_counter = 0

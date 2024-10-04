@@ -119,11 +119,17 @@ def check_money(saved_game):
 
 
 def location_now(game_id):
-    sql = (f'SELECT location from game where id = "{game_id}"')
+    sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    current_location = cursor.fetchall()[0][0]
-    return current_location
+    results = cursor.fetchall()
+
+    if results:
+        current_location = results[0][0]
+        return current_location
+    else:
+        print(f"No location found for game_id {game_id}.")
+        return None
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
@@ -142,7 +148,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
             return True
 
     def check_if_correct_location(airport_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(airport_accusation)}' "
+        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
         kursori = db_connection.cursor()
         kursori.execute(sql1)
         accusation_id = kursori.fetchone()[0]
@@ -180,7 +186,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again.")
         suspect_accusation = input("Who do you suspect: ")
-    airport_accusation = location_now(select_game)
+    airport_accusation = location_now(1)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor = db_connection.cursor()
     cursor.execute(sql)
