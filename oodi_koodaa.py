@@ -58,6 +58,17 @@ def help_command():
           f"'gamble' to gamble your money")
     return
 
+def press_enter_to_continue():
+    # Makes prints to take breaks and look pretty :3
+    while True:
+        enter=input(f"Press Enter to Continue:")
+        if enter=='':
+            break
+        else:
+            continue
+    return
+
+
 """
 def gamble_command(db_connection):
     cursor = db_connection.cursor()
@@ -131,49 +142,48 @@ def location_now(game_id):
         print(f"No location found for game_id {game_id}.")
         return None
 
+def check_if_correct_weapon(weapon_accusation):
+    sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    matches = []
+    if not accusations:
+        return False
+    elif accusations:
+        return True
+
+def check_if_correct_location(airport_accusation):
+    sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    if not accusations:
+        return False
+    elif accusations:
+        return True
+
+def check_if_correct_suspect(suspect_accusation):
+    sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    matches = []
+    if not accusations:
+        return False
+    elif accusations:
+        return True
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
-    def check_if_correct_weapon(weapon_accusation):
-        sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        matches = []
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
-    def check_if_correct_location(airport_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
-    def check_if_correct_suspect(suspect_accusation):
-        sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        matches = []
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
@@ -206,6 +216,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
         print("You have the correct airport!")
     elif not location_right:
         print("The murder did not happen here.")
+    press_enter_to_continue()
     return
 
 
@@ -235,7 +246,7 @@ def fly():
         cursor.execute(availabled)
         airports = cursor.fetchall()
         for airport in airports:
-            print(f'Icao: {airport[0]}, {airport[1]}. ')
+            print(f'ICAO: {airport[0]}, {airport[1]}. ')
 
     def icao_in_locations(destination):
         # Checks if the icao code is writen correctly.
@@ -286,23 +297,29 @@ def fly():
 
 
     while True:
-        print(f'You are currently at the {location_now(1)}.')
+        print(f'\nYou are currently at the {location_now(1)}.')
+        press_enter_to_continue()
+        print()
         print(f'Available airports for you to fly are:')
         locations_available()
-        destination = input("Where would you like to fly next, use the Icao-code: ")
+        destination = input("\nWhere would you like to fly next, use the ICAO-code: ")
         destination = destination.upper()
         if icao_in_locations(destination) == True:
             if location_check(destination) == True:
                 flying_new_port(destination)
                 cost_of_flying()
-                print(f'Welcome to {location_now(1)} you have {check_money(1)} euros.')
-
+                print(f'\nWelcome to {location_now(1)} you have {check_money(1)} euros.')
+                press_enter_to_continue()
+                print()
                 break
             elif location_check(destination) == False:
-                print("You cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+                print("\nYou cannot stay at the same airport. If you do party people will leave and case won't be solved.")
+                press_enter_to_continue()
+                print()
         else :
-            print("Sorry your Icao-code was not in the list, please try again.")
-
+            print("\nSorry your ICAO-code was not in the list, please try again.")
+            press_enter_to_continue()
+            print()
 
 
 def print_story():
@@ -356,7 +373,6 @@ while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ").lower()
     command_counter = 0
-
     while command_counter == 0:
         if check_money(select_game) == 0:
             print("\nMake your final accusations.")
@@ -387,6 +403,7 @@ while check_money(select_game) > 0 and not victory:
             print("\nHere are your current accusations:")
             check_accusations(select_game)
             print("")
+            press_enter_to_continue()
             fly()
             game_round = input("What would you like to do: ").lower()
             command_counter = 0

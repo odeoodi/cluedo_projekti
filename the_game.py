@@ -142,49 +142,48 @@ def location_now(game_id):
         print(f"No location found for game_id {game_id}.")
         return None
 
+def check_if_correct_weapon(weapon_accusation):
+    sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    matches = []
+    if not accusations:
+        return False
+    elif accusations:
+        return True
+
+def check_if_correct_location(airport_accusation):
+    sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    if not accusations:
+        return False
+    elif accusations:
+        return True
+
+def check_if_correct_suspect(suspect_accusation):
+    sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
+    kursori = db_connection.cursor()
+    kursori.execute(sql1)
+    accusation_id = kursori.fetchone()[0]
+    sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
+    kursori.execute(sql2)
+    accusations = kursori.fetchone()
+    matches = []
+    if not accusations:
+        return False
+    elif accusations:
+        return True
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
-    def check_if_correct_weapon(weapon_accusation):
-        sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        matches = []
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
-    def check_if_correct_location(airport_accusation):
-        sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
-    def check_if_correct_suspect(suspect_accusation):
-        sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
-        kursori = db_connection.cursor()
-        kursori.execute(sql1)
-        accusation_id = kursori.fetchone()[0]
-        sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
-        kursori.execute(sql2)
-        accusations = kursori.fetchone()
-        matches = []
-        if not accusations:
-            return False
-        elif accusations:
-            return True
-
     weapon_options = 'spoon','knife','poison','pencil','pistol'
     suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
     print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
@@ -217,7 +216,6 @@ def accuse_weapon_suspect(game_id, the_accusation):
         print("You have the correct airport!")
     elif not location_right:
         print("The murder did not happen here.")
-
     press_enter_to_continue()
     return
 
@@ -375,7 +373,6 @@ while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ").lower()
     command_counter = 0
-
     while command_counter == 0:
         if check_money(select_game) == 0:
             print("\nMake your final accusations.")
