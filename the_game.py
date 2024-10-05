@@ -373,7 +373,7 @@ while check_money(select_game) > 0 and not victory:
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ").lower()
     command_counter = 0
-    while command_counter == 0:
+    while command_counter == 0 and not victory:
         if check_money(select_game) == 0:
             print("\nMake your final accusations.")
             accusation_counter += 1

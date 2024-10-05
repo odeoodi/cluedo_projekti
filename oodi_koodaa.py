@@ -344,6 +344,21 @@ def win():
     victory = True
     return victory
 '''
+def latest_accusations_correct(accusation_counter_num):
+    sql = f'select weapon_accusations, suspect_accusations, location_accusations from accusations where id = "{accusation_counter_num}"'
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    latest_weapon_accusation = results[0][0]
+    latest_suspect_accusation = results[0][1]
+    latest_location_accusation = results[0][2]
+    if check_if_correct_location(latest_location_accusation) and check_if_correct_suspect(latest_suspect_accusation) and check_if_correct_weapon(latest_weapon_accusation):
+        victory = True
+    else:
+        victory = False
+    return victory
+
+
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -378,12 +393,17 @@ while check_money(select_game) > 0 and not victory:
             print("\nMake your final accusations.")
             accusation_counter += 1
             accuse_weapon_suspect(select_game, accusation_counter)
+            victory = latest_accusations_correct(accusation_counter)
+            if victory:
+                break
             break
         if game_round.lower() == "accuse":
             accusation_counter += 1
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
-            # check_if_correct()
+            victory = latest_accusations_correct(accusation_counter)
+            if victory:
+                break
             # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             fly()
@@ -411,9 +431,9 @@ while check_money(select_game) > 0 and not victory:
 
 
 # These can be changed to work better with the outro.
-if check_money(select_game) <= 0 and not victory:
+if check_money(select_game) < 0 and not victory:
     print("You ran out of money.")
-elif victory:
+elif victory and check_money(select_game) >= 0:
     print("You solved the mystery!")
 
 
