@@ -4,12 +4,11 @@ import mysql.connector
 import random
 
 def help_command():
-    print(f"type 'help' for help! You may also try \n"
-          f"'accuse' to accuse, \n"
-          f"'fly' to fly to a new destination, \n"
-          f"'check accusations' to refresh your memory, \n"
-          f"'end game' to end the game, \n"
-          f"'gamble' to gamble your money")
+    print(f"The currently available commands are: \n"
+          f"'accuse' to accuse a person. \n"
+          f"'fly' to fly to a new destination. \n"
+          f"'check accusations' to refresh your memory about who you have accused. \n"
+          f"'end game' to end the game. \n")
     return
 
 
@@ -42,6 +41,45 @@ def start_money(db_connection):
     cursor.execute("select money from game")
     total_money = cursor.fetchone()
     return total_money[0]
+
+
+def random_hints(db_connection):
+    cursor = db_connection.cursor()
+
+    cursor.execute("SELECT id_locations, id_weapons, id_suspects FROM right_answers")
+    exclusions = cursor.fetchall()
+    excluded_locations = [row[0] for row in exclusions]
+    excluded_weapons = [row[1] for row in exclusions]
+    excluded_suspects = [row[2] for row in exclusions]
+
+    if excluded_locations:
+        cursor.execute(f"SELECT * FROM locations WHERE id NOT IN ({','.join(map(str, excluded_locations))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM locations ORDER BY RAND() LIMIT 1")
+    random_location = cursor.fetchone()
+
+    if excluded_weapons:
+        cursor.execute(f"SELECT * FROM weapons WHERE id NOT IN ({','.join(map(str, excluded_weapons))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM weapons ORDER BY RAND() LIMIT 1")
+    random_weapon = cursor.fetchone()
+
+    if excluded_suspects:
+        cursor.execute(f"SELECT * FROM suspects WHERE id NOT IN ({','.join(map(str, excluded_suspects))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM suspects ORDER BY RAND() LIMIT 1")
+    random_suspect = cursor.fetchone()
+
+    cursor.execute(
+        """
+        UPDATE accusations
+        SET weapon_accusations = %s, location_accusations = %s, suspect_accusations = %s
+        WHERE id = %s
+        """,
+        (random_weapon[1], random_location[1], random_suspect[1], 1))
+
+    return random_location[1], random_weapon[1], random_suspect[1]
+
 
 try:
     gained = start_money(db_connection)
