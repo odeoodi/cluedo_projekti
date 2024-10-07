@@ -502,5 +502,6 @@ if check_money(select_game) < 0 and not victory:
     print("You ran out of money.")
 elif victory and check_money(select_game) >= 0:
     print("You solved the mystery!")
-
+elif game_round == "end game":
+    print("Thanks for playing!")
 
