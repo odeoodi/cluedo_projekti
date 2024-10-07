@@ -58,6 +58,7 @@ def help_command():
           f"'gamble' to gamble your money")
     return
 
+
 def press_enter_to_continue():
     # Makes prints to take breaks and look pretty :3
     while True:
