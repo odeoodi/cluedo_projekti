@@ -502,10 +502,9 @@ while check_money(select_game) > 0 and not victory and game_round != "end game":
 
 
 #End of the game.
-if check_money(select_game) < 0 and not victory:
-    print("OH NO! Unfortunately, your money has run out, and the criminal gets away without punishment… Better luck next time!")
-elif victory and check_money(select_game) >= 0:
+if check_money(select_game) <= 0 and not victory:
+    print("OH NO! Unfortunately, your money has run out, and the criminal gets away without punishment… You tried ouy best better luck next time!")
+elif victory:
     print("Congratulations! You've identified the culprit, and the police can now press charges. You've done an amazing job, and I hope you're proud of yourself. Keep up the great work!")
-elif game_round == "end game":
-    print("Thanks for playing!")
+
 
