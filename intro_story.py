@@ -20,7 +20,7 @@ def print_story():
                 print(line)
             break
         elif question == 'no':
-            print("Let the game begin!")
+            print("\nLet the game begin!")
             break
         else:
             print("check spelling.")
