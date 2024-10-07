@@ -4,6 +4,67 @@ import mysql.connector
 import random
 import intro_story
 
+def random_hints():
+    cursor = db_connection.cursor()
+
+    cursor.execute("SELECT id_locations, id_weapons, id_suspects FROM right_answers")
+    exclusions = cursor.fetchall()
+    excluded_locations = [row[0] for row in exclusions]
+    excluded_weapons = [row[1] for row in exclusions]
+    excluded_suspects = [row[2] for row in exclusions]
+
+    if excluded_locations:
+        cursor.execute(f"SELECT * FROM locations WHERE id NOT IN ({','.join(map(str, excluded_locations))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM locations ORDER BY RAND() LIMIT 1")
+    random_location = cursor.fetchone()
+
+    if excluded_weapons:
+        cursor.execute(f"SELECT * FROM weapons WHERE id NOT IN ({','.join(map(str, excluded_weapons))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM weapons ORDER BY RAND() LIMIT 1")
+    random_weapon = cursor.fetchone()
+
+    if excluded_suspects:
+        cursor.execute(f"SELECT * FROM suspects WHERE id NOT IN ({','.join(map(str, excluded_suspects))}) ORDER BY RAND() LIMIT 1")
+    else:
+        cursor.execute("SELECT * FROM suspects ORDER BY RAND() LIMIT 1")
+    random_suspect = cursor.fetchone()
+
+    cursor.execute(
+        """
+        UPDATE accusations
+        SET weapon_accusations = %s, location_accusations = %s, suspect_accusations = %s
+        WHERE id = %s
+        """,
+        (random_weapon[1], random_location[1], random_suspect[1], 1))
+
+    return random_location[1], random_weapon[1], random_suspect[1]
+
+def win(accusation_counter):
+    sql = f"SELECT weapon_accusations, suspect_accusations, location_accusations FROM accusations WHERE id = {accusation_counter};"
+    cursor = db_connection.cursor()
+    cursor.execute(sql)
+    last_accusations = cursor.fetchone()
+
+    last_weapon = last_accusations[0]
+    last_suspect = last_accusations[1]
+    last_location = last_accusations[2]
+
+    if last_accusations:
+        right_weapon = check_if_correct_weapon(last_weapon)
+        right_suspect = check_if_correct_suspect(last_suspect)
+        right_location = check_if_correct_location(last_location)
+
+        if right_weapon and right_suspect and right_location == True:
+            print("You win")
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
 def start_location():
     # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
@@ -50,12 +111,11 @@ def start_money(game_id):
     return
 
 def help_command():
-    print(f"type 'help' for help! You may also try \n"
-          f"'accuse' to accuse, \n"
-          f"'fly' to fly to a new destination, \n"
-          f"'check accusations' to refresh your memory, \n"
-          f"'end game' to end the game, \n"
-          f"'gamble' to gamble your money")
+    print(f"The currently available commands are: \n"
+          f"'accuse' to accuse a weapon and a person. \n"
+          f"'fly' to fly to a new destination. \n"
+          f"'check accusations' to refresh your memory about the accusations you have made. \n"
+          f"'end game' to end the game. \n")
     return
 
 
@@ -365,10 +425,13 @@ start_money(select_game)
 start_accusations()
 insert_right_answers()
 print_story()
+random_hints()
 print('\nSee the options by typing "help".\n')
 print(f"You have {check_money(select_game)} € left.\n"
-      f"You are now at {location_now(select_game)}")
-accusation_counter = 0
+      f"You are now at {location_now(select_game)}.")
+print("Here are your current clues, these are not part of the crime:")
+check_accusations(select_game)
+accusation_counter = 1
 command_counter = 0
 
 while check_money(select_game) > 0 and not victory:
@@ -380,12 +443,15 @@ while check_money(select_game) > 0 and not victory:
             print("\nMake your final accusations.")
             accusation_counter += 1
             accuse_weapon_suspect(select_game, accusation_counter)
+            victory = win(accusation_counter)
             break
         if game_round.lower() == "accuse":
             accusation_counter += 1
             command_counter += 1
             accuse_weapon_suspect(select_game,accusation_counter)
-            # check_if_correct()
+            victory = win(accusation_counter)
+            if victory:
+                break
             # game_round = input("What would you like to do: ")
         elif game_round.lower() == "fly":
             fly()
@@ -413,9 +479,9 @@ while check_money(select_game) > 0 and not victory:
 
 
 # These can be changed to work better with the outro.
-if check_money(select_game) <= 0 and not victory:
+if check_money(select_game) < 0 and not victory:
     print("You ran out of money.")
-elif victory:
+elif victory and check_money(select_game) >= 0:
     print("You solved the mystery!")
 
 
