@@ -3,8 +3,9 @@ from tabnanny import check
 import mysql.connector
 import random
 import intro_story
-
+# Functions:
 def rules():
+    #Asks the user if they want to know the rules of the game then prints them.
     rule = input('Do you want to read the rules? Type "yes" or "no": ').lower()
     if rule == "yes":
         print("1. You will start at a random airport which is one of the options for the murder scene."
@@ -20,6 +21,7 @@ def rules():
     return
 
 def random_hints():
+    # Gives the user hints by randomly selecting a location, a weapon and a suspect then checking if it is in the right_answers and telling the result.
     cursor = db_connection.cursor()
 
     cursor.execute("SELECT id_locations, id_weapons, id_suspects FROM right_answers")
@@ -57,6 +59,7 @@ def random_hints():
     return random_location[1], random_weapon[1], random_suspect[1]
 
 def win(accusation_counter):
+    # Shows whether the user has won or not.
     sql = f"SELECT weapon_accusations, suspect_accusations, location_accusations FROM accusations WHERE id = {accusation_counter};"
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -72,7 +75,7 @@ def win(accusation_counter):
         right_location = check_if_correct_location(last_location)
 
         if right_weapon and right_suspect and right_location == True:
-            print("You win")
+            print("You win!")
             return True
         else:
             return False
@@ -109,6 +112,7 @@ def start_location():
 
 
 def start_accusations():
+    # Empties previous accusations for a new game.
     sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
     #sql2 = f"alter table accusations auto_increment = 1"
     sql1 = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
@@ -119,6 +123,7 @@ def start_accusations():
     return
 
 def start_money(game_id):
+    # Gives the user 500 money at the start of the game
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -126,6 +131,7 @@ def start_money(game_id):
     return
 
 def help_command():
+    # Gives the user the opportunity to see their options.
     print(f"The commands to use are: \n"
           f"'accuse' to accuse a weapon and a person. \n"
           f"'fly' to fly to a new destination. \n"
@@ -159,7 +165,7 @@ def gamble_command(db_connection):
 """
 
 def insert_right_answers():
-
+# Randomly sets the right answers at the start of the game.
     def random_location():
         sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
         kursori=db_connection.cursor()
@@ -197,6 +203,7 @@ def insert_right_answers():
     return
 
 def check_money(saved_game):
+    # Tells the user how much money they have left.
     sql = f'select money from game where id = "{saved_game}"'
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -206,6 +213,7 @@ def check_money(saved_game):
 
 
 def location_now(game_id):
+    # Tells the user what airport they are at.
     sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -219,6 +227,7 @@ def location_now(game_id):
         return None
 
 def check_if_correct_weapon(weapon_accusation):
+    # Checks whether the weapon accusation is correct.
     sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
     kursori = db_connection.cursor()
     kursori.execute(sql1)
@@ -233,6 +242,7 @@ def check_if_correct_weapon(weapon_accusation):
         return True
 
 def check_if_correct_location(airport_accusation):
+    # Checks whether the location accusation is correct.
     sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
     kursori = db_connection.cursor()
     kursori.execute(sql1)
@@ -246,6 +256,7 @@ def check_if_correct_location(airport_accusation):
         return True
 
 def check_if_correct_suspect(suspect_accusation):
+    # Checks whether the suspect accusation is correct.
     sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
     kursori = db_connection.cursor()
     kursori.execute(sql1)
@@ -297,6 +308,7 @@ def accuse_weapon_suspect(game_id, the_accusation):
 
 
 def check_accusations(game_id):
+    # Shows the user what they have already guessed.
     sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations where weapon_accusations is not NULL')
     cursor = db_connection.cursor()
     cursor.execute(sql)
@@ -399,6 +411,7 @@ def fly():
 
 
 def print_story():
+    #Asks if the user wants to know the intro then prints it
     while True:
         question = input('Do you wish to read the introduction story? "yes" or "no": ')
         question = question.lower()
@@ -412,14 +425,6 @@ def print_story():
         else:
             print("check spelling.")
     return
-'''
-angelinan koodi check if correct
-
-def win():
-    if check_if_correct has all three correct -> 
-    victory = True
-    return victory
-'''
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -429,8 +434,7 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-# intro()
-
+# Start of game:
 victory = False
 select_game = 1
 # accusation_counter = 0
@@ -450,7 +454,7 @@ check_accusations(select_game)
 accusation_counter = 1
 command_counter = 0
 game_round = ""
-
+# Game loop.
 while check_money(select_game) > 0 and not victory and game_round != "end game":
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ").lower()
@@ -497,11 +501,11 @@ while check_money(select_game) > 0 and not victory and game_round != "end game":
 
 
 
-# These can be changed to work better with the outro.
+#End of the game.
 if check_money(select_game) < 0 and not victory:
-    print("You ran out of money.")
+    print("OH NO! Unfortunately, your money has run out, and the criminal gets away without punishment… Better luck next time!")
 elif victory and check_money(select_game) >= 0:
-    print("You solved the mystery!")
+    print("Congratulations! You've identified the culprit, and the police can now press charges. You've done an amazing job, and I hope you're proud of yourself. Keep up the great work!")
 elif game_round == "end game":
     print("Thanks for playing!")
 
