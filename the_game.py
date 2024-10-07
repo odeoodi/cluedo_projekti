@@ -7,6 +7,9 @@ import intro_story
 def rules():
     #Asks the user if they want to know the rules of the game then prints them.
     rule = input('Do you want to read the rules? Type "yes" or "no": ').lower()
+    while rule != "yes" and rule != "no":
+        print("Check your spelling.")
+        rule = input('Do you want to read the rules? Type "yes" or "no": ').lower()
     if rule == "yes":
         print("1. You will start at a random airport which is one of the options for the murder scene. "
               "At the start you will get three clues, that are not a part of the murder.\n You can see them later at the top of the"
@@ -16,9 +19,6 @@ def rules():
               " Flying costs 125 €.\n"
               "3. You lose the game if your money runs out before solving the mystery.\n"
               "4. You win the game by making an accusation with a correct weapon, suspect and airport.\n")
-    elif rule != "no" and rule != "yes":
-        print("Check your spelling.")
-        input('Do you want to read the rules? Type "yes" or "no": ').lower()
     return
 
 def random_hints():
@@ -272,21 +272,28 @@ def check_if_correct_suspect(suspect_accusation):
         return True
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
-    weapon_options = 'spoon','knife','poison','pencil','pistol'
-    suspect_options = 'Make', 'Iida', 'Ode', 'Angelina', 'Ville'
-    print("Weapons to choose from: spoon, knife, poison, pencil, pistol")
+    cursor = db_connection.cursor()
+    sql1 = f'select weapon from weapons'
+    sql2 = f'select names from suspects'
+    cursor.execute(sql1)
+    weapon_options = []
+    results_one = cursor.fetchall()
+    weapon_options = [i[0] for i in results_one]
+    cursor.execute(sql2)
+    results_two = cursor.fetchall()
+    suspect_options = [i[0] for i in results_two]
+    print(f"Weapons to choose from: {', '.join(weapon_options)}")
     weapon_accusation = input("Make your weapon accusation: ").lower()
     while weapon_accusation not in weapon_options:
         print("Where did you find this? Put it back.")
         weapon_accusation = input("Make your weapon accusation: ")
-    print("Suspects to choose from: Make, Iida, Ode, Angelina, Ville")
+    print(f"Suspects to choose from: {', '.join(suspect_options)}")
     suspect_accusation = input("Who do you suspect: ")
     while suspect_accusation not in suspect_options:
         print("They are not here. Try again. Remember to write the name with a capital letter.")
         suspect_accusation = input("Who do you suspect: ")
     airport_accusation = location_now(1)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
-    cursor = db_connection.cursor()
     cursor.execute(sql)
     weapon_right = check_if_correct_weapon(weapon_accusation)
     suspect_right = check_if_correct_suspect(suspect_accusation)
