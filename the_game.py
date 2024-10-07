@@ -4,6 +4,21 @@ import mysql.connector
 import random
 import intro_story
 
+def rules():
+    rule = input('Do you want to read the rules? Type "yes" or "no": ').lower()
+    if rule == "yes":
+        print("1. You will start at a random airport which is one of the options for the murder scene."
+              "At the start you will get three clues, that are not a part of the murder. You can see them later at the top of the"
+              "accusations you have made."
+              "You can start your round by making an accusation there or flying somewhere else straight away.\n"
+              "2. After making an accusation you must change the airport your at, the game will prompt you to fly to a new destination."
+              "Flying costs 125 €.\n"
+              "3. You lose the game if your money runs out before solving the mystery.\n"
+              "4. You win the game by making an accusation with a correct weapon, suspect and airport.")
+    elif rule != "no" and rule != "yes":
+        print("Check your spelling.")
+    return
+
 def random_hints():
     cursor = db_connection.cursor()
 
@@ -111,11 +126,11 @@ def start_money(game_id):
     return
 
 def help_command():
-    print(f"The currently available commands are: \n"
+    print(f"The commands to use are: \n"
           f"'accuse' to accuse a weapon and a person. \n"
           f"'fly' to fly to a new destination. \n"
           f"'check accusations' to refresh your memory about the accusations you have made. \n"
-          f"'end game' to end the game. \n")
+          f"'end game' to end the game without finishing. \n")
     return
 
 
@@ -424,6 +439,7 @@ start_money(select_game)
 #print(location_now(select_game))
 start_accusations()
 insert_right_answers()
+rules()
 print_story()
 random_hints()
 print('\nSee the options by typing "help".\n')
@@ -433,8 +449,9 @@ print("Here are your current clues, these are not part of the crime:")
 check_accusations(select_game)
 accusation_counter = 1
 command_counter = 0
+game_round = ""
 
-while check_money(select_game) > 0 and not victory:
+while check_money(select_game) > 0 and not victory and game_round != "end game":
     # saved_game = input("Select saved game: ") // possible if we want to save games to the game table and identify them by id number.
     game_round = input("What would you like to do: ").lower()
     command_counter = 0
@@ -464,6 +481,8 @@ while check_money(select_game) > 0 and not victory:
         elif game_round == "help":
             help_command()
             game_round = input("What would you like to do: ").lower()
+        elif game_round == "end game":
+            break
         else:
             print("Check spelling on your command.")
             game_round = input("What would you like to do: ").lower()
