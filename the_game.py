@@ -8,16 +8,17 @@ def rules():
     #Asks the user if they want to know the rules of the game then prints them.
     rule = input('Do you want to read the rules? Type "yes" or "no": ').lower()
     if rule == "yes":
-        print("1. You will start at a random airport which is one of the options for the murder scene."
-              "At the start you will get three clues, that are not a part of the murder. You can see them later at the top of the"
-              "accusations you have made."
+        print("1. You will start at a random airport which is one of the options for the murder scene. "
+              "At the start you will get three clues, that are not a part of the murder.\n You can see them later at the top of the"
+              "accusations you have made. "
               "You can start your round by making an accusation there or flying somewhere else straight away.\n"
               "2. After making an accusation you must change the airport your at, the game will prompt you to fly to a new destination."
-              "Flying costs 125 €.\n"
+              " Flying costs 125 €.\n"
               "3. You lose the game if your money runs out before solving the mystery.\n"
-              "4. You win the game by making an accusation with a correct weapon, suspect and airport.")
+              "4. You win the game by making an accusation with a correct weapon, suspect and airport.\n")
     elif rule != "no" and rule != "yes":
         print("Check your spelling.")
+        input('Do you want to read the rules? Type "yes" or "no": ').lower()
     return
 
 def random_hints():
@@ -503,8 +504,8 @@ while check_money(select_game) > 0 and not victory and game_round != "end game":
 
 #End of the game.
 if check_money(select_game) <= 0 and not victory:
-    print("OH NO! Unfortunately, your money has run out, and the criminal gets away without punishment… You tried ouy best better luck next time!")
+    print("OH NO! Unfortunately, your money has run out, and the criminal gets away without punishment… You tried your best, better luck next time!")
 elif victory:
-    print("Congratulations! You've identified the culprit, and the police can now press charges. You've done an amazing job, and I hope you're proud of yourself. Keep up the great work!")
+    print("Congratulations! You've identified the culprit, and the police can now press charges. \nYou've done an amazing job, and I hope you're proud of yourself. Keep up the great work!")
 
 
