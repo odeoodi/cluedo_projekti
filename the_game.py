@@ -432,6 +432,7 @@ start_accusations()
 insert_right_answers()
 rules()
 print_story()
+press_enter_to_continue()
 random_hints()
 print('\nSee the options by typing "help".\n')
 print(f"You have {check_money(select_game)} € left.\n"
