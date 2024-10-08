@@ -269,12 +269,12 @@ def accuse_weapon_suspect(game_id, the_accusation):
     weapon_accusation = input("Make your weapon accusation: ").lower()
     while weapon_accusation not in weapon_options:
         print("Where did you find this? Put it back.")
-        weapon_accusation = input("Make your weapon accusation: ")
+        weapon_accusation = input("Make your weapon accusation: ").lower()
     print(f"Suspects to choose from: {', '.join(suspect_options)}")
-    suspect_accusation = input("Who do you suspect: ")
+    suspect_accusation = input("Who do you suspect: ").capitalize()
     while suspect_accusation not in suspect_options:
-        print("They are not here. Try again. Remember to write the name with a capital letter.")
-        suspect_accusation = input("Who do you suspect: ")
+        print("They are not here. Try again.")
+        suspect_accusation = input("Who do you suspect: ").capitalize()
     airport_accusation = location_now(1)
     sql = f'update accusations set weapon_accusations = "{weapon_accusation}",location_accusations = "{airport_accusation}",suspect_accusations = "{suspect_accusation}" WHERE id = {the_accusation}'
     cursor.execute(sql)
