@@ -83,7 +83,6 @@ def win(accusation_counter):
     else:
         return False
 
-
 def start_location():
     # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
@@ -110,7 +109,6 @@ def start_location():
     cursor.execute(sql3)
     db_connection.commit()
     return
-
 
 def start_accusations():
     # Empties previous accusations for a new game.
@@ -140,7 +138,6 @@ def help_command():
           f"'end game' to end the game without finishing. \n")
     return
 
-
 def press_enter_to_continue():
     # Makes prints to take breaks and look pretty :3
     while True:
@@ -150,20 +147,6 @@ def press_enter_to_continue():
         else:
             continue
     return
-
-
-"""
-def gamble_command(db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute('UPDATE game SET money = money - 11')
-    money_gained_amount = random.randint(1, 20)
-    cursor.execute('UPDATE game SET money = money + %s', [money_gained_amount])
-    db_connection.commit()
-    cursor.execute("select money from game")
-    total_money = cursor.fetchone()
-
-    return total_money[0]
-"""
 
 def insert_right_answers():
 # Randomly sets the right answers at the start of the game.
@@ -211,7 +194,6 @@ def check_money(saved_game):
     money = cursor.fetchone()
     money_now = int(money[0])
     return money_now
-
 
 def location_now(game_id):
     # Tells the user what airport they are at.
@@ -270,6 +252,7 @@ def check_if_correct_suspect(suspect_accusation):
         return False
     elif accusations:
         return True
+
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table
     cursor = db_connection.cursor()
@@ -314,7 +297,6 @@ def accuse_weapon_suspect(game_id, the_accusation):
     press_enter_to_continue()
     return
 
-
 def check_accusations(game_id):
     # Shows the user what they have already guessed.
     sql = (f'select weapon_accusations,location_accusations,suspect_accusations from accusations where weapon_accusations is not NULL')
@@ -328,8 +310,6 @@ def check_accusations(game_id):
         print("")
     print("")
     return made_accusations
-
-
 
 def fly():
 # Druing this funktion player can fly to the new location.
@@ -416,7 +396,6 @@ def fly():
             print("\nSorry your ICAO-code was not in the list, please try again.")
             press_enter_to_continue()
             print()
-
 
 def print_story():
     #Asks if the user wants to know the intro then prints it
