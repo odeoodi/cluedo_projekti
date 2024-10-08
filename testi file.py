@@ -1,2 +1,0 @@
-#moi
-#moi oodi
