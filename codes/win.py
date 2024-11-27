@@ -1,4 +1,5 @@
 import mysql.connector
+from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 
 
 db_connection = mysql.connector.connect(

@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
     port=3306,
@@ -45,7 +46,7 @@ def start_accusations():
     #sql2 = f'alter table accusations auto_increment = 1'
     cursor = db_connection.cursor()
     cursor.execute(sql1)
-    hints = cursor.fetchall()
+    #hints = cursor.fetchall()
     return
 
 def start_money(game_id):
@@ -53,5 +54,5 @@ def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    current_location = cursor.fetchall()
+    #current_location = cursor.fetchall()
     return

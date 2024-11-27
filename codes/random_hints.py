@@ -9,6 +9,8 @@ db_connection = mysql.connector.connect(
     autocommit=True
 )
 
+
+
 def random_hints():
     # Gives the user hints by randomly selecting a location, a weapon and a suspect then checking if it is in the right_answers
     # and telling the result.

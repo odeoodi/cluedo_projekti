@@ -10,12 +10,8 @@ from codes.fly import fly
 from codes.win import win
 from codes.rules import rules
 from codes.help_command import help_command
-#from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
-
-
 from codes.acccuse import accuse_weapon_suspect
 from codes.check_accustations import check_accusations
-
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -39,10 +35,12 @@ rules()
 print_story()
 press_enter_to_continue()
 random_hints()
+
 print('\nSee the options by typing "help".\n')
 print(f"You have {check_money(select_game)} € left.\n"
       f"You are now at {location_now(select_game)}.")
 print("Here are your current clues, these are not part of the crime:")
+
 check_accusations(select_game)
 accusation_counter = 1
 command_counter = 0

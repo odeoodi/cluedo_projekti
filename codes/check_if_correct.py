@@ -1,5 +1,5 @@
 import mysql.connector
-import location_now
+from codes.location_now import location_now
 
 
 db_connection = mysql.connector.connect(

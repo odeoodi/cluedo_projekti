@@ -1,7 +1,7 @@
 import mysql.connector
-from location_now import location_now
-from check_money import check_money
-from press_enter import press_enter_to_continue
+from codes.location_now import location_now
+from codes.check_money import check_money
+from codes.press_enter import press_enter_to_continue
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'

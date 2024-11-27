@@ -1,7 +1,8 @@
 import mysql.connector
-import location_now
-from press_enter import press_enter_to_continue
-from check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
+from codes.location_now import location_now
+from codes.press_enter import press_enter_to_continue
+from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
+
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
