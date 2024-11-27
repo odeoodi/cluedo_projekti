@@ -18,19 +18,6 @@ def press_enter_to_continue():
 
 
 
-def location_now(game_id):
-    # Tells the user what airport they are at.
-    sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    results = cursor.fetchall()
-
-    if results:
-        current_location = results[0][0]
-        return current_location
-    else:
-        print(f"No location found for game_id {game_id}.")
-        return None
 
 def check_if_correct_weapon(weapon_accusation):
     # Checks whether the weapon accusation is correct.
