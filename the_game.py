@@ -4,8 +4,6 @@ from codes.start import start_location, start_money, start_accusations
 from codes.right_answers import insert_right_answers
 from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 
-# Functions:
-
 def press_enter_to_continue():
     # Makes prints to take breaks and look pretty :3
     while True:
