@@ -1,7 +1,7 @@
 import mysql.connector
-import location_now
-import check_money
-import press_enter_to_continue
+from location_now import location_now
+from check_money import check_money
+from press_enter import press_enter_to_continue
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -11,8 +11,6 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-
-
 
 def fly():
 # Druing this function player can fly to the new location.

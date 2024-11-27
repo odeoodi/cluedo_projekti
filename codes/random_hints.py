@@ -10,7 +10,8 @@ db_connection = mysql.connector.connect(
 )
 
 def random_hints():
-    # Gives the user hints by randomly selecting a location, a weapon and a suspect then checking if it is in the right_answers and telling the result.
+    # Gives the user hints by randomly selecting a location, a weapon and a suspect then checking if it is in the right_answers
+    # and telling the result.
     cursor = db_connection.cursor()
 
     cursor.execute("SELECT id_locations, id_weapons, id_suspects FROM right_answers")
