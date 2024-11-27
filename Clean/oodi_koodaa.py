@@ -1,7 +1,4 @@
-from tabnanny import check
-
 import mysql.connector
-import random
 import intro_story
 # Functions:
 def rules():
