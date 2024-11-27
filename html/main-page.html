@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,8 +26,34 @@
         </nav>
     </header>
 
+    <main>
+       <div id="map"></div>
 
-<div id="map"></div>
+        <div class="boxes">
+            <section class="box">
+                <header>
+                    <h2>Game Status</h2>
+                </header>
+                <table>
+                    <tr>
+                        <td colspan="2">Player name</td>
+                    </tr>
+                    <tr>
+                        <td>Budget: <span id="budget">500</span>€</td>
+                    </tr>
+                </table>
+            </section>
+            <section class="box">
+                <header>
+                    <h2>Notepad</h2>
+                </header>
+                <ul id="hints"></ul> <!-- tähän lisään javascriptillä pelaajan saamat vihjeet -->
+            </section>
+        </div>
+    </main>
+
+
+
 
 
 </div>
