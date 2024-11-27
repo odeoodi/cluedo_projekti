@@ -5,6 +5,7 @@ import random_hints
 import win
 import help_command
 from start import start_location, start_money, start_accusations
+from right_answers import insert_right_answers
 
 
 # Functions:
