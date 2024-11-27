@@ -3,7 +3,7 @@ import intro_story
 import rules
 import random_hints
 import win
-
+import help_command
 
 
 # Functions:
@@ -12,14 +12,6 @@ import win
 
 
 
-def help_command():
-    # Gives the user the opportunity to see their options.
-    print(f"The commands to use are: \n"
-          f"'accuse' to accuse a weapon and a person. \n"
-          f"'fly' to fly to a new destination. \n"
-          f"'check accusations' to refresh your memory about the accusations you have made. \n"
-          f"'end game' to end the game without finishing. \n")
-    return
 
 def press_enter_to_continue():
     # Makes prints to take breaks and look pretty :3
