@@ -1,117 +1,16 @@
 import mysql.connector
 import intro_story
-from rules import rules
+import rules
+import random_hints
+import win
+
+
 
 # Functions:
 
 
-def random_hints():
-    # Gives the user hints by randomly selecting a location, a weapon and a suspect then checking if it is in the right_answers and telling the result.
-    cursor = db_connection.cursor()
 
-    cursor.execute("SELECT id_locations, id_weapons, id_suspects FROM right_answers")
-    exclusions = cursor.fetchall()
-    excluded_locations = [row[0] for row in exclusions]
-    excluded_weapons = [row[1] for row in exclusions]
-    excluded_suspects = [row[2] for row in exclusions]
 
-    if excluded_locations:
-        cursor.execute(f"SELECT * FROM locations WHERE id NOT IN ({','.join(map(str, excluded_locations))}) ORDER BY RAND() LIMIT 1")
-    else:
-        cursor.execute("SELECT * FROM locations ORDER BY RAND() LIMIT 1")
-    random_location = cursor.fetchone()
-
-    if excluded_weapons:
-        cursor.execute(f"SELECT * FROM weapons WHERE id NOT IN ({','.join(map(str, excluded_weapons))}) ORDER BY RAND() LIMIT 1")
-    else:
-        cursor.execute("SELECT * FROM weapons ORDER BY RAND() LIMIT 1")
-    random_weapon = cursor.fetchone()
-
-    if excluded_suspects:
-        cursor.execute(f"SELECT * FROM suspects WHERE id NOT IN ({','.join(map(str, excluded_suspects))}) ORDER BY RAND() LIMIT 1")
-    else:
-        cursor.execute("SELECT * FROM suspects ORDER BY RAND() LIMIT 1")
-    random_suspect = cursor.fetchone()
-
-    cursor.execute(
-        """
-        UPDATE accusations
-        SET weapon_accusations = %s, location_accusations = %s, suspect_accusations = %s
-        WHERE id = %s
-        """,
-        (random_weapon[1], random_location[1], random_suspect[1], 1))
-
-    return random_location[1], random_weapon[1], random_suspect[1]
-
-def win(accusation_counter):
-    # Shows whether the user has won or not.
-    sql = f"SELECT weapon_accusations, suspect_accusations, location_accusations FROM accusations WHERE id = {accusation_counter};"
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    last_accusations = cursor.fetchone()
-
-    last_weapon = last_accusations[0]
-    last_suspect = last_accusations[1]
-    last_location = last_accusations[2]
-
-    if last_accusations:
-        right_weapon = check_if_correct_weapon(last_weapon)
-        right_suspect = check_if_correct_suspect(last_suspect)
-        right_location = check_if_correct_location(last_location)
-
-        if right_weapon and right_suspect and right_location == True:
-            print("You win!")
-            return True
-        else:
-            return False
-    else:
-        return False
-
-def start_location():
-    # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
-    # selects one of the airports as starting airport.
-    while True:
-        sql1= (f"UPDATE locations SET name = (SELECT name FROM airport WHERE continent = 'EU' AND type = 'large_airport' ORDER BY RAND()LIMIT 1);")
-        sql1_1= (f"SELECT name FROM locations;")
-        cursor = db_connection.cursor()
-        cursor.execute(sql1)
-        cursor.execute(sql1_1)
-        sql1_1 = cursor.fetchall()
-        db_connection.commit()
-        dubles=0
-        for outter in sql1_1:
-            if sql1_1.count(outter) > 1:
-                dubles += 1
-            if dubles != 0:
-                continue
-        if dubles <= 0:
-            break
-    sql2= (f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);")
-    sql3= (f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);")
-    cursor = db_connection.cursor()
-    cursor.execute(sql2)
-    cursor.execute(sql3)
-    db_connection.commit()
-    return
-
-def start_accusations():
-    # Empties previous accusations for a new game.
-    sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
-    #sql2 = f"alter table accusations auto_increment = 1"
-    sql1 = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
-    #sql2 = f'alter table accusations auto_increment = 1'
-    cursor = db_connection.cursor()
-    cursor.execute(sql1)
-    hints = cursor.fetchall()
-    return
-
-def start_money(game_id):
-    # Gives the user 500 money at the start of the game
-    sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    current_location = cursor.fetchall()
-    return
 
 def help_command():
     # Gives the user the opportunity to see their options.
@@ -405,6 +304,7 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
+
 # Start of game:
 victory = False
 select_game = 1
