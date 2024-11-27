@@ -1,4 +1,6 @@
 import mysql.connector
+import location_now
+
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
