@@ -1,11 +1,7 @@
 import mysql.connector
-import intro_story
-import rules
-import random_hints
-import win
-import help_command
-from start import start_location, start_money, start_accusations
-from right_answers import insert_right_answers
+from codes import intro_story, random_hints, rules, help_command, win
+from codes.start import start_location, start_money, start_accusations
+from codes.right_answers import insert_right_answers
 
 
 # Functions:
@@ -20,110 +16,9 @@ def press_enter_to_continue():
             continue
     return
 
-def insert_right_answers():
-# Randomly sets the right answers at the start of the game.
-    def random_location():
-        sql = f"SELECT id FROM locations ORDER BY RAND() LIMIT 1;"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_locations = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
 
-    def random_weapon():
-        sql = f"SELECT id FROM weapons ORDER BY RAND() LIMIT 1"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_weapons = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
 
-    def random_suspect():
-        sql = f"SELECT id FROM suspects ORDER BY RAND() LIMIT 1"
-        kursori=db_connection.cursor()
-        kursori.execute(sql)
-        result=kursori.fetchone()
-        sql2 = f"UPDATE right_answers SET id_suspects = {result[0]};"
-        kursori.execute(sql2)
-        db_connection.commit()
-        return result
 
-    random_weapon()
-    random_suspect()
-    random_location()
-
-    return
-
-def check_money(saved_game):
-    # Tells the user how much money they have left.
-    sql = f'select money from game where id = "{saved_game}"'
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    money = cursor.fetchone()
-    money_now = int(money[0])
-    return money_now
-
-def location_now(game_id):
-    # Tells the user what airport they are at.
-    sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    results = cursor.fetchall()
-
-    if results:
-        current_location = results[0][0]
-        return current_location
-    else:
-        print(f"No location found for game_id {game_id}.")
-        return None
-
-def check_if_correct_weapon(weapon_accusation):
-    # Checks whether the weapon accusation is correct.
-    sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
-    kursori = db_connection.cursor()
-    kursori.execute(sql1)
-    accusation_id = kursori.fetchone()[0]
-    sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
-    kursori.execute(sql2)
-    accusations = kursori.fetchone()
-    matches = []
-    if not accusations:
-        return False
-    elif accusations:
-        return True
-
-def check_if_correct_location(airport_accusation):
-    # Checks whether the location accusation is correct.
-    sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
-    kursori = db_connection.cursor()
-    kursori.execute(sql1)
-    accusation_id = kursori.fetchone()[0]
-    sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
-    kursori.execute(sql2)
-    accusations = kursori.fetchone()
-    if not accusations:
-        return False
-    elif accusations:
-        return True
-
-def check_if_correct_suspect(suspect_accusation):
-    # Checks whether the suspect accusation is correct.
-    sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
-    kursori = db_connection.cursor()
-    kursori.execute(sql1)
-    accusation_id = kursori.fetchone()[0]
-    sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
-    kursori.execute(sql2)
-    accusations = kursori.fetchone()
-    matches = []
-    if not accusations:
-        return False
-    elif accusations:
-        return True
 
 def accuse_weapon_suspect(game_id, the_accusation):
     # --- adds the accused weapon to accusations table

@@ -1,5 +1,7 @@
 import mysql.connector
-import intro_story
+from codes import intro_story
+
+
 # Functions:
 def rules():
     #Asks the user if they want to know the rules of the game then prints them.
