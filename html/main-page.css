@@ -65,10 +65,9 @@ body {
     max-height: 20.9rem;
     overflow-y: auto;
     position: relative;
-    align-content: center;
     max-width: 16rem;
     padding-left: 6rem;
-
+    height: 20.9rem;
 }
 
 .content p {
