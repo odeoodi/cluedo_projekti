@@ -63,7 +63,7 @@ body {
 }
 .content {
     color: var(--bistre);
-    max-height: 19.3rem;
+    max-height: 20.6rem;
     overflow-y: auto;
     position: relative;
     align-content: center;
