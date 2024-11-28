@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <title>J'accuse!</title>
     <script src="main-page.js" defer></script>
+    <link rel="stylesheet" href="main-page.css">
 </head>
 <body>
 <div class="container"> <!-- Tämän containerin sisälle laitetaan kaikki sisältö mikä tulee sivulle -->
@@ -27,33 +28,55 @@
     </header>
 
     <main>
-       <div id="map"></div>
 
-        <div class="boxes">
+        <div class="boxes flex-wrap">
             <section class="box">
                 <header>
                     <h2>Game Status</h2>
                 </header>
                 <table>
                     <tr>
-                        <td colspan="2">Player name</td>
+                        <td colspan="2">Player name: <span id="player-id">ID</span></td>
                     </tr>
                     <tr>
                         <td>Budget: <span id="budget">500</span>€</td>
                     </tr>
                 </table>
             </section>
-            <section class="box">
-                <header>
-                    <h2>Notepad</h2>
-                </header>
-                <ul id="hints"></ul> <!-- tähän lisään javascriptillä pelaajan saamat vihjeet -->
-            </section>
+
+            <div id="map flex-wrap responsive-img">
+                <img src="https://picsum.photos/400/300" alt="will be the pic of the map">
+            </div>
+
+            <div class="notepad">
+                <div class="title">
+                    <h1>Notepad</h1>
+                </div>
+                <div class="content">
+
+                    <p id="hints">Your hints about the murder will be here</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur autem blanditiis
+                        culpa cum est quia rem, soluta!
+                        Aliquam cum delectus, dolor id laboriosam magnam magni molestiae repellat vero vitae.</p>
+                </div>
+            </div>
         </div>
     </main>
-
-
-
 
 
 </div>
