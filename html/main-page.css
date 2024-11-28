@@ -48,22 +48,21 @@ body {
     font-family: Verdana,sans-serif;
 }
 
-
 .notepad {
     text-align: center;
     box-sizing: border-box;
     font-family: ShadowsIntoLight,sans-serif;
     background-image: url("img/jaccuse-notepad.png");
-    background-size: 100%;
-    height: auto;
+    background-size: cover;
     width: 40%;
+    aspect-ratio: auto;
     overflow-y: scroll;
     position: relative;
     padding-bottom: 1rem;
 }
 .content {
     color: var(--bistre);
-    max-height: 20.6rem;
+    max-height: 20.9rem;
     overflow-y: auto;
     position: relative;
     align-content: center;
