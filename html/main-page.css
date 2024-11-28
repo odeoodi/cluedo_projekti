@@ -49,23 +49,6 @@ body {
 }
 
 
-/*.notepad {
-    width: 400px;
-    height: 600px;
-    background: linear-gradient(to bottom, var(--coyote),var(--ash-grey));
-    border: 1px solid var(--coyote);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    overflow-y: scroll;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-*/
-
-
 .notepad {
     text-align: center;
     box-sizing: border-box;
