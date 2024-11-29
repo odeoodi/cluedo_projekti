@@ -23,6 +23,7 @@
     width: 70%;
     margin: auto;
 }
+
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -31,16 +32,30 @@
 .status {
     text-align: center;
     box-sizing: border-box;
-    width: 100%;
-    padding-bottom: 1rem;
+    width: 30%;
+     border-collapse: collapse;
+    border: 3px solid var(--noir);
+    margin-left: 44rem;
+    margin-right: 4rem;
+    margin-bottom: 1rem;
 }
+
 .status table {
     width: 100%;
+    table-layout: fixed;
+}
+
+.status table tr td {
+    border-collapse: collapse;
+    border: 3px solid var(--noir);
+    width: 30%;
+    padding: 0.7rem;
 }
 
 #map {
     width: 60%;
     box-sizing: border-box;
+    margin-top: 1rem;
 }
 
 body {
@@ -50,21 +65,22 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: SpecialElite,sans-serif;
+    font-family: SpecialElite, sans-serif;
 }
 
 .notepad {
     text-align: center;
     box-sizing: border-box;
-    font-family: ShadowsIntoLight,sans-serif;
+    font-family: ShadowsIntoLight, sans-serif;
     background-image: url("img/jaccuse-notepad.png");
     background-size: cover;
-    width: 40%; /* Jos halutaan että tää skaalautuu, niin tää pitää muuttaa mobiiliin staattiseksi */
+    width: 40%;
     aspect-ratio: auto;
     overflow-y: scroll;
     position: relative;
     padding-bottom: 1rem;
 }
+
 .content {
     color: var(--bistre);
     max-height: 20.9rem;
@@ -79,12 +95,14 @@ body {
     max-width: 15rem;
     margin-top: 0;
 }
+
 .notepad title {
     width: 100%;
     height: 1rem;
     padding-top: 1.4rem;
     position: sticky;
 }
+
 .notepad h1 {
     margin-bottom: 0;
 }
