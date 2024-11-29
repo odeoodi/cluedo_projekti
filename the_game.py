@@ -1,17 +1,20 @@
 import mysql.connector
+from codes.location_now import location_now
 from codes.start import start_location, start_money, start_accusations
 from codes.right_answers import insert_right_answers
-from codes.location_now import location_now
+from codes.rules import rules
+from codes.print_story import print_story
+from codes.press_enter import press_enter_to_continue
+from codes.help_command import help_command
 from codes.random_hints import random_hints
 from codes.check_money import check_money
-from codes.press_enter import press_enter_to_continue
-from codes.print_story import print_story
+from codes.check_accustations import check_accusations
+from codes.acccuse import accuse_weapon_suspect
 from codes.fly import fly
 from codes.win import win
-from codes.rules import rules
-from codes.help_command import help_command
-from codes.acccuse import accuse_weapon_suspect
-from codes.check_accustations import check_accusations
+
+
+
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
