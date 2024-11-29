@@ -14,6 +14,11 @@
     src: url("ShadowsIntoLight-Regular.ttf");
 }
 
+@font-face {
+    font-family: SpecialElite;
+    src: url("SpecialElite-Regular.ttf");
+}
+
 .container {
     width: 70%;
     margin: auto;
@@ -23,14 +28,14 @@
     flex-wrap: wrap;
 }
 
-.box {
+.status {
     text-align: center;
     box-sizing: border-box;
     width: 100%;
+    padding-bottom: 1rem;
 }
-.box table {
+.status table {
     width: 100%;
-
 }
 
 #map {
@@ -45,7 +50,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Verdana,sans-serif;
+    font-family: SpecialElite,sans-serif;
 }
 
 .notepad {
@@ -54,7 +59,7 @@ body {
     font-family: ShadowsIntoLight,sans-serif;
     background-image: url("img/jaccuse-notepad.png");
     background-size: cover;
-    width: 40%;
+    width: 40%; /* Jos halutaan että tää skaalautuu, niin tää pitää muuttaa mobiiliin staattiseksi */
     aspect-ratio: auto;
     overflow-y: scroll;
     position: relative;
