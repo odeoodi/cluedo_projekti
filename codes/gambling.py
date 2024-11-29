@@ -17,7 +17,7 @@ class WinMoney:
             self.select_game = select_game
             num = random.randint(0, 4)
             amount = [25, 50, 100, 150, 200]
-            print(f'You have won {amount[num]}.')
+            print(f'You won {amount[num]}€.')
 
             def win(amount, num,select_game):
                 money = f'UPDATE game SET money = money+ %s WHERE id = %s'
@@ -46,7 +46,7 @@ class PayGambling:
 def gambling(select_game):
         roll = random.randint(1, 10)
         paying = PayGambling(select_game)
-        if roll <= 2:
+        if roll <= 3:
            win = WinMoney(select_game)
         else:
             print('No win')
