@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <!-- Link CSS files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>J'accuse!</title>
+    <script src="main-page.js" defer></script>
+    <link rel="stylesheet" href="main-page.css">
+</head>
+<body>
+<div class="container"> <!-- Tämän containerin sisälle laitetaan kaikki sisältö mikä tulee sivulle -->
+
+    <header>
+        <h1>J'accuse!</h1>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="main-page.html">Game</a>
+                </li>
+                <li>
+                    <a href="about-page.html">About</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="boxes flex-wrap">
+            <section class="box">
+                <header>
+                    <h2>Game Status</h2>
+                </header>
+                <table>
+                    <tr>
+                        <td colspan="2">Player name: <span id="player-id">ID</span></td>
+                    </tr>
+                    <tr>
+                        <td>Budget: <span id="budget">500</span>€</td>
+                    </tr>
+                </table>
+            </section>
+
+            <div id="map flex-wrap responsive-img">
+                <img src="https://picsum.photos/400/300" alt="will be the pic of the map">
+            </div>
+
+            <div class="notepad">
+                <div class="title">
+                    <h1>Notepad</h1>
+                </div>
+                <div class="content">
+
+                    <p id="hints">Your hints about the murder will be here</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 J'accuse!</p> <!-- Tää on caan placeholder, saa muuttaa -->
+    </footer>
+
+</div>
+</body>
+</html>

@@ -8,5 +8,23 @@ wrapper = textwrap.TextWrapper(width=80, break_long_words=False, replace_whitesp
 intro_list = wrapper.wrap(text=story)
 
 
-def getStory():
-    return intro_list
+#def getstory():
+    #return intro_list
+
+def print_story():
+    #Asks if the user wants to know the intro then prints it
+    while True:
+        question = input('Do you wish to read the introduction story? "yes" or "no": ')
+        question = question.lower()
+        if question == 'yes':
+            for line in intro_list:
+                print(line)
+            break
+        elif question == 'no':
+            print("\nLet the game begin!")
+            break
+        else:
+            print("check spelling.")
+    return
+
+print(print_story())

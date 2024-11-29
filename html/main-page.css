@@ -1,0 +1,85 @@
+:root {
+    --eggshell: #EEE9DA;
+    --bistre: #351B0C;
+    --noir: #57432E;
+    --chamoisee: #948561;
+    --coyote: #746953;
+    --lion: #B49969;
+    --ash-grey: #BEBDAD;
+    --bone: #D4CFBC;
+}
+
+@font-face {
+    font-family: ShadowsIntoLight;
+    src: url("ShadowsIntoLight-Regular.ttf");
+}
+
+.container {
+    width: 70%;
+    margin: auto;
+}
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+.box table {
+    width: 100%;
+
+}
+
+#map {
+    width: 60%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--eggshell);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Verdana,sans-serif;
+}
+
+.notepad {
+    text-align: center;
+    box-sizing: border-box;
+    font-family: ShadowsIntoLight,sans-serif;
+    background-image: url("img/jaccuse-notepad.png");
+    background-size: cover;
+    width: 40%;
+    aspect-ratio: auto;
+    overflow-y: scroll;
+    position: relative;
+    padding-bottom: 1rem;
+}
+.content {
+    color: var(--bistre);
+    max-height: 20.9rem;
+    overflow-y: auto;
+    position: relative;
+    max-width: 16rem;
+    padding-left: 6rem;
+    height: 20.9rem;
+}
+
+.content p {
+    max-width: 15rem;
+    margin-top: 0;
+}
+.notepad title {
+    width: 100%;
+    height: 1rem;
+    padding-top: 1.4rem;
+    position: sticky;
+}
+.notepad h1 {
+    margin-bottom: 0;
+}
