@@ -7,7 +7,7 @@ from codes.print_story import print_story
 from codes.press_enter import press_enter_to_continue
 from codes.help_command import help_command
 from codes.random_hints import random_hints
-from codes.gambling import gambling
+from codes.gambling import Gambling
 from codes.check_money import check_money
 from codes.check_accustations import check_accusations
 from codes.acccuse import accuse_weapon_suspect
@@ -81,7 +81,8 @@ while check_money(select_game) > 0 and not victory and game_round != "end game":
             help_command()
             game_round = input("What would you like to do: ").lower()
         elif game_round == "gamble":
-            gambling(select_game)
+            rungame = Gambling(select_game)
+            rungame.gamble(select_game)
             game_round = input("What would you like to do: ").lower()
         elif game_round == "end game":
             break
