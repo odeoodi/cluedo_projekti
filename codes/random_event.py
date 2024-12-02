@@ -21,7 +21,7 @@ class RandomEvent:
             event = random.randint(1, 5)
             print(event)
             if event == 1:
-                CleanNotebok.cean(self.select_game)
+                CleanNotebok.clean(self.select_game)
             elif event == 2:
                 print (2)
             elif event == 3:
@@ -39,7 +39,7 @@ class CleanNotebok:
     def __init__(self, select_game):
         super().__init__(select_game)
 
-    def cean (self):
+    def clean (self):
         empty = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
         cursor = db_connection.cursor()
         cursor.execute(empty)
