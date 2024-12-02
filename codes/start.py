@@ -49,9 +49,10 @@ def start_accusations():
     #hints = cursor.fetchall()
     return
 
-def start_money(game_id):
+def start_money(game_id, money):
     # Gives the user 500 money at the start of the game
-    sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
+    sql = (f'UPDATE game SET money = "{money}" WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
     return
+
