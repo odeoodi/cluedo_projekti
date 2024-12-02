@@ -13,9 +13,7 @@ from codes.check_accustations import check_accusations
 from codes.acccuse import accuse_weapon_suspect
 from codes.fly import fly
 from codes.win import win
-
-
-
+import codes.config
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -106,4 +104,11 @@ if check_money(select_game) <= 0 and not victory:
 elif victory:
     print("Congratulations! You've identified the culprit, and the police can now press charges. \nYou've done an amazing job, and I hope you're proud of yourself. Keep up the great work!")
 
+'''
+class Game():
+    def __init__(self, game_id):
+        self.game_id = game_id
+        accusation_counter = 1
+        command_counter = 0
 
+'''

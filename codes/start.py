@@ -1,6 +1,5 @@
 import mysql.connector
 
-
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
     port=3306,
@@ -9,7 +8,6 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
-
 
 def start_location():
     # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,

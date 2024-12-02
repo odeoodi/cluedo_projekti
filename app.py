@@ -4,6 +4,9 @@ from flask_cors import CORS
 import mysql.connector
 from codes.start import start_money, start_location, start_accusations
 import codes.config
+from codes.fly import flying_new_port, cost_of_flying
+
+
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -24,6 +27,13 @@ def new_game():
     start_accusations()
     start_money(codes.config.game_id,codes.config.money)
     return 'OK'
+
+@app.route('/fly/<icao>')
+def in_game_fly(icao):
+    icao = (icao)
+    flying_new_port(icao)
+    cost_of_flying(codes.config.fly_cost)
+    return 'ok'
 
 
 
