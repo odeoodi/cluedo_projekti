@@ -1,4 +1,5 @@
-game_id =
-accusation_counter = 1
-command_counter = 0
-start_money = 500
+game_id =1
+money = 500
+fly_cost = 75
+
+
