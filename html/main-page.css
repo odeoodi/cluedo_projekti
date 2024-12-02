@@ -9,6 +9,10 @@
     --bone: #D4CFBC;
 }
 
+html{
+    align-content: center;
+}
+
 @font-face {
     font-family: ShadowsIntoLight;
     src: url("ShadowsIntoLight-Regular.ttf");

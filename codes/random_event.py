@@ -16,7 +16,7 @@ class RandomEvent:
         self.select_game = select_game
         roll = random.randint(1, 10)
         print(roll)
-        roll = 2
+        roll = 1
         if roll == 1:
             event = random.randint(1, 5)
             print(event)

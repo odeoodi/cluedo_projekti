@@ -54,5 +54,4 @@ def start_money(game_id):
     sql = (f'UPDATE game SET money = 500 WHERE id = "{game_id}"')
     cursor = db_connection.cursor()
     cursor.execute(sql)
-    #current_location = cursor.fetchall()
     return
