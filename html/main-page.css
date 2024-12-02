@@ -13,6 +13,10 @@
     font-family: ShadowsIntoLight;
     src: url("ShadowsIntoLight-Regular.ttf");
 }
+@font-face {
+    font-family: Caveat;
+    src: url("CaveatBrush-Regular.ttf");
+}
 
 @font-face {
     font-family: SpecialElite;
@@ -71,7 +75,7 @@ body {
 .notepad {
     text-align: center;
     box-sizing: border-box;
-    font-family: ShadowsIntoLight, sans-serif;
+    font-family: Caveat, sans-serif;
     background-image: url("img/jaccuse-notepad.png");
     background-size: cover;
     width: 40%;
