@@ -2,7 +2,7 @@ import json
 from flask import Flask, request
 from flask_cors import CORS
 import mysql.connector
-from codes.start import start_money, start_location, start_accusations
+from codes.start import start_money, start_location, start_accusations, insert_right_answers
 import codes.config
 from codes.fly import flying_new_port, cost_of_flying
 
@@ -26,7 +26,8 @@ def new_game():
     start_location()
     start_accusations()
     start_money(codes.config.game_id,codes.config.money)
-    return 'OK'
+    insert_right_answers()
+    return 'ok'
 
 @app.route('/fly/<icao>')
 def in_game_fly(icao):
@@ -34,6 +35,8 @@ def in_game_fly(icao):
     flying_new_port(icao)
     cost_of_flying(codes.config.fly_cost)
     return 'ok'
+
+
 
 
 

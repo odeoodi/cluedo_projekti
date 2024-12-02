@@ -1,7 +1,6 @@
 import mysql.connector
 from codes.location_now import location_now
-from codes.start import start_location, start_money, start_accusations
-from codes.right_answers import insert_right_answers
+from codes.start import start_location, start_money, start_accusations, insert_right_answers
 from codes.rules import rules
 from codes.print_story import print_story
 from codes.press_enter import press_enter_to_continue
