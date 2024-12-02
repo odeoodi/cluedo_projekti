@@ -29,7 +29,15 @@
 
     <main>
 
-        <div class="boxes flex-wrap">
+        <div class="boxes, flex-wrap">
+
+            <section class="box" id="dicebox">
+                <h2>Gambling dice</h2>
+                <p>Roll the dice to play for hints!</p>
+                <div id="dice">🎲</div> <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle -->
+                <button id="roll" type="submit">Roll</button>
+            </section>
+
             <section class="status">
                 <header>
                     <h2>Game Status</h2>
@@ -56,7 +64,6 @@
                 <div class="content">
 
                     <p id="hints">Your hints about the murder will be here</p>
-
                 </div>
             </div>
         </div>
