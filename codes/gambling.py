@@ -1,5 +1,9 @@
 import random
 import mysql.connector
+from flask import Flask, request
+from flask_cors import CORS
+import codes.config
+
 
 db_connection = mysql.connector.connect(
     host='127.0.0.1',  # host='localhost'
@@ -9,6 +13,7 @@ db_connection = mysql.connector.connect(
     password='pekka',
     autocommit=True
 )
+
 class Gambling:
     def __init__(self, select_game):
         self.select_game = 1
@@ -101,6 +106,7 @@ class Gambling:
             return
 
     def gamble(self, select_game):
+            start_text = 'Are you ready to start? Write "yes" or "no". "Rules" if you want to read rules:'
             while True:
                 start = input(f'Are you ready to start?\nWrite "yes" or "no". "Rules" if you want to read rules:').lower().strip()
 
@@ -117,6 +123,7 @@ class Gambling:
                 else :
                     print(f'\nCheck your input.\n')
             return
+
 
 
 class WinMoney(Gambling):
@@ -154,3 +161,23 @@ class PayGambling(Gambling):
 
 
 
+
+'''
+app = Flask(__name__)
+cors = CORS(app)
+
+@app.route('/gamble')
+def gamble_java():
+    start_text = 'Are you ready to start?'
+    gamer= Gambling(codes.config.game_id)
+    yield start_text
+    #args = request.args
+    #yes = args.get('yes')
+
+
+
+if __name__ == '__main__':
+    app.run(use_reloader=True, host='127.0.0.1', port=3000)
+
+
+'''
