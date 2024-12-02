@@ -8,8 +8,6 @@ wrapper = textwrap.TextWrapper(width=80, break_long_words=False, replace_whitesp
 intro_list = wrapper.wrap(text=story)
 
 
-#def getstory():
-    #return intro_list
 
 def print_story():
     #Asks if the user wants to know the intro then prints it
@@ -26,5 +24,3 @@ def print_story():
         else:
             print("check spelling.")
     return
-
-print(print_story())

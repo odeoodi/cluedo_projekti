@@ -9,33 +9,61 @@
     --bone: #D4CFBC;
 }
 
+html{
+    align-content: center;
+}
+
 @font-face {
     font-family: ShadowsIntoLight;
     src: url("ShadowsIntoLight-Regular.ttf");
+}
+@font-face {
+    font-family: Caveat;
+    src: url("CaveatBrush-Regular.ttf");
+}
+
+@font-face {
+    font-family: SpecialElite;
+    src: url("SpecialElite-Regular.ttf");
 }
 
 .container {
     width: 70%;
     margin: auto;
 }
+
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
 }
 
-.box {
+.status {
     text-align: center;
     box-sizing: border-box;
-    width: 100%;
+    width: 30%;
+     border-collapse: collapse;
+    border: 3px solid var(--noir);
+    margin-left: 44rem;
+    margin-right: 4rem;
+    margin-bottom: 1rem;
 }
-.box table {
-    width: 100%;
 
+.status table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.status table tr td {
+    border-collapse: collapse;
+    border: 3px solid var(--noir);
+    width: 30%;
+    padding: 0.7rem;
 }
 
 #map {
     width: 60%;
     box-sizing: border-box;
+    margin-top: 1rem;
 }
 
 body {
@@ -45,13 +73,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Verdana,sans-serif;
+    font-family: SpecialElite, sans-serif;
 }
 
 .notepad {
     text-align: center;
     box-sizing: border-box;
-    font-family: ShadowsIntoLight,sans-serif;
+    font-family: Caveat, sans-serif;
     background-image: url("img/jaccuse-notepad.png");
     background-size: cover;
     width: 40%;
@@ -60,6 +88,7 @@ body {
     position: relative;
     padding-bottom: 1rem;
 }
+
 .content {
     color: var(--bistre);
     max-height: 20.9rem;
@@ -74,12 +103,14 @@ body {
     max-width: 15rem;
     margin-top: 0;
 }
+
 .notepad title {
     width: 100%;
     height: 1rem;
     padding-top: 1.4rem;
     position: sticky;
 }
+
 .notepad h1 {
     margin-bottom: 0;
 }
