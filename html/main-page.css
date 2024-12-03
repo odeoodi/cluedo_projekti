@@ -32,6 +32,12 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+#newgame {
+    background-color: var(--bone);
+    border-radius: 25px;
+}
+
 #dicebox {
     width: 70%;
     border-collapse: collapse;
