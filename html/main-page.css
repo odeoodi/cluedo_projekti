@@ -47,6 +47,7 @@
     text-align: center;
     flex-wrap: wrap;
     display: flex;
+    padding-bottom: 0.5rem;
 }
 
 #dicebox h2 {

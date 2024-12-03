@@ -16,12 +16,21 @@ async function start_newgame() {
 document.querySelector('#newgame').addEventListener('click', (e) => {
   start_newgame()})
 
+// things we need for the map
+let lat = 51.505 // here we need to add the longitude and latitude from the fly function
+let long = -0.09
 
-var map = L.map('map').setView([51.505, -0.09], 13);
+const map = L.map('map').setView([lat, long], 5);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var marker = L.marker([51.5, -0.09]).addTo(map);
+const marker = L.marker([lat, long]).addTo(map);
+
+L.marker([lat, long]).addTo(map)
+    .bindPopup('Here we can add the airport and flag.')
+    .openPopup();
+
+// map stuff ends
