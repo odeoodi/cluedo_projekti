@@ -13,8 +13,15 @@ async function start_newgame() {
       console.log(error.message)}}
 
 
-
-
-
 document.querySelector('#newgame').addEventListener('click', (e) => {
   start_newgame()})
+
+
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var marker = L.marker([51.5, -0.09]).addTo(map);
