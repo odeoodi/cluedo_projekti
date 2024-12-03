@@ -19,5 +19,4 @@ async function start_newgame() {
 
 
 document.querySelector('#newgame').addEventListener('click', (e) => {
-  start_newgame()
-})
+  start_newgame()})
