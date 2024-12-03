@@ -102,6 +102,7 @@
     box-sizing: border-box;
     margin-top: 1rem;
     background-color: var(--eggshell);
+    padding-left: 2rem;
 }
 
 body {
