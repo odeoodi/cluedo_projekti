@@ -39,6 +39,16 @@
     box-sizing: border-box;
     margin-bottom: 1rem;
     text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+#dicebox h2 {
+    width: 100%;
+}
+
+#dicebox p {
+    width: 100%;
 }
 
 #roll {
@@ -49,10 +59,14 @@
     background-color: var(--bone);
     padding: 0.7rem;
     border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#dice {
+.dice {
     font-size: 3rem;
+    width: 33%;
+    box-sizing: border-box;
 }
 .status {
     text-align: center;
