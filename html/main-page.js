@@ -1,7 +1,7 @@
 'use strict'
 
 // this is url to python and after this add the flask address
-const url_py = 'http://127.0.0.1:3000/'
+const url_py = 'http://127.0.0.1:3000'
 
 
 async function start_newgame() {
