@@ -58,6 +58,15 @@
     width: 100%;
 }
 
+.dice {
+    font-size: 3rem;
+    width: 33%;
+    box-sizing: border-box;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
+}
+
 #roll {
     cursor: pointer;
     box-sizing: border-box;
@@ -70,11 +79,6 @@
     margin-right: auto;
 }
 
-.dice {
-    font-size: 3rem;
-    width: 33%;
-    box-sizing: border-box;
-}
 .status {
     text-align: center;
     box-sizing: border-box;

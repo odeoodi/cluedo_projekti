@@ -28,9 +28,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const marker = L.marker([lat, long]).addTo(map);
+console.log(marker); // testing if the marker has been made and added to the map
 
 L.marker([lat, long]).addTo(map)
     .bindPopup('Here we can add the airport and flag.')
     .openPopup();
+
+marker.on('click', function () {
+    console.log('Click event triggered!');
+});
 
 // map stuff ends
