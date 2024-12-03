@@ -27,10 +27,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-const marker = L.marker([lat, long]).addTo(map);
-console.log(marker); // testing if the marker has been made and added to the map
-
-L.marker([lat, long]).addTo(map)
+const marker = L.marker([lat, long]).addTo(map)
     .bindPopup('Here we can add the airport and flag.')
     .openPopup();
 
