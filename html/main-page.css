@@ -101,6 +101,7 @@
     width: 60%;
     box-sizing: border-box;
     margin-top: 1rem;
+    background-color: var(--eggshell);
 }
 
 body {
