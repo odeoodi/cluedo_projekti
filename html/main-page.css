@@ -9,10 +9,6 @@
     --bone: #D4CFBC;
 }
 
-html{
-    align-content: center;
-}
-
 @font-face {
     font-family: ShadowsIntoLight;
     src: url("ShadowsIntoLight-Regular.ttf");
@@ -37,14 +33,53 @@ html{
     flex-wrap: wrap;
 }
 
+#newgame {
+    background-color: var(--bone);
+    border-radius: 25px;
+}
+
+#dicebox {
+    width: 70%;
+    border-collapse: collapse;
+    border: 3px solid var(--noir);
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+#dicebox h2 {
+    width: 100%;
+}
+
+#dicebox p {
+    width: 100%;
+}
+
+#roll {
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: medium;
+    font-family: SpecialElite,sans-serif;
+    background-color: var(--bone);
+    padding: 0.7rem;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dice {
+    font-size: 3rem;
+    width: 33%;
+    box-sizing: border-box;
+}
 .status {
     text-align: center;
     box-sizing: border-box;
     width: 30%;
-     border-collapse: collapse;
+    border-collapse: collapse;
     border: 3px solid var(--noir);
-    margin-left: 44rem;
-    margin-right: 4rem;
     margin-bottom: 1rem;
 }
 
@@ -58,7 +93,9 @@ html{
     border: 3px solid var(--noir);
     width: 30%;
     padding: 0.7rem;
+    background-color: var(--bone);
 }
+
 
 #map {
     width: 60%;
