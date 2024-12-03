@@ -10,9 +10,7 @@ async function start_newgame() {
     if (!response.ok) throw new Error("something went wrong")
     console.log(response)
   } catch (error){
-      console.log(error.message)
-    }
-}
+      console.log(error.message)}}
 
 
 
