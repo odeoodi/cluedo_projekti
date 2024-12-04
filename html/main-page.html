@@ -6,8 +6,11 @@
     <!-- Link CSS files -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     <title>J'accuse!</title>
+    <link rel="stylesheet" href="javascript/leaflet/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="main-page.js" defer></script>
     <link rel="stylesheet" href="main-page.css">
+    <link rel="icon" type="image/x-icon" href="/html/img/magnifier.png">
 </head>
 <body>
 <div class="container"> <!-- Tämän containerin sisälle laitetaan kaikki sisältö mikä tulee sivulle -->
@@ -17,6 +20,9 @@
 
         <nav>
             <ul>
+                <li>
+                    <button id="newgame">New game</button>
+                </li>
                 <li>
                     <a href="main-page.html">Game</a>
                 </li>
@@ -34,7 +40,9 @@
             <section class="box" id="dicebox">
                 <h2>Gambling dice</h2>
                 <p>Roll the dice to play for hints!</p>
-                <div id="dice">🎲</div> <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle -->
+                <img class="dice" id="dice1" src="img/dice-two.png" alt="Dice number two">
+                <img class="dice" id="dice2" src="img/dice-two.png" alt="Dice number two">
+                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two"> <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt-->
                 <button id="roll" type="submit">Roll</button>
             </section>
 
@@ -54,7 +62,6 @@
             </section>
 
             <div id="map">
-                <img src="https://picsum.photos/635/407" alt="will be the pic of the map">
             </div>
 
             <div class="notepad">

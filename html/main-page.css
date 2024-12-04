@@ -32,6 +32,12 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+#newgame {
+    background-color: var(--bone);
+    border-radius: 25px;
+}
+
 #dicebox {
     width: 70%;
     border-collapse: collapse;
@@ -39,6 +45,26 @@
     box-sizing: border-box;
     margin-bottom: 1rem;
     text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+    padding-bottom: 0.5rem;
+}
+
+#dicebox h2 {
+    width: 100%;
+}
+
+#dicebox p {
+    width: 100%;
+}
+
+.dice {
+    font-size: 3rem;
+    width: 33%;
+    box-sizing: border-box;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
 }
 
 #roll {
@@ -49,11 +75,10 @@
     background-color: var(--bone);
     padding: 0.7rem;
     border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#dice {
-    font-size: 3rem;
-}
 .status {
     text-align: center;
     box-sizing: border-box;
@@ -81,6 +106,8 @@
     width: 60%;
     box-sizing: border-box;
     margin-top: 1rem;
+    background-color: var(--eggshell);
+    padding-left: 2rem;
 }
 
 body {
@@ -130,4 +157,5 @@ body {
 
 .notepad h1 {
     margin-bottom: 0;
+    margin-top: 2rem;
 }
