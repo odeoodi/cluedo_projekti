@@ -124,8 +124,6 @@ class Gambling:
                     print(f'\nCheck your input.\n')
             return
 
-
-
 class WinMoney(Gambling):
     def __init__(self, select_game, num):
             super().__init__(select_game)
