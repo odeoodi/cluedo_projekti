@@ -32,11 +32,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const marker = L.marker([lat, long]).addTo(map) //makes a new marker and adds it on the map
     .bindPopup('Pop-up') //adds the pop-up, here we can add the airport info
-    .openPopup // opens the pop-up without the marker being clicked, when the marker is created
+    .openPopup() // opens the pop-up without the marker being clicked, when the marker is created
 
 
-marker.on('click', function () {
-    // here we can add the fly function
+marker.on('click', () => {
+  console.log('marker clicked')
 });
 
 // map stuff ends
