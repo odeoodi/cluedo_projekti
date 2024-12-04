@@ -33,10 +33,7 @@
     flex-wrap: wrap;
 }
 
-#newgame {
-    background-color: var(--bone);
-    border-radius: 25px;
-}
+
 
 #dicebox {
     width: 70%;
@@ -158,4 +155,18 @@ body {
 .notepad h1 {
     margin-bottom: 0;
     margin-top: 2rem;
+}
+#game-selections {
+    list-style: none;
+    flex-wrap: wrap;
+    display: flex;
+}
+.selection {
+    background-color: var(--bone);
+    border-radius: 25px;
+    margin-right: 1rem;
+}
+
+.player-status {
+    padding: 4px;
 }

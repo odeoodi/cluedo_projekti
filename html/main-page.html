@@ -21,9 +21,6 @@
         <nav>
             <ul>
                 <li>
-                    <button id="newgame">New game</button>
-                </li>
-                <li>
                     <a href="main-page.html">Game</a>
                 </li>
                 <li>
@@ -42,23 +39,9 @@
                 <p>Roll the dice to play for hints!</p>
                 <img class="dice" id="dice1" src="img/dice-two.png" alt="Dice number two">
                 <img class="dice" id="dice2" src="img/dice-two.png" alt="Dice number two">
-                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two"> <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt-->
+                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two">
+                <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt-->
                 <button id="roll" type="submit">Roll</button>
-            </section>
-
-            <section class="status">
-                <header>
-                    <h2>Game Status</h2>
-                </header>
-
-                <table>
-                    <tr>
-                        <td>Player name: <span id="player-id">ID</span></td>
-                    </tr>
-                    <tr>
-                        <td>Budget: <span id="budget">500</span>€</td>
-                    </tr>
-                </table>
             </section>
 
             <div id="map">
@@ -86,6 +69,22 @@
                 </div>
             </div>
         </div>
+
+        <ul id="game-selections">
+            <li>
+                <button class="selection" id="newgame">New game</button>
+            </li>
+            <li>
+                <button class="selection" id="accuse">Accuse</button>
+            </li>
+            <li>
+                <button class="selection" id="gamble">Gamble</button>
+            </li>
+            <li class="player-status">
+                <a>Budget: <span id="budget">500</span>€</a>
+            </li>
+            <li class="player-status">Player name: <span id="player-id">ID</span></li>
+        </ul>
     </main>
     <footer>
         <p>&copy; 2024 J'accuse!</p>
