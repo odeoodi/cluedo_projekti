@@ -58,7 +58,7 @@ def hints(weapon, suspect, location):
     suspect = (suspect)
     location = (location)
     # hint_list = (here iidas function which will take as parameter weapon, suspect and location.)
-    # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
+                # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
     # return hint_list
 
 
