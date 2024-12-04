@@ -15,6 +15,9 @@ async function start_newgame() {
 
 document.querySelector('#newgame').addEventListener('click', (e) => {
   start_newgame()})
+// gamble pop-up
+
+// gamble pop-up ends
 
 // things we need for the map
 let lat = 51.505 // here we need to add the longitude and latitude from the fly function
