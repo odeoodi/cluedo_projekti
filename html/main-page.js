@@ -6,10 +6,12 @@ const url_py = 'http://127.0.0.1:3000'
 let weapons_list = {}
 let suspects_list = {}
 let locations_list = {}
+let player_name = document.querySelector('#player-id')
+
 
 let weapon = ''
 let suspect = ''
-let location = ''
+let location_game = ''
 
 
 async function get_lists() {
@@ -42,7 +44,7 @@ async function start_newgame() {
 
 async function accuse() {
     try {
-        const response = await fetch( `${url_py}/accuse/${weapon}/${suspect}/${location}`)
+        const response = await fetch( `${url_py}/accuse/${weapon}/${suspect}/${location_game}`)
         if (!response.ok) throw new Error("something went wrong")
         let result = await response.json()
         console.log(result)
