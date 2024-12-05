@@ -2,6 +2,10 @@
 
 // this is url to python and after this add the flask address
 const url_py = 'http://127.0.0.1:3000'
+const overlay = document.querySelector('#overlay')
+const popup = document.querySelector('#popup')
+
+
 
 let weapons_list = {}
 let suspects_list = {}
@@ -9,9 +13,17 @@ let locations_list = {}
 let player_name = document.querySelector('#player-id')
 
 
+
 let weapon = ''
 let suspect = ''
 let location_game = ''
+
+function showpopup() {
+    overlay.style.display = 'block'
+    popup.style.display = 'block' }
+function closepopup() {
+    overlay.style.display = 'none'
+    popup.style.display = 'none' }
 
 
 async function get_lists() {
@@ -38,7 +50,13 @@ async function start_newgame() {
     const response = await fetch( `${url_py}/new_game`)
     if (!response.ok) throw new Error("something went wrong")
     console.log(response)
-        get_lists()
+    get_lists()
+    showpopup()
+    const new_name = document.querySelector('#player_nameInput').value
+    document.querySelector('#start_newgame').addEventListener('click', () => {
+        player_name.innerText = new_name
+        closepopup()})
+    document.querySelector('#cance_newgame').addEventListener('click', () => {closepopup()})
   } catch (error){
       console.log(error.message)}}
 
