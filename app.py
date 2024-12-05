@@ -56,16 +56,16 @@ def hints(weapon, suspect, location):
 
 @app.route('/fly/<icao>')
 def in_game_fly(icao):
-    icao = (icao)
+    icao = icao
     flying_new_port(icao)
     cost_of_flying(codes.config.fly_cost)
     return 'ok'
 
 @app.route('/accuse/<weapon>/<suspect>/<location>')
 def accuse(weapon, suspect, location):
-    weapon = (weapon)
-    suspect = (suspect)
-    location = (location)
+    weapon = weapon
+    suspect = suspect
+    location = location
     is_weapon = check_if_correct_weapon(weapon)
     is_suspect = check_if_correct_suspect(suspect)
     is_location = check_if_correct_location(location)
