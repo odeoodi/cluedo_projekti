@@ -100,3 +100,9 @@ roll.addEventListener('click', () => {
       }
     }
 );
+
+const gamble = document.getElementById('gamble-button')
+const dicebox = document.getElementById('dicebox')
+gamble.addEventListener('click', () => {
+  dicebox.style.display = 'flex'
+})

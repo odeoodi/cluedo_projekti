@@ -36,7 +36,7 @@ async function start_newgame() {
 
 
 
-document.querySelector('#newgame').addEventListener('click', (e) => {
+document.querySelector('#newgame-button').addEventListener('click', (e) => {
   start_newgame()})
 // gamble pop-up
 
