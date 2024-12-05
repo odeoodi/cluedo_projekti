@@ -14,6 +14,8 @@ let player_name = document.querySelector('#player-id')
 
 
 
+
+
 let weapon = ''
 let suspect = ''
 let location_game = ''
@@ -25,6 +27,15 @@ function closepopup() {
     overlay.style.display = 'none'
     popup.style.display = 'none' }
 
+async function enter_name(){
+    showpopup()
+    document.querySelector('#start_newgame').addEventListener('click', () => {
+        const new_name = document.querySelector('#player_nameInput').value
+        player_name.innerText = new_name
+        closepopup()})
+    document.querySelector('#cance_newgame').addEventListener('click', () => {closepopup()})
+    get_lists()
+}
 
 async function get_lists() {
     try {
@@ -43,22 +54,22 @@ async function get_lists() {
   } catch (error){
       console.log(error.message)
       }}
-get_lists()
+
 
 async function start_newgame() {
     try {
     const response = await fetch( `${url_py}/new_game`)
-    if (!response.ok) throw new Error("something went wrong")
+    if (!response.ok) throw new Error("something went wrong new game")
     console.log(response)
-    get_lists()
-    showpopup()
-    const new_name = document.querySelector('#player_nameInput').value
-    document.querySelector('#start_newgame').addEventListener('click', () => {
-        player_name.innerText = new_name
-        closepopup()})
-    document.querySelector('#cance_newgame').addEventListener('click', () => {closepopup()})
+    enter_name()
   } catch (error){
       console.log(error.message)}}
+
+function first_start() {
+    if (player_name.textContent === 'ID'){
+        enter_name()
+    }}
+// lets use it when we need it: first_start()
 
 async function accuse() {
     try {
@@ -68,8 +79,6 @@ async function accuse() {
         console.log(result)
         } catch (error){
       console.log(error.message)}}
-
-
 
 document.querySelector('#newgame-button').addEventListener('click', (e) => {
   start_newgame()})
