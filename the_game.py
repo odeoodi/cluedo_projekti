@@ -59,7 +59,6 @@ class Game:
         else:
             return False
 
-Game(codes.config.game_id, codes.config.name).winning()
 
 
 
