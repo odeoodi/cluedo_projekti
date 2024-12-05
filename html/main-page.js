@@ -10,13 +10,13 @@ let locations_list = {}
 async function get_lists() {
     try {
     const response = await fetch( `${url_py}/getweapons`)
-    if (!response.ok) throw new Error("something went wrong")
+    if (!response.ok) throw new Error("something went wrong weapons")
     weapons_list = await response.json()
     const response2 = await fetch( `${url_py}/getsuspects`)
-    if (!response2.ok) throw new Error("something went wrong")
+    if (!response2.ok) throw new Error("something went wrong suspects")
     suspects_list = await response2.json()
     const response3 = await fetch( `${url_py}/getlocations`)
-    if (!response3.ok) throw new Error("something went wrong")
+    if (!response3.ok) throw new Error("something went wrong locations")
     locations_list = await response3.json()
     console.log(weapons_list)
     console.log(suspects_list)
@@ -31,6 +31,7 @@ async function start_newgame() {
     const response = await fetch( `${url_py}/new_game`)
     if (!response.ok) throw new Error("something went wrong")
     console.log(response)
+        get_lists()
   } catch (error){
       console.log(error.message)}}
 
