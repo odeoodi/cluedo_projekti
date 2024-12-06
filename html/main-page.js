@@ -80,7 +80,6 @@ function first_start() {
     }}
 // lets use it when we need it: first_start()
 
-check_money()
 
 async function accuse() {
     try {
