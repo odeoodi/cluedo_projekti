@@ -36,6 +36,13 @@ def api(lat, long):
     except requests.exceptions.RequestException as e:
         return [f"Error: {str(e)}"]
 
+def get_api_data(data):
+    pop_up_text = []
+    for i in data:
+        info = api(data[i][2], data[i][3])
+        pop_up_text.append(info)
+
+
 '''
 
 longitude = -3.372288
