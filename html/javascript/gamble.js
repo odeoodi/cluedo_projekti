@@ -9,7 +9,7 @@ roll.addEventListener('click', () => {
       const new_dice1 = Math.floor(Math.random() * 6 + 1);
       const new_dice2 = Math.floor(Math.random() * 6 + 1);
       const new_dice3 = Math.floor(Math.random() * 6 + 1);
-
+    // first dice
       switch (new_dice1) {
             case 1:
                   dice1.src = '/html/img/dice-one.png'
