@@ -57,6 +57,7 @@ async function get_lists() {
 
 async function start_newgame() {
     try {
+    // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
     const response = await fetch( `${url_py}/new_game`)
     if (!response.ok) throw new Error("something went wrong new game")
     console.log(response)
