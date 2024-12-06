@@ -55,7 +55,6 @@ async function get_lists() {
       console.log(error.message)
       }}
 
-
 async function start_newgame() {
     try {
     const response = await fetch( `${url_py}/new_game`)
@@ -65,11 +64,23 @@ async function start_newgame() {
   } catch (error){
       console.log(error.message)}}
 
+async function check_money () {
+    try {
+    const response = await fetch( `${url_py}/checkmoney`)
+    if (!response.ok) throw new Error("money not found")
+    const money_at_bank = await response.json()
+        console.log(money_at_bank)
+      } catch (error){
+      console.log(error.message)
+      }}
+
 function first_start() {
     if (player_name.textContent === 'ID'){
         enter_name()
     }}
 // lets use it when we need it: first_start()
+
+check_money()
 
 async function accuse() {
     try {
