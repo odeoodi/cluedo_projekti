@@ -45,6 +45,7 @@ def suspects_data(connector = db_connection):
 def locations_data(connector = db_connection):
     connect = connector
     data = from_sql_locations(connect)
+    print(data)
     jsondata = json.dumps(data)
     return jsondata
 

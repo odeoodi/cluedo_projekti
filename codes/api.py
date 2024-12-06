@@ -1,8 +1,11 @@
+import json
 import requests
+import os
+from dotenv import load_dotenv
 
-def api(long, lat):
-    info = ()
-    key = "0aaa6428b03947689af5ae726e15192c"
+load_dotenv()
+def api(lat, long):
+    key =os.environ.get('API_KEY')
     try:
         geocode_url = f"https://api.opencagedata.com/geocode/v1/json?q={lat}+{long}&key={key}"
         geocode_response = requests.get(geocode_url)
@@ -26,15 +29,17 @@ def api(long, lat):
         flag_url = country_data.get("flags", {}).get("png", "No flag available")
         country = country_data.get("name", {}).get("common", "Unknown")
         list = [capital, flag_url, country]
+        jsonlist = json.dumps(list)
 
-        return list
+        return jsonlist
 
     except requests.exceptions.RequestException as e:
         return [f"Error: {str(e)}"]
 
+'''
 
-longitude = -0.1278
-latitude = 51.5074
+longitude = -3.372288
+latitude = 55.950145
 
 result = api(longitude, latitude)
 
@@ -43,3 +48,4 @@ if "Error" in result[0]:
 else:
     print(f"Capital: {result[0]}, Flag: {result[1]}, Country: {result[2]}")
 
+'''
