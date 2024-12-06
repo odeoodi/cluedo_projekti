@@ -90,7 +90,7 @@ def accuse(weapon, suspect, location, connector = db_connection):
     is_weapon = check_if_correct_weapon(weapon, connect)
     is_suspect = check_if_correct_suspect(suspect, connect)
     is_location = check_if_correct_location(location, connect)
-    jsonanwsver = [is_weapon, is_suspect, is_location]
+    jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
     return jsonanwsver
 
 

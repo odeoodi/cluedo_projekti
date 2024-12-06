@@ -159,6 +159,29 @@ body {
     z-index: 1000;
 }
 
+.printing {
+    background-color: var(--bone);
+    border: 3px solid var(--theblack);
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 100%;
+    border-radius: 8px;
+
+}
+
+.printing_h2 {
+    margin-top: 0;
+    padding-top: 0;
+    position: sticky;
+    top: 0;
+}
+
+.printing_text {
+    color: var(--theblack);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
 .popup {
     display: none;
     justify-content: center;
