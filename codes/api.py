@@ -42,3 +42,4 @@ if "Error" in result[0]:
     print(result[0])
 else:
     print(f"Capital: {result[0]}, Flag: {result[1]}, Country: {result[2]}")
+
