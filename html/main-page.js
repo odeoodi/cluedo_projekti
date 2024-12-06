@@ -71,12 +71,10 @@ async function check_money () {
     const response = await fetch( `${url_py}/checkmoney`)
     if (!response.ok) throw new Error("money not found")
     const money_at_bank = await response.json()
-        console.log(money_at_bank)
-        return money_at_bank
+    console.log(money_at_bank)
+    return money_at_bank
       } catch (error){
-      console.log(error.message)
-        return error.message
-    }}
+      console.log(error.message)}}
 
 
 function first_start() {
