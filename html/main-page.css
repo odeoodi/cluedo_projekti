@@ -161,7 +161,7 @@ body {
 
 .printing {
     background-color: var(--bone);
-    border: 3px solid var(--theblack);
+    border: 3px solid var(--noir);
     padding: 15px;
     margin: 20px auto;
     max-width: 100%;
