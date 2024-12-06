@@ -39,7 +39,6 @@ def suspects_data(connector = db_connection):
     jsondata = json.dumps(data)
     return jsondata
 
-
 @app.route('/getlocations')
 def locations_data(connector = db_connection):
     connect = connector
@@ -47,6 +46,12 @@ def locations_data(connector = db_connection):
     jsondata = json.dumps(data)
     return jsondata
 
+@app.route('/checkmoney')
+def check_money(connector = db_connection):
+    connect = connector
+    playermoney = check_money(codes.config.game_id, connect)
+    jsonmoney = json.dumps(playermoney)
+    return jsonmoney
 
 @app.route ('/hints/<weapon>/<suspect>/<location>')
 def hints(weapon, suspect, location):
