@@ -7,3 +7,4 @@ def check_money(game_id, connector):
     money = cursor.fetchone()
     money_now = int(money[0])
     return money_now
+

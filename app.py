@@ -22,7 +22,7 @@ def new_game(connection = db_connection):
     connect = connection
     start_location(connect)
     start_accusations(connect)
-    start_money(codes.config.game_id,codes.config.money, connect)
+    start_money(thisgame.id,codes.config.money, connect)
     insert_right_answers(connect)
     return 'ok'
 
@@ -48,9 +48,9 @@ def locations_data(connector = db_connection):
     return jsondata
 
 @app.route('/checkmoney')
-def check_money(connector = db_connection):
+def check_money_sql(connector = db_connection):
     connect = connector
-    playermoney = check_money( thisgame.id, connect)
+    playermoney = check_money(thisgame.id, connector)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
 
@@ -81,13 +81,6 @@ def accuse(weapon, suspect, location, connector = db_connection):
     is_location = check_if_correct_location(location, connect)
     jsonanwsver = [is_weapon, is_suspect, is_location]
     return jsonanwsver
-
-
-
-
-
-
-
 
 
 
