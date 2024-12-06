@@ -28,8 +28,8 @@ class Gambling:
                   f'\nIf you get 2 times 6, you  win 150€.'
                   f'\nIf you get 2 times 5, you win 100€.\n')
             return
-
-    def if_winning(self, dice1,dice2,dice3):
+    @staticmethod
+    def if_winning(dice1,dice2,dice3):
             if dice1 == 1 and dice2 == 1 and dice3 == 1:
                 wintext = "You have 3 times 1, you are winning 250€"
                 winpoint = 3
