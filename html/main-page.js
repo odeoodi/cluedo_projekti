@@ -96,6 +96,16 @@ document.querySelector('#newgame-button').addEventListener('click', (e) => {
   start_newgame()})
 
 
+
+function selectImage(img) {
+        // Remove 'pressed' class from all images
+        const allImages = document.querySelectorAll('.img_wrapper img');
+        allImages.forEach(image => image.classList.remove('pressed'));
+
+        // Add 'pressed' class to the clicked image
+        img.classList.add('pressed')
+  }
+
 // gamble pop-up
 
 // gamble pop-up ends
