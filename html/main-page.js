@@ -1,7 +1,7 @@
 'use strict'
 
 // this is url to python and after this add the flask address
-const url_py = 'http://127.0.0.1:3000'
+// const url_py = 'http://127.0.0.1:3000'
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
 
@@ -72,15 +72,18 @@ async function check_money () {
     if (!response.ok) throw new Error("money not found")
     const money_at_bank = await response.json()
         console.log(money_at_bank)
+        return money_at_bank
       } catch (error){
       console.log(error.message)
-      }}
+        return error.message
+    }}
+
 
 function first_start() {
     if (player_name.textContent === 'ID'){
         enter_name()
     }}
-// lets use it when we need it: first_start()
+// let's use it when we need it: first_start()
 
 
 async function accuse() {
@@ -106,10 +109,3 @@ function selectImage(img) {
         img.classList.add('pressed')
   }
 
-// gamble pop-up
-
-// gamble pop-up ends
-
-// things we need for the map
-
-// map stuff ends

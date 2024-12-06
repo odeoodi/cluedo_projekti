@@ -15,6 +15,17 @@ async function gamble_win(new_dice1, new_dice2, new_dice3) {
   return win_stats
 }
 
+async function pay_gambling(cost,select_game) {
+  try {
+    const response = await fetch(`${url_py}/pay/${cost}/${select_game}`)
+    if (!response.ok) {
+      throw new Error('Problem with deducting money.')
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 const roll = document.getElementById('roll');
 let dice1 = document.getElementById('dice1');
 let dice2 = document.getElementById('dice2');
@@ -22,6 +33,8 @@ let dice3 = document.getElementById('dice3');
 let win_stats = {};
 let win_message = ''
 let win_points = 0
+let gamble_payed = ''
+const url_py = 'http://127.0.0.1:3000'
 
 roll.addEventListener('click', () => {
   const new_dice1 = Math.floor(Math.random() * 6 + 1);
@@ -137,5 +150,13 @@ roll.addEventListener('click', () => {
   gamble.addEventListener('click', () => {
     dicebox.style.display = 'flex';
   });
+  const rollDice = document.getElementById('roll')
+rollDice.addEventListener('click', async () => {
+  await pay_gambling(50, 1)
+  let new_budget = check_money()
+  let budget = document.getElementById('budget')
+  budget.textContent = await new_budget
+})
+
 
 

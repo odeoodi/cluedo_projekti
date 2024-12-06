@@ -9,7 +9,7 @@ from codes.get_from_sql import from_sql_weapons, form_sql_suspects,from_sql_loca
 from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 from codes.check_money import check_money
 from codes.fly import flying_new_port, cost_of_flying
-from codes.gambling import Gambling
+from codes.gambling import Gambling, pay
 from codes.api import api, get_api_data
 
 db_connection = db_connection
@@ -86,7 +86,13 @@ def gamble_winning(dice1, dice2, dice3):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
+@app.route('/pay/<cost>/<select_game>') # this function deducts the gambling cost from the players money amount
+def pay_gamble(cost,select_game):
+    cost = cost
+    select_game = select_game
+    payed = pay(cost,select_game)
+    print("gamble payed")
+    return payed
 
 @app.route('/accuse/<weapon>/<suspect>/<location>')
 def accuse(weapon, suspect, location, connector = db_connection):

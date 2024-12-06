@@ -131,24 +131,14 @@ class WinMoney(Gambling):
                 return
             win(amount, num, select_game)
 
-class PayGambling(Gambling):
-    def __init__(self, select_game):
-        super().__init__(select_game)
-        self.cost = 50
-        print(f'You pay {self.cost}€ to try your luck.')
 
-        def pay( cost, select_game):
-            loose = f'UPDATE game SET money = money- %s WHERE id = %s'
-            cursor = db_connection.cursor()
-            cursor.execute(loose, (cost, select_game))
-            db_connection.commit()
-            return
-
-        pay(self.cost, select_game)
-
-
-
-
+def pay(cost, select_game):
+    loose = f'UPDATE game SET money = money- %s WHERE id = %s'
+    cursor = db_connection.cursor()
+    cursor.execute(loose, (cost, select_game))
+    db_connection.commit()
+    print(f'You pay {cost}€ to try your luck.')
+    return {"status": "ok"}, 200
 
 
 
