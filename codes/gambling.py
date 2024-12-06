@@ -30,31 +30,23 @@ class Gambling:
             return
 
     def if_winning(self, dice1,dice2,dice3):
-            if dice1 == 1 and dice1 == 1 and dice2 == 1:
-                print(f"You have 3 times 1, you are winning 250€")
-                return
-            elif dice1 == 5 and dice2 == 5 or (dice3 == 5 and dice2 == 5 or(dice1 == 5 and dice3 == 5 )):
-                print (f"You have 2 times 5, you are winning 100€ ")
-                return
-            elif dice1 == 6 and dice2 == 6 or (dice3 == 6 and dice2 == 6 or(dice1 == 6 and dice3 == 6 )):
-                print(f"You have 2 times 6, you are winning 150€ ")
-                return
-            else:
-                print(f"Yuo have nothing...")
-
-    def winning(self, dice1, dice2, dice3 ):
-            if dice1 == 1 and dice1 == 1 and dice2 == 1:
+            if dice1 == 1 and dice2 == 1 and dice3 == 1:
+                wintext = "You have 3 times 1, you are winning 250€"
                 winpoint = 3
-                return winpoint
-            elif dice1 == 6 and dice2 == 6 or (dice3 == 6 and dice2 == 6 or (dice1 == 6 and dice3 == 6)):
-                winpoint = 2
-                return winpoint
-            elif dice1 == 5 and dice2 == 5 or (dice3 == 5 and dice2 == 5 or (dice1 == 5 and dice3 == 5)):
+                return winpoint, wintext
+            elif dice1 == 5 and dice2 == 5 or (dice3 == 5 and dice2 == 5 or(dice1 == 5 and dice3 == 5 )):
+                wintext = "You have 2 times 5, you are winning 100€ "
                 winpoint = 1
-                return winpoint
+                return winpoint, wintext
+            elif dice1 == 6 and dice2 == 6 or (dice3 == 6 and dice2 == 6 or(dice1 == 6 and dice3 == 6 )):
+                wintext = "You have 2 times 6, you are winning 150€ "
+                winpoint = 2
+                return winpoint, wintext
             else:
+                wintext = f"You have nothing..."
                 winpoint = 0
-                return winpoint
+                return winpoint, wintext
+
 
     def roll(self):
             dice = random.randint(1, 6)
@@ -101,7 +93,7 @@ class Gambling:
             print()
             print(f'\nYou have: \nDice 1 - {dice1} \nDice 2 - {dice2} \nDice 3 - {dice3}\n')
             self.if_winning(dice1, dice2, dice3)
-            winpoint = self.winning(dice1, dice2, dice3)
+            winpoint = self.if_winning(dice1, dice2, dice3)
             WinMoney(select_game, winpoint)
             return
 
