@@ -108,4 +108,3 @@ function selectImage(img) {
         // Add 'pressed' class to the clicked image
         img.classList.add('pressed')
   }
-

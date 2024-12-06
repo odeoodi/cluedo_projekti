@@ -130,20 +130,39 @@ roll.addEventListener('click', () => {
       console.log('what??');
       break;
   }
-  gamble_win(new_dice1, new_dice2, new_dice3).then((win_stats) => {
+  gamble_win(new_dice1, new_dice2, new_dice3).then(async (win_stats) => {
+    const gamble_alert = document.getElementById('gamble-text')
     if (win_stats) {
-        // console.log(win_stats.message);
-        win_message = win_stats.message
-        // console.log(`Points: ${win_stats.points}`);
-        win_points = win_stats.points
+      // console.log(win_stats.message);
+      win_message = win_stats.message
+      // console.log(`Points: ${win_stats.points}`);
+      win_points = win_stats.points
     } else {
-        console.log("Error occurred while fetching win stats.");
+      console.log("Error occurred while fetching win stats.");
     }
     if (win_points === 0) {
-
+      gamble_alert.textContent = 'Sorry, you lost.'
+    } else if (win_points === 1) {
+      gamble_alert.textContent = 'You have two fives, you are winning 100€!'
+      await pay_gambling(-100, 1)
+      let new_budget = check_money()
+      let budget = document.getElementById('budget')
+      budget.textContent = await new_budget
+    } else if (win_points === 2) {
+      gamble_alert.textContent = 'You have two sixes, you are winning 150€!'
+      await pay_gambling(-150, 1)
+      let new_budget = check_money()
+      let budget = document.getElementById('budget')
+      budget.textContent = await new_budget
+    } else if (win_points === 3) {
+      gamble_alert.textContent = 'You have three ones, you are winning 250€!'
+      await pay_gambling(-250, 1)
+      let new_budget = check_money()
+      let budget = document.getElementById('budget')
+      budget.textContent = await new_budget
     }
 
-});
+  });
 })
   const gamble = document.getElementById('gamble-button');
   const dicebox = document.getElementById('dicebox');
@@ -157,6 +176,3 @@ rollDice.addEventListener('click', async () => {
   let budget = document.getElementById('budget')
   budget.textContent = await new_budget
 })
-
-
-
