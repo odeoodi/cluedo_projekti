@@ -1,35 +1,28 @@
 import mysql.connector
 from codes.location_now import location_now
+from database_connector import db_connection
 
 
-db_connection = mysql.connector.connect(
-    host='127.0.0.1',  # host='localhost'
-    port=3306,
-    database='detective_game2',
-    user='heikki',
-    password='pekka',
-    autocommit=True
-)
-
-def check_if_correct_weapon(weapon_accusation):
+def check_if_correct_weapon(weapon_accusation, connector):
     # Checks whether the weapon accusation is correct.
+    connect = connector
     sql1 = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}' "
-    kursori = db_connection.cursor()
+    kursori = connect.cursor()
     kursori.execute(sql1)
     accusation_id = kursori.fetchone()[0]
     sql2 = f"SELECT id_weapons FROM right_answers WHERE id_weapons = '{accusation_id}' "
     kursori.execute(sql2)
     accusations = kursori.fetchone()
-    matches = []
     if not accusations:
         return False
     elif accusations:
         return True
 
-def check_if_correct_location(airport_accusation):
+def check_if_correct_location(connector, game_id):
     # Checks whether the location accusation is correct.
-    sql1 = f"SELECT id FROM locations WHERE name = '{location_now(1)}' "
-    kursori = db_connection.cursor()
+    connect = connector
+    sql1 = f"SELECT id FROM locations WHERE name = '{location_now(game_id)}'"
+    kursori = connect.cursor()
     kursori.execute(sql1)
     accusation_id = kursori.fetchone()[0]
     sql2 = f"SELECT id_locations FROM right_answers WHERE id_locations = '{accusation_id}' "
@@ -40,16 +33,16 @@ def check_if_correct_location(airport_accusation):
     elif accusations:
         return True
 
-def check_if_correct_suspect(suspect_accusation):
+def check_if_correct_suspect(suspect_accusation, connector):
     # Checks whether the suspect accusation is correct.
+    connect = connector
     sql1 = f"SELECT id FROM suspects WHERE names = '{suspect_accusation}' "
-    kursori = db_connection.cursor()
+    kursori = connect.cursor()
     kursori.execute(sql1)
     accusation_id = kursori.fetchone()[0]
     sql2 = f"SELECT id_suspects FROM right_answers WHERE id_suspects = {accusation_id} "
     kursori.execute(sql2)
     accusations = kursori.fetchone()
-    matches = []
     if not accusations:
         return False
     elif accusations:

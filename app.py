@@ -1,7 +1,7 @@
 import json
 from flask import Flask, request
 from flask_cors import CORS
-from database_connector import  db_connection
+from database_connector import db_connection
 import codes.config
 from the_game import Game
 from codes.start import start_money, start_location, start_accusations, insert_right_answers
@@ -65,13 +65,14 @@ def in_game_fly(icao):
     return 'ok'
 
 @app.route('/accuse/<weapon>/<suspect>/<location>')
-def accuse(weapon, suspect, location):
+def accuse(weapon, suspect, location, connector = db_connection):
+    connect = connector
     weapon = weapon
     suspect = suspect
     location = location
-    is_weapon = check_if_correct_weapon(weapon)
-    is_suspect = check_if_correct_suspect(suspect)
-    is_location = check_if_correct_location(location)
+    is_weapon = check_if_correct_weapon(weapon, connect)
+    is_suspect = check_if_correct_suspect(suspect, connect)
+    is_location = check_if_correct_location(location, connect)
     jsonanwsver = [is_weapon, is_suspect, is_location]
     return jsonanwsver
 
