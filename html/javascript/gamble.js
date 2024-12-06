@@ -33,7 +33,8 @@ let dice3 = document.getElementById('dice3');
 let win_stats = {};
 let win_message = ''
 let win_points = 0
-let gamble_payed = ''
+const dicebox = document.getElementById('dicebox');
+const end_gamble = document.getElementById('end-gamble')
 const url_py = 'http://127.0.0.1:3000'
 
 roll.addEventListener('click', () => {
@@ -142,30 +143,40 @@ roll.addEventListener('click', () => {
     }
     if (win_points === 0) {
       gamble_alert.textContent = 'Sorry, you lost.'
+      end_gamble.style.display = 'flex'
+
     } else if (win_points === 1) {
       gamble_alert.textContent = 'You have two fives, you are winning 100€!'
       await pay_gambling(-100, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      end_gamble.style.display = 'flex'
+
     } else if (win_points === 2) {
       gamble_alert.textContent = 'You have two sixes, you are winning 150€!'
       await pay_gambling(-150, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      end_gamble.style.display = 'flex'
+
     } else if (win_points === 3) {
       gamble_alert.textContent = 'You have three ones, you are winning 250€!'
       await pay_gambling(-250, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      end_gamble.style.display = 'flex'
+    }
+    else {
+      console.log('Something went wrong with winning the gamble.')
     }
 
   });
 })
   const gamble = document.getElementById('gamble-button');
-  const dicebox = document.getElementById('dicebox');
+
   gamble.addEventListener('click', () => {
     dicebox.style.display = 'flex';
   });

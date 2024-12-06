@@ -443,7 +443,7 @@ db_connection = mysql.connector.connect(
 )
 # Start of game:
 victory = False
-select_game = 1
+#select_game = 1
 # accusation_counter = 0
 start_location()
 start_money(select_game)
