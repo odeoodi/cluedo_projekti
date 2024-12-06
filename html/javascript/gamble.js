@@ -1,9 +1,23 @@
 'use strict';
 
+async function gamble_win(new_dice1,new_dice2,new_dice3) {
+  try{
+    const response = await fetch(`${url_py}/gamble_winning/${new_dice1}/${new_dice2}/${new_dice3}`)
+    if (!response.ok) {
+      throw new Error('Dice not working')
+    }
+     win_stats = await response.json()
+    console.log(win_stats)
+  } catch(error) {
+    console.log(error.message)
+  }
+}
+
 const roll = document.getElementById('roll');
 let dice1 = document.getElementById('dice1');
 let dice2 = document.getElementById('dice2');
 let dice3 = document.getElementById('dice3');
+let win_stats = {}
 
 roll.addEventListener('click', () => {
       const new_dice1 = Math.floor(Math.random() * 6 + 1);
@@ -98,7 +112,9 @@ roll.addEventListener('click', () => {
             console.log('what??')
         break
       }
-    }
+gamble_win(new_dice1, new_dice2, new_dice3)
+}
+
 );
 
 const gamble = document.getElementById('gamble-button')
@@ -106,3 +122,5 @@ const dicebox = document.getElementById('dicebox')
 gamble.addEventListener('click', () => {
   dicebox.style.display = 'flex'
 })
+
+

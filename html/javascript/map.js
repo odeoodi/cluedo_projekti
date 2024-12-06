@@ -1,5 +1,6 @@
-let lat = 51.505 // here we need to add the longitude and latitude from the fly function
+let lat = 51.505 // here we need to add the longitude and latitude from get_location
 let long = -0.09
+
 
 const map = L.map('map').setView([lat, long], 5);
 
