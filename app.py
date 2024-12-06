@@ -10,6 +10,7 @@ from codes.check_if_correct import check_if_correct_location, check_if_correct_w
 from codes.check_money import check_money
 from codes.fly import flying_new_port, cost_of_flying
 from codes.gambling import Gambling
+from codes.api import api, get_api_data
 
 db_connection = db_connection
 
@@ -45,9 +46,10 @@ def suspects_data(connector = db_connection):
 def locations_data(connector = db_connection):
     connect = connector
     data = from_sql_locations(connect)
-    print(data)
+    pop_up_text=get_api_data(data)
     jsondata = json.dumps(data)
-    return jsondata
+    jasonpopuptext=json.dumps(pop_up_text)
+    return jsondata, jasonpopuptext
 
 @app.route('/checkmoney')
 def check_money_sql(connector = db_connection):

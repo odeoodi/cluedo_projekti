@@ -2,8 +2,8 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
-
 load_dotenv()
+
 def api(lat, long):
     key =os.environ.get('API_KEY')
     try:
@@ -39,9 +39,9 @@ def api(lat, long):
 def get_api_data(data):
     pop_up_text = []
     for i in data:
-        info = api(data[i][2], data[i][3])
+        info = api(i[2], i[3])
         pop_up_text.append(info)
-
+    return pop_up_text
 
 '''
 
