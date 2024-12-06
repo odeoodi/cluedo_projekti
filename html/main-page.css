@@ -7,6 +7,7 @@
     --lion: #B49969;
     --ash-grey: #BEBDAD;
     --bone: #D4CFBC;
+    --theblack: #120000
 }
 
 @font-face {
@@ -33,25 +34,21 @@
     flex-wrap: wrap;
 }
 
-#newgame {
-    background-color: var(--bone);
-    border-radius: 25px;
-}
-
 #dicebox {
-    width: 70%;
+    width: 50%;
     border-collapse: collapse;
     border: 3px solid var(--noir);
     box-sizing: border-box;
     margin-bottom: 1rem;
     text-align: center;
     flex-wrap: wrap;
-    display: flex;
+    display: none;
     padding-bottom: 0.5rem;
 }
 
 #dicebox h2 {
     width: 100%;
+    margin-bottom: 2px;
 }
 
 #dicebox p {
@@ -62,8 +59,8 @@
     font-size: 3rem;
     width: 33%;
     box-sizing: border-box;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-bottom: 1rem;
 }
 
@@ -78,29 +75,6 @@
     margin-left: auto;
     margin-right: auto;
 }
-
-.status {
-    text-align: center;
-    box-sizing: border-box;
-    width: 30%;
-    border-collapse: collapse;
-    border: 3px solid var(--noir);
-    margin-bottom: 1rem;
-}
-
-.status table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-.status table tr td {
-    border-collapse: collapse;
-    border: 3px solid var(--noir);
-    width: 30%;
-    padding: 0.7rem;
-    background-color: var(--bone);
-}
-
 
 #map {
     width: 60%;
@@ -158,4 +132,53 @@ body {
 .notepad h1 {
     margin-bottom: 0;
     margin-top: 2rem;
+}
+#game-selections {
+    list-style: none;
+    flex-wrap: wrap;
+    display: flex;
+}
+.selection {
+    background-color: var(--bone);
+    border-radius: 25px;
+    margin-right: 1rem;
+}
+
+.player-status {
+    padding: 4px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup {
+    display: none;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--eggshell);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+.popup h2 {
+    margin-top: 0;
+}
+.popup button {
+    margin: 5px;
+}
+#player_nameInput{
+    margin-bottom: 3%;
 }

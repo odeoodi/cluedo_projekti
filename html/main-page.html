@@ -8,6 +8,8 @@
     <title>J'accuse!</title>
     <link rel="stylesheet" href="javascript/leaflet/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="javascript/map.js" defer></script>
+    <script src="javascript/gamble.js" defer></script>
     <script src="main-page.js" defer></script>
     <link rel="stylesheet" href="main-page.css">
     <link rel="icon" type="image/x-icon" href="/html/img/magnifier.png">
@@ -20,9 +22,6 @@
 
         <nav>
             <ul>
-                <li>
-                    <button id="newgame">New game</button>
-                </li>
                 <li>
                     <a href="main-page.html">Game</a>
                 </li>
@@ -39,26 +38,12 @@
 
             <section class="box" id="dicebox">
                 <h2>Gambling dice</h2>
-                <p>Roll the dice to play for hints!</p>
+                <p>Roll the dice for a chance to get more money!</p>
                 <img class="dice" id="dice1" src="img/dice-two.png" alt="Dice number two">
                 <img class="dice" id="dice2" src="img/dice-two.png" alt="Dice number two">
-                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two"> <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt-->
-                <button id="roll" type="submit">Roll</button>
-            </section>
-
-            <section class="status">
-                <header>
-                    <h2>Game Status</h2>
-                </header>
-
-                <table>
-                    <tr>
-                        <td>Player name: <span id="player-id">ID</span></td>
-                    </tr>
-                    <tr>
-                        <td>Budget: <span id="budget">500</span>€</td>
-                    </tr>
-                </table>
+                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two">
+                <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt / DONE-->
+                <button id="roll">Roll</button>
             </section>
 
             <div id="map">
@@ -86,11 +71,35 @@
                 </div>
             </div>
         </div>
+
+        <ul id="game-selections">
+            <li>
+                <button class="selection" id="newgame-button">New game</button>
+            </li>
+            <li>
+                <button class="selection" id="accuse-button">Accuse</button>
+            </li>
+            <li>
+                <button class="selection" id="gamble-button">Gamble</button>
+            </li>
+            <li class="player-status">
+                <a>Budget: <span id="budget">500</span>€</a>
+            </li>
+            <li class="player-status">Player name: <span id="player-id">ID</span></li>
+        </ul>
     </main>
     <footer>
         <p>&copy; 2024 J'accuse!</p>
     </footer>
-
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Start a new game by writing your name</h2>
+        <input type="text" id="player_nameInput" placeholder="Your name" />
+        <div>
+            <button class="selection" id="start_newgame">Start</button>
+            <button class="selection" id="cance_newgame">Cancel</button>
+        </div>
+    </div>
 </div>
 </body>
 </html>

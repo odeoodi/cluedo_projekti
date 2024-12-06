@@ -1,21 +1,10 @@
-import mysql.connector
-
-db_connection = mysql.connector.connect(
-    host='127.0.0.1',  # host='localhost'
-    port=3306,
-    database='detective_game2',
-    user='heikki',
-    password='pekka',
-    autocommit=True
-)
-
-def location_now(game_id):
+def location_now(game_id, connection):
     # Tells the user what airport they are at.
+    connect = connection
     sql = (f'SELECT location FROM game WHERE id = "{game_id}"')
-    cursor = db_connection.cursor()
+    cursor = connect.cursor()
     cursor.execute(sql)
     results = cursor.fetchall()
-
     if results:
         current_location = results[0][0]
         return current_location

@@ -23,8 +23,8 @@ class Gambling:
         self.rolls = 2
 
     def gambling_rule(self):
-            print(f'\nAt the start of the game you will roll three dices.\nAfter that you have two rerolls. Select dice which you want to roll.\n'
-                  f'\nIf you get 3 times 1, you win grand price'
+            print(f'\nAt the start of the game you will roll three dices.\nAfter that you have two re-rolls. Select dice which you want to roll.\n'
+                  f'\nIf you get 3 times 1, you win the grand prize of 250€.'
                   f'\nIf you get 2 times 6, you  win 150€.'
                   f'\nIf you get 2 times 5, you win 100€.\n')
             return
@@ -123,8 +123,6 @@ class Gambling:
                 else :
                     print(f'\nCheck your input.\n')
             return
-
-
 
 class WinMoney(Gambling):
     def __init__(self, select_game, num):
