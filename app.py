@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from database_connector import db_connection
 import codes.config
@@ -75,13 +75,17 @@ def in_game_fly(icao):
     return 'ok'
 
 @app.route('/gamble_winning/<int:dice1>/<int:dice2>/<int:dice3>')
-def gamble_winning(dice1,dice2,dice3):
-    rolled_dice1 = dice1
-    rolled_dice2 = dice2
-    rolled_dice3 = dice3
-    wintextpoint = Gambling.if_winning(rolled_dice1,rolled_dice2,rolled_dice3)
-    jsonwintextpoint = json.dumps(wintextpoint)
-    return jsonwintextpoint
+def gamble_winning(dice1, dice2, dice3):
+    try:
+        winpoint, wintext = Gambling.if_winning(dice1, dice2, dice3)
+        response = {
+            'points': winpoint,
+            'message': wintext
+        }
+        return jsonify(response)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 @app.route('/accuse/<weapon>/<suspect>/<location>')
