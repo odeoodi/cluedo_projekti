@@ -212,8 +212,8 @@ body {
     padding: 5rem 0 2rem 0;
 
 }
-.img_box1, .img_box2, .img_box3, .img_box4, .img_box5 {
-    border: 0.5rem solid #351B0C;
+.img_box1, .img_box2, .img_box3, .img_box4, .img_box5, .img_box6, .img_box7, .img_box8, .img_box9, .img_box10, .img_box11, .img_box12 {
+    border: 0.5rem solid var(--noir);
     width:100px;
     height:100px;
     object-fit:cover;
@@ -223,7 +223,14 @@ body {
 .img_box2:hover::after,
 .img_box3:hover::after,
 .img_box4:hover::after,
-.img_box5:hover::after{
+.img_box5:hover::after,
+.img_box6:hover::after,
+.img_box7:hover::after,
+.img_box8:hover::after,
+.img_box9:hover::after,
+.img_box10:hover::after,
+.img_box11:hover::after,
+.img_box12:hover::after {
     font-size:1rem;
     background-color:#57432E;
     color:white;
