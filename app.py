@@ -47,9 +47,9 @@ def locations_data(connector = db_connection):
     connect = connector
     data = from_sql_locations(connect)
     pop_up_text=get_api_data(data)
+    data.append(pop_up_text)
     jsondata = json.dumps(data)
-    jasonpopuptext=json.dumps(pop_up_text)
-    return jsondata, jasonpopuptext
+    return jsondata
 
 @app.route('/checkmoney')
 def check_money_sql(connector = db_connection):
