@@ -61,6 +61,7 @@ async function start_newgame() {
     if (!response.ok) throw new Error("something went wrong new game")
     console.log(response)
     enter_name()
+        // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
   } catch (error){
       console.log(error.message)}}
 
