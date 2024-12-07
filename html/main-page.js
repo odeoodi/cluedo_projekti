@@ -41,16 +41,20 @@ async function get_lists() {
     try {
     const response = await fetch( `${url_py}/getweapons`)
     if (!response.ok) throw new Error("something went wrong weapons")
-    const weapons_list = await response.json()
+    weapons_list = await response.json()
     const response2 = await fetch( `${url_py}/getsuspects`)
     if (!response2.ok) throw new Error("something went wrong suspects")
-    const suspects_list = await response2.json()
+    suspects_list = await response2.json()
     const response3 = await fetch( `${url_py}/getlocations`)
     if (!response3.ok) throw new Error("something went wrong locations")
-    const locations_list = await response3.json()
-    console.log(weapons_list)
-    console.log(suspects_list)
-    console.log(locations_list)
+    locations_list = await response3.json()
+    console.log(weapons_list, suspects_list, locations_list)
+    return{
+        weapons_list,
+        suspects_list,
+        locations_list,
+        }
+
   } catch (error){
       console.log(error.message)
       }}
@@ -63,6 +67,7 @@ async function start_newgame() {
     console.log(response)
     enter_name()
         // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
+
   } catch (error){
       console.log(error.message)}}
 
