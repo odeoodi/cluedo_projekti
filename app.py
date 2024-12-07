@@ -12,8 +12,6 @@ from codes.fly import flying_new_port, cost_of_flying
 from codes.gambling import if_winning, pay, add_money
 from codes.api import get_api_data
 
-
-
 thisgame = Game(codes.config.game_id, codes.config.name)
 
 app = Flask(__name__)
@@ -116,7 +114,6 @@ def add_money_gamble(added, connection = db_connection):
     ok_money = add_money(added, select_game, connect)
     print('win money added')
     return ok_money
-
 
 @app.route('/accuse/<weapon>/<suspect>/<location>')
 def accuse(weapon, suspect, location, connector = db_connection):

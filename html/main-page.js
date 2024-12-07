@@ -5,6 +5,8 @@
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
 
+let loading_stuff = false
+
 let weapons_list = {}
 let suspects_list = {}
 let locations_list = {}
@@ -22,13 +24,50 @@ function closepopup() {
     overlay.style.display = 'none'
     popup.style.display = 'none' }
 
+function loading() {
+    showpopup()
+    const container = document.querySelector('#popup')
+    container.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    const text_thing = document.createElement('h2')
+    Object.assign(text_thing, {
+        id: 'popup_h2',
+        textContent: 'Loading data'
+    })
+    fragment.appendChild(text_thing)
+    container.appendChild(fragment)
+
+    function dotst() {
+        if (!loading_stuff) return
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < 3) {
+                text_thing.textContent = 'Loading data' + '.'.repeat(i + 1)
+                i++
+            } else {
+                clearInterval(interval)
+                setTimeout(() => {
+                    text_thing.textContent = 'Loading data'
+                    dotst()
+                }, 800)
+            }
+        }, 600)
+    }
+    dotst()
+}
+
 async function get_locations(){
+    loading_stuff = true
+    loading()
     try {
         const response3 = await fetch(`${url_py}/getlocations`)
         if (!response3.ok) throw new Error("something went wrong locations")
         locations_list = await response3.json()
         console.log(locations_list)
+        loading_stuff = false
+        closepopup()
         return locations_list
+
     }catch(error){console.log(error)}}
 
 async function get_lists() {
@@ -54,7 +93,6 @@ async function check_money () {
     return money_at_bank
       } catch (error){
       console.log(error.message)}}
-
 
 async function start_newgame() {
     try {
@@ -108,11 +146,11 @@ async function enter_name(){
         document.querySelector('#gamble-button').disabled = false
         closepopup()
         await start_newgame()
+        await get_locations()
+        await get_lists()
     })
     document.querySelector('#cance_newgame').addEventListener('click', async () => {closepopup()})
             // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen
-    await get_locations()
-    await get_lists()
 }
 
 function fail(){

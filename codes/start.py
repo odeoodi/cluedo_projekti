@@ -36,9 +36,7 @@ def start_accusations(connection):
     # Empties previous accusations for a new game.
     connect = connection
     sql1 = f"update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL"
-    #sql2 = f"alter table accusations auto_increment = 1"
     sql1 = f'update accusations set weapon_accusations = NULL, suspect_accusations = NULL, location_accusations = NULL'
-    #sql2 = f'alter table accusations auto_increment = 1'
     cursor = connect.cursor()
     cursor.execute(sql1)
     #hints = cursor.fetchall()
