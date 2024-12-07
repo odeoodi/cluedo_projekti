@@ -5,16 +5,10 @@
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
 
-
-
 let weapons_list = {}
 let suspects_list = {}
 let locations_list = {}
 let player_name = document.querySelector('#player-id')
-
-
-
-
 
 let weapon = ''
 let suspect = ''
@@ -81,13 +75,46 @@ async function check_money () {
       } catch (error){
       console.log(error.message)}}
 
+function fail(){
+    const texts = document.querySelector('#popup')
+    const no_needed = document.querySelectorAll('h2, #player_nameInput,#cance_newgame')
+    no_needed.forEach(element => {element.remove()})
+    const loost_text = document.createElement('h2')
+    loost_text.textContent = 'Oh no! You have run out of the money!\nGame Over!'
+    loost_text.style.fontSize = '1.4rem'
+    texts.appendChild(loost_text)
+    const new_game_button = document.querySelector('#start_newgame')
+    new_game_button.innerText = 'Ok'
+    new_game_button.addEventListener('click', () => {closepopup()})
+    new_game_button.style.transform = 'scale(1.5)'
+    texts.appendChild(new_game_button)
+    showpopup()
+}
+
+async function game_status () {
+    try {
+        const response = await fetch( `${url_py}/game_status`)
+        if (!response.ok) throw new Error("game_status is wierd")
+        let game_status_is = await response.json()
+        console.log(game_status_is.status )
+        switch (game_status_is.status) {
+            case 'loose' :
+                return fail()
+            case 'win' :
+                return game_status_is
+            default:
+                return console.log('lul nothing')
+        }
+        } catch (error){
+      console.log(error.message)}}
+
+
 
 function first_start() {
     if (player_name.textContent === 'ID'){
         enter_name()
     }}
 // let's use it when we need it: first_start()
-
 
 async function accuse() {
     try {

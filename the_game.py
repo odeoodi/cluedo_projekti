@@ -41,19 +41,7 @@ class Game:
         else:
             return False
 
-    def winning(self, connector, weapon, suspect, location):
-        connect = connector
-        weapon = 'rope'
-        suspect = 'Emmet'
-        location = 'Vnukovo International Airport'
-        is_weapon = check_if_correct_weapon(weapon)
-        is_suspect = check_if_correct_suspect(suspect)
-        is_location = check_if_correct_location(location)
-        answer = [is_weapon, is_suspect, is_location]
-
-        for i in answer:
-            if i is True:
-                Game.right_answers += 1
+    def winning(self):
         if Game.right_answers == 3:
             return True
         else:

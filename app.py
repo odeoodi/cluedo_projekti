@@ -57,6 +57,18 @@ def check_money_sql(connector = db_connection):
     playermoney = check_money(thisgame.id, connector)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
+@app.route('/game_status')
+def game_status(connector = db_connection):
+    connect = connector
+    winnig = thisgame.winning()
+    loosing = thisgame.losing(connect)
+    if winnig:
+        return jsonify({'status': 'win'})
+    elif winnig != True and loosing == True:
+        return jsonify({'status': 'loose'})
+    else:
+        return jsonify({'status': 'continue'})
+
 
 @app.route ('/hints/<weapon>/<suspect>/<location>')
 def hints(weapon, suspect, location):
