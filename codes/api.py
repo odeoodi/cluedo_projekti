@@ -40,8 +40,12 @@ def get_api_data(data):
     pop_up_text = []
     for i in data:
         info = api(i[2], i[3])
-        pop_up_text.append(info)
+        list_info = json.loads(info)
+        pop_up_text.append(list_info)
     return pop_up_text
+
+
+
 
 '''
 
