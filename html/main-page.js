@@ -109,7 +109,6 @@ async function game_status () {
       console.log(error.message)}}
 
 
-
 function first_start() {
     if (player_name.textContent === 'ID'){
         enter_name()
