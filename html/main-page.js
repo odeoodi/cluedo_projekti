@@ -20,50 +20,28 @@ function showpopup() {
 function closepopup() {
     overlay.style.display = 'none'
     popup.style.display = 'none' }
-
-async function enter_name(){
-    showpopup()
-    document.querySelector('#start_newgame').addEventListener('click', () => {
-        const new_name = document.querySelector('#player_nameInput').value
-        player_name.innerText = new_name
-        closepopup()})
-    document.querySelector('#cance_newgame').addEventListener('click', () => {closepopup()})
-    get_lists()
-}
+async function get_locations(){
+    try {
+        const response3 = await fetch(`${url_py}/getlocations`)
+        if (!response3.ok) throw new Error("something went wrong locations")
+        locations_list = await response3.json()
+        console.log(locations_list)
+        return locations_list
+    }catch(error){console.log(error)}}
 
 async function get_lists() {
     try {
     const response = await fetch( `${url_py}/getweapons`)
     if (!response.ok) throw new Error("something went wrong weapons")
-    weapons_list = await response.json()
     const response2 = await fetch( `${url_py}/getsuspects`)
     if (!response2.ok) throw new Error("something went wrong suspects")
+    weapons_list = await response.json()
     suspects_list = await response2.json()
-    const response3 = await fetch( `${url_py}/getlocations`)
-    if (!response3.ok) throw new Error("something went wrong locations")
-    locations_list = await response3.json()
-    console.log(weapons_list, suspects_list, locations_list)
+    console.log(weapons_list, suspects_list)
     return{
         weapons_list,
         suspects_list,
-        locations_list,
-        }
-
-  } catch (error){
-      console.log(error.message)
-      }}
-
-async function start_newgame() {
-    try {
-    // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
-    const response = await fetch( `${url_py}/new_game`)
-    if (!response.ok) throw new Error("something went wrong new game")
-    console.log(response)
-    enter_name()
-        // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
-
-  } catch (error){
-      console.log(error.message)}}
+        }} catch (error) {console.log(error.message)}}
 
 async function check_money () {
     try {
@@ -75,19 +53,85 @@ async function check_money () {
       } catch (error){
       console.log(error.message)}}
 
+async function enter_name(){
+    const container = document.querySelector('#popup')
+    container.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    const text_thing = document.createElement('h2')
+        Object.assign(text_thing,{
+            id: 'popup_h2',
+            textContent: 'Start a new game by writing your name:' })
+    const start_button = document.createElement('button')
+        Object.assign(start_button, {
+            id: 'start_newgame',
+            className: "selection",
+            textContent: 'Start' })
+    const cancel_button = document.createElement('button')
+        Object.assign(cancel_button, {
+            id: 'cance_newgame',
+            className: "selection",
+            textContent: 'Cancel' })
+    const input = document.createElement('input')
+        Object.assign(input, {
+            type: 'text',
+            id: 'player_nameInput',
+            placeholder: 'Your name' })
+    const button_cont = document.createElement('div')
+        Object.assign(button_cont, {
+            id: 'button_cont' })
+    button_cont.appendChild(start_button)
+    button_cont.appendChild(cancel_button)
+    fragment.appendChild(text_thing)
+    fragment.appendChild(input)
+    fragment.appendChild(button_cont)
+    container.appendChild(fragment)
+    showpopup()
+    document.querySelector('#start_newgame').addEventListener('click', async () => {
+        const new_name = document.querySelector('#player_nameInput').value
+        player_name.innerText = new_name
+        const stat_money = await check_money()
+        let budget = document.getElementById('budget')
+        budget.textContent = stat_money
+        closepopup()
+    })
+    document.querySelector('#cance_newgame').addEventListener('click', async () => {closepopup()})
+    await get_locations()
+    await get_lists()
+}
+
+async function start_newgame() {
+    try {
+    // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
+    const response = await fetch( `${url_py}/new_game`)
+    if (!response.ok) throw new Error("something went wrong new game")
+    console.log(response)
+    enter_name()
+        // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
+  } catch (error){
+      console.log(error.message)}}
+
 function fail(){
     const texts = document.querySelector('#popup')
-    const no_needed = document.querySelectorAll('h2, #player_nameInput,#cance_newgame')
-    no_needed.forEach(element => {element.remove()})
+    const fragment = document.createDocumentFragment()
+    texts.innerHTML = ''
     const loost_text = document.createElement('h2')
-    loost_text.textContent = 'Oh no! You have run out of the money!\nGame Over!'
-    loost_text.style.fontSize = '1.4rem'
-    texts.appendChild(loost_text)
-    const new_game_button = document.querySelector('#start_newgame')
-    new_game_button.innerText = 'Ok'
-    new_game_button.addEventListener('click', () => {closepopup()})
-    new_game_button.style.transform = 'scale(1.5)'
-    texts.appendChild(new_game_button)
+        Object.assign(loost_text, {
+        id: 'loost_newgame',
+        textContent: 'Oh no! You have run out of the money!\nGame Over!'})
+        loost_text.style.fontSize = '20px'
+    const ok_button = document.createElement('button')
+        Object.assign(ok_button, {
+        id: 'ok',
+        className: "selection",
+        innerText: 'Ok',})
+        ok_button.style.paddingLeft = '10px'
+        ok_button.style.paddingRight = '10px'
+        ok_button.style.transform = 'scale(1.5)'
+    ok_button.addEventListener('click', () => {closepopup()})
+    fragment.appendChild(loost_text)
+    fragment.appendChild(ok_button)
+    texts.appendChild(fragment)
+    document.querySelector('#dicebox').style.display = 'none'
     showpopup()
 }
 
@@ -107,7 +151,6 @@ async function game_status () {
         }
         } catch (error){
       console.log(error.message)}}
-
 
 function first_start() {
     if (player_name.textContent === 'ID'){

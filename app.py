@@ -57,6 +57,7 @@ def check_money_sql(connector = db_connection):
     playermoney = check_money(thisgame.id, connector)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
+
 @app.route('/game_status')
 def game_status(connector = db_connection):
     connect = connector
