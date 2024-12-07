@@ -2,6 +2,7 @@ import random
 import mysql.connector
 import mysql
 
+
 '''
 EI OLE VIELÄ VALMIS
 '''
