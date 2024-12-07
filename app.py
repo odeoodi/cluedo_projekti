@@ -10,7 +10,7 @@ from codes.check_if_correct import check_if_correct_location, check_if_correct_w
 from codes.check_money import check_money
 from codes.fly import flying_new_port, cost_of_flying
 from codes.gambling import if_winning, pay, add_money
-from codes.api import api, get_api_data
+from codes.api import get_api_data
 
 
 
@@ -54,7 +54,7 @@ def locations_data(connector = db_connection):
 @app.route('/checkmoney')
 def check_money_sql(connector = db_connection):
     connect = connector
-    playermoney = check_money(1, connect)
+    playermoney = check_money(thisgame.id, connect)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
 
