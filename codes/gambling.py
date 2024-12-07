@@ -123,13 +123,6 @@ class WinMoney(Gambling):
             amount = [0, 100, 150, 250]
             print(f'You won {amount[num]}€.')
 
-            def win(amount, num,select_game):
-                money = f'UPDATE game SET money = money+ %s WHERE id = %s'
-                cursor = db_connection.cursor()
-                cursor.execute(money, (amount[num], select_game))
-                db_connection.commit()
-                return
-            win(amount, num, select_game)
 
 
 def pay(cost, select_game):
@@ -139,6 +132,13 @@ def pay(cost, select_game):
     db_connection.commit()
     print(f'You pay {cost}€ to try your luck.')
     return {"status": "ok"}, 200
+
+def add_money(num,select_game):
+        money = f'UPDATE game SET money = money+ %s WHERE id = %s'
+        cursor = db_connection.cursor()
+        cursor.execute(money, (num, select_game))
+        db_connection.commit()
+        return
 
 
 
