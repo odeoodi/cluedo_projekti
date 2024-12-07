@@ -58,14 +58,13 @@ function loading() {
 
 async function get_locations(){
     loading_stuff = true
-    loading()
+
     try {
         const response3 = await fetch(`${url_py}/getlocations`)
         if (!response3.ok) throw new Error("something went wrong locations")
         locations_list = await response3.json()
         console.log(locations_list)
-        loading_stuff = false
-        closepopup()
+
         return locations_list
 
     }catch(error){console.log(error)}}
@@ -135,8 +134,7 @@ async function enter_name(){
     fragment.appendChild(button_cont)
     container.appendChild(fragment)
     showpopup()
-    document.querySelector('#start_newgame').addEventListener('click', async () => {
-            // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
+    async function start_click() {
         const new_name = document.querySelector('#player_nameInput').value
         player_name.innerText = new_name
         const stat_money = await check_money()
@@ -144,14 +142,21 @@ async function enter_name(){
         budget.textContent = stat_money
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
+        const narrator_text = document.querySelector('#printing_text')
+        narrator_text.textContent = ''
         closepopup()
+        loading_stuff = true
+        loading()
         await start_newgame()
         await get_locations()
         await get_lists()
-    })
-    document.querySelector('#cance_newgame').addEventListener('click', async () => {closepopup()})
-            // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen
+        loading_stuff = false
+        closepopup()
 }
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {start_click()}})
+    start_button.addEventListener('click', async () => {start_click()})
+    cancel_button.addEventListener('click', async () => {closepopup()})}
 
 function fail(){
     const texts = document.querySelector('#popup')
