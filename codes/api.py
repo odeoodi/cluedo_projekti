@@ -39,8 +39,12 @@ def api(lat, long):
 def get_api_data(data):
     pop_up_text = []
     for i in data:
+        long = data[i][3]
+        lat =
         info = api(data[i][2], data[i][3])
         pop_up_text.append(info)
+    return
+
 
 
 '''
