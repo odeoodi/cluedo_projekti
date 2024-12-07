@@ -1,5 +1,5 @@
 'use strict';
-
+// FUNCTIONS
 async function gamble_win(new_dice1, new_dice2, new_dice3) {
   try {
     const response = await fetch(
@@ -19,13 +19,26 @@ async function pay_gambling(cost,select_game) {
   try {
     const response = await fetch(`${url_py}/pay/${cost}/${select_game}`)
     if (!response.ok) {
-      throw new Error('Problem with deducting money.')
+      throw new Error('Problem with paying gamble')
     }
   } catch (error) {
     console.log(error.message)
   }
 }
 
+async function add_money(added,select_game) {
+  try {
+    const response = await fetch(`${url_py}/add-money-gamble/${added}/${select_game}`)
+    if (!response.ok) {
+      throw new Error('Could not add win money')
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+// VARIABLES
 const roll = document.getElementById('roll');
 let dice1 = document.getElementById('dice1');
 let dice2 = document.getElementById('dice2');
@@ -36,6 +49,9 @@ let win_points = 0
 const dicebox = document.getElementById('dicebox');
 const end_gamble = document.getElementById('end-gamble')
 const url_py = 'http://127.0.0.1:3000'
+const gamble = document.getElementById('gamble-button');
+const rollDice = document.getElementById('roll')
+const gamble_alert = document.getElementById('gamble-text')
 
 roll.addEventListener('click', () => {
   const new_dice1 = Math.floor(Math.random() * 6 + 1);
@@ -132,7 +148,6 @@ roll.addEventListener('click', () => {
       break;
   }
   gamble_win(new_dice1, new_dice2, new_dice3).then(async (win_stats) => {
-    const gamble_alert = document.getElementById('gamble-text')
     if (win_stats) {
       // console.log(win_stats.message);
       win_message = win_stats.message
@@ -147,7 +162,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 1) {
       gamble_alert.textContent = 'You have two fives, you are winning 100€!'
-      await pay_gambling(-100, 1)
+      await add_money(100, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
@@ -155,7 +170,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 2) {
       gamble_alert.textContent = 'You have two sixes, you are winning 150€!'
-      await pay_gambling(-150, 1)
+      await add_money(150, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
@@ -163,7 +178,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 3) {
       gamble_alert.textContent = 'You have three ones, you are winning 250€!'
-      await pay_gambling(-250, 1)
+      await add_money(250, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
@@ -175,12 +190,13 @@ roll.addEventListener('click', () => {
 
   });
 })
-  const gamble = document.getElementById('gamble-button');
 
+ // opening the gamble dice box
   gamble.addEventListener('click', () => {
     dicebox.style.display = 'flex';
   });
-  const rollDice = document.getElementById('roll')
+
+  // paying the gamble
 rollDice.addEventListener('click', async () => {
   await pay_gambling(50, 1)
   let new_budget = check_money()

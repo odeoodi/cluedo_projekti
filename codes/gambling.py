@@ -133,12 +133,12 @@ def pay(cost, select_game):
     print(f'You pay {cost}€ to try your luck.')
     return {"status": "ok"}, 200
 
-def add_money(num,select_game):
+def add_money(added,select_game):
         money = f'UPDATE game SET money = money+ %s WHERE id = %s'
         cursor = db_connection.cursor()
-        cursor.execute(money, (num, select_game))
+        cursor.execute(money, (added, select_game))
         db_connection.commit()
-        return
+        return 'ok'
 
 
 
