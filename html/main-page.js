@@ -17,9 +17,11 @@ let location_game = ''
 function showpopup() {
     overlay.style.display = 'block'
     popup.style.display = 'block' }
+
 function closepopup() {
     overlay.style.display = 'none'
     popup.style.display = 'none' }
+
 async function get_locations(){
     try {
         const response3 = await fetch(`${url_py}/getlocations`)

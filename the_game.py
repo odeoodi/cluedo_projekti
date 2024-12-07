@@ -7,7 +7,6 @@ from codes.print_story import print_story
 from codes.press_enter import press_enter_to_continue
 from codes.help_command import help_command
 from codes.random_hints import random_hints
-from codes.gambling import Gambling
 from codes.check_money import check_money
 from codes.check_accustations import check_accusations
 from codes.acccuse import accuse_weapon_suspect
