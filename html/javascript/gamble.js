@@ -52,9 +52,6 @@ const url_py = 'http://127.0.0.1:3000'
 const gamble = document.getElementById('gamble-button');
 const rollDice = document.getElementById('roll')
 const gamble_alert = document.getElementById('gamble-text')
-const re_roll1 = document.getElementById('re-dice1')
-const re_roll2 = document.getElementById('re-dice2')
-const re_roll3 = document.getElementById('re-dice3')
 
 
 roll.addEventListener('click', () => {
@@ -162,44 +159,42 @@ roll.addEventListener('click', () => {
     }
 
     if (win_points === 0) {
-      gamble_alert.textContent = 'You have nothing, choose one dice to re-roll.'
+      gamble_alert.textContent = 'Sorry, you lost.'
+      roll.style.display = 'none'
       end_gamble.style.display = 'flex'
-      re_roll1.style.display = 'flex'
-      re_roll2.style.display = 'flex'
-      re_roll3.style.display = 'flex'
-    } else if (win_points === 1) {
+    }
+
+    else if (win_points === 1) {
       gamble_alert.textContent = 'You have two fives, you are winning 100€!'
       await add_money(100, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      roll.style.display = 'none'
       end_gamble.style.display = 'flex'
-      re_roll1.style.display = 'none'
-      re_roll2.style.display = 'none'
-      re_roll3.style.display = 'none'
+
 
     } else if (win_points === 2) {
-      gamble_alert.textContent = 'You have two sixes, you are winning 150€!'
+      gamble_alert.textContent = 'You have at least one six or one five, you are winning 150€!'
       await add_money(150, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      roll.style.display = 'none'
       end_gamble.style.display = 'flex'
-      re_roll1.style.display = 'none'
-      re_roll2.style.display = 'none'
-      re_roll3.style.display = 'none'
+
 
 
     } else if (win_points === 3) {
-      gamble_alert.textContent = 'You have three ones, you are winning 250€!'
+      gamble_alert.textContent = 'You have two sixes, you are winning 250€!'
       await add_money(250, 1)
       let new_budget = check_money()
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
+      roll.style.display = 'none'
       end_gamble.style.display = 'flex'
-      re_roll1.style.display = 'none'
-      re_roll2.style.display = 'none'
-      re_roll3.style.display = 'none'
+
+
 
     }
     else {
@@ -209,9 +204,18 @@ roll.addEventListener('click', () => {
   });
 })
 
- // opening the gamble dice box
+ // opening the gamble dice box and re-setting it for next gamble
   gamble.addEventListener('click', () => {
     dicebox.style.display = 'flex';
+    end_gamble.style.display ='none';
+    roll.style.display = 'flex';
+    dice1.src = 'img/dice-six.png'
+    dice2.src = 'img/dice-six.png'
+    dice3.src = 'img/dice-six.png'
+    dice1.alt = "Dice number six"
+    dice2.alt = "Dice number six"
+    dice3.alt = "Dice number six"
+    gamble_alert.textContent = 'Roll the dice for a chance to get more money!'
   });
 
   // paying the gamble
