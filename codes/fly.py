@@ -1,20 +1,4 @@
-import mysql.connector
-from codes.location_now import location_now
-from codes.check_money import check_money
-from codes.press_enter import press_enter_to_continue
-
-db_connection = mysql.connector.connect(
-    host='127.0.0.1',  # host='localhost'
-    port=3306,
-    database='detective_game2',
-    user='heikki',
-    password='pekka',
-    autocommit=True
-)
-
-#def fly():
-# Druing this function player can fly to the new location.
-
+'''
 def locations_available():
     # This print all the airports and their ICAO-codes where player can fly.
     # Execludin the location where player is currently
@@ -40,7 +24,7 @@ def icao_in_locations(destination):
         return True
 
 
-def location_check(destination):
+#def location_check(destination):
     # Checks if the destination where player wants to go is current location or not.
     # Returns True or False.
     getlocation = (f'SELECT location FROM game ;')
@@ -54,25 +38,26 @@ def location_check(destination):
         return True
     else:
         return False
-
-def flying_new_port(destination):
-    # Uppdates a new location to the database where player has flown.
-    flying = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
-    cursor = db_connection.cursor()
-    cursor.execute(flying)
-    db_connection.commit()
-    return
-
-def cost_of_flying(fly_cost):
-    # Subtracts flying cost from the money player has.
-    # Change (SELECT money -'125'....) to change cost.
-    moneycost=(f'UPDATE game SET money =( SELECT money -{fly_cost} FROM game ) ')
-    cursor = db_connection.cursor()
-    cursor.execute(moneycost)
-    db_connection.commit()
-    return
-
 '''
+def flying_new_port(destination, connection):
+    # Uppdates a new location to the database where player has flown.
+    connect = connection
+    flying = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
+    cursor = connect.cursor()
+    cursor.execute(flying)
+    connect.commit()
+    return
+
+def cost_of_flying(fly_cost, connection):
+    # Subtracts flying cost from the money player has.
+    connect = connection
+    moneycost=(f'UPDATE game SET money =( SELECT money -{fly_cost} FROM game ) ')
+    cursor = connect.cursor()
+    cursor.execute(moneycost)
+    connect.commit()
+    return
+
+
     while True:
         print(f'\nYou are currently at the {location_now(1)}.')
         press_enter_to_continue()
@@ -97,4 +82,3 @@ def cost_of_flying(fly_cost):
             print("\nSorry your ICAO-code was not in the list, please try again.")
             press_enter_to_continue()
             print()
-'''

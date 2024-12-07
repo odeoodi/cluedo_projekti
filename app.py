@@ -70,7 +70,6 @@ def game_status(connector = db_connection):
     else:
         return jsonify({'status': 'continue'})
 
-
 @app.route ('/hints/<weapon>/<suspect>/<location>')
 def hints(weapon, suspect, location):
     weapon =(weapon)
@@ -81,10 +80,11 @@ def hints(weapon, suspect, location):
     # return hint_list
 
 @app.route('/fly/<icao>')
-def in_game_fly(icao):
+def in_game_fly(icao, connector = db_connection):
+    connect = connector
     icao = icao
-    flying_new_port(icao)
-    cost_of_flying(codes.config.fly_cost)
+    flying_new_port(icao, connect)
+    cost_of_flying(codes.config.fly_cost, connect)
     return 'ok'
 
 @app.route('/gamble_winning/<int:dice1>/<int:dice2>/<int:dice3>')
