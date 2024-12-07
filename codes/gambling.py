@@ -18,16 +18,16 @@ def if_winning(dice1,dice2,dice3):
 
 def pay(cost, select_game, connection):
     connect = connection
-    loose = f'UPDATE game SET money = money- %s WHERE id = %s'
+    loose = f'UPDATE game SET money = money- {cost} WHERE id = {select_game}'
     cursor = connect.cursor()
-    cursor.execute(loose, (cost, select_game))
+    cursor.execute(loose)
     connect.commit()
     return {"status": "ok"}, 200
 
 def add_money(added,select_game, connection):
     connect = connection
-    money = f'UPDATE game SET money = money+ %s WHERE id = %s'
+    money = f'UPDATE game SET money = money+{added} WHERE id = {select_game}'
     cursor = connect.cursor()
-    cursor.execute(money, (added, select_game))
+    cursor.execute(money)
     connect.commit()
     return 'ok'
