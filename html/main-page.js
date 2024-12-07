@@ -55,6 +55,15 @@ async function check_money () {
       } catch (error){
       console.log(error.message)}}
 
+
+async function start_newgame() {
+    try {
+    const response = await fetch( `${url_py}/new_game`)
+    if (!response.ok) throw new Error("something went wrong new game")
+    console.log(response)
+  } catch (error){
+      console.log(error.message)}}
+
 async function enter_name(){
     const container = document.querySelector('#popup')
     container.innerHTML = ''
@@ -89,28 +98,22 @@ async function enter_name(){
     container.appendChild(fragment)
     showpopup()
     document.querySelector('#start_newgame').addEventListener('click', async () => {
+            // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
         const new_name = document.querySelector('#player_nameInput').value
         player_name.innerText = new_name
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
+        document.querySelector('#accuse-button').disabled = false
+        document.querySelector('#gamble-button').disabled = false
         closepopup()
+        await start_newgame()
     })
     document.querySelector('#cance_newgame').addEventListener('click', async () => {closepopup()})
+            // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen
     await get_locations()
     await get_lists()
 }
-
-async function start_newgame() {
-    try {
-    // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
-    const response = await fetch( `${url_py}/new_game`)
-    if (!response.ok) throw new Error("something went wrong new game")
-    console.log(response)
-    enter_name()
-        // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
-  } catch (error){
-      console.log(error.message)}}
 
 function fail(){
     const texts = document.querySelector('#popup')
@@ -134,6 +137,8 @@ function fail(){
     fragment.appendChild(ok_button)
     texts.appendChild(fragment)
     document.querySelector('#dicebox').style.display = 'none'
+    document.querySelector('#accuse-button').disabled = true
+    document.querySelector('#gamble-button').disabled = true
     showpopup()
 }
 
@@ -169,8 +174,8 @@ async function accuse() {
         } catch (error){
       console.log(error.message)}}
 
-document.querySelector('#newgame-button').addEventListener('click', (e) => {
-  start_newgame()})
+document.querySelector('#newgame-button').addEventListener('click', async (e) => {
+  enter_name()})
 
 
 
