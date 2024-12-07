@@ -1,7 +1,7 @@
 'use strict'
 
 // this is url to python and after this add the flask address
-const url_py = 'http://127.0.0.1:3000'
+// const url_py = 'http://127.0.0.1:3000'
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
 
@@ -41,26 +41,33 @@ async function get_lists() {
     try {
     const response = await fetch( `${url_py}/getweapons`)
     if (!response.ok) throw new Error("something went wrong weapons")
-    const weapons_list = await response.json()
+    weapons_list = await response.json()
     const response2 = await fetch( `${url_py}/getsuspects`)
     if (!response2.ok) throw new Error("something went wrong suspects")
-    const suspects_list = await response2.json()
+    suspects_list = await response2.json()
     const response3 = await fetch( `${url_py}/getlocations`)
     if (!response3.ok) throw new Error("something went wrong locations")
-    const locations_list = await response3.json()
-    console.log(weapons_list)
-    console.log(suspects_list)
-    console.log(locations_list)
+    locations_list = await response3.json()
+    console.log(weapons_list, suspects_list, locations_list)
+    return{
+        weapons_list,
+        suspects_list,
+        locations_list,
+        }
+
   } catch (error){
       console.log(error.message)
       }}
 
 async function start_newgame() {
     try {
+    // MUITSTA DOMITAA TEKSTIT POIS NARRATORISTA
     const response = await fetch( `${url_py}/new_game`)
     if (!response.ok) throw new Error("something went wrong new game")
     console.log(response)
     enter_name()
+        // dom komento joka otaa lore.js muutujan intro ja laitaa sen narratoreen.
+
   } catch (error){
       console.log(error.message)}}
 
@@ -69,16 +76,17 @@ async function check_money () {
     const response = await fetch( `${url_py}/checkmoney`)
     if (!response.ok) throw new Error("money not found")
     const money_at_bank = await response.json()
-        console.log(money_at_bank)
+    console.log(money_at_bank)
+    return money_at_bank
       } catch (error){
-      console.log(error.message)
-      }}
+      console.log(error.message)}}
+
 
 function first_start() {
     if (player_name.textContent === 'ID'){
         enter_name()
     }}
-// lets use it when we need it: first_start()
+// let's use it when we need it: first_start()
 
 
 async function accuse() {
@@ -94,10 +102,12 @@ document.querySelector('#newgame-button').addEventListener('click', (e) => {
   start_newgame()})
 
 
-// gamble pop-up
 
-// gamble pop-up ends
+function selectImage(img) {
+        // Remove 'pressed' class from all images
+        const allImages = document.querySelectorAll('.img_wrapper img');
+        allImages.forEach(image => image.classList.remove('pressed'));
 
-// things we need for the map
-
-// map stuff ends
+        // Add 'pressed' class to the clicked image
+        img.classList.add('pressed')
+  }

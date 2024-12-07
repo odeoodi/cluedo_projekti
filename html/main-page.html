@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="javascript/map.js" defer></script>
     <script src="javascript/gamble.js" defer></script>
+    <script src="javascript/notepad.js" defer></script>
     <script src="main-page.js" defer></script>
     <link rel="stylesheet" href="main-page.css">
     <link rel="icon" type="image/x-icon" href="/html/img/magnifier.png">
@@ -38,12 +39,13 @@
 
             <section class="box" id="dicebox">
                 <h2>Gambling dice</h2>
-                <p>Roll the dice for a chance to get more money!</p>
-                <img class="dice" id="dice1" src="img/dice-two.png" alt="Dice number two">
-                <img class="dice" id="dice2" src="img/dice-two.png" alt="Dice number two">
-                <img class="dice" id="dice3" src="img/dice-two.png" alt="Dice number two">
+                <p id="gamble-text">Roll the dice for a chance to get more money!</p>
+                <img class="dice" id="dice1" src="img/dice-six.png" alt="Dice number six">
+                <img class="dice" id="dice2" src="img/dice-six.png" alt="Dice number six">
+                <img class="dice" id="dice3" src="img/dice-six.png" alt="Dice number six">
                 <!-- Tähän JavaScriptillä muuttuva nopan sivu tämän tilalle muuttamalla src ja alt / DONE-->
                 <button id="roll">Roll</button>
+                <button id="end-gamble">Stop gambling</button>
             </section>
 
             <div id="map">
@@ -55,19 +57,21 @@
                 </div>
                 <div class="content">
 
-                    <p id="hints">Your hints about the murder will be here</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque illo libero perspiciatis,
-                        possimus quas recusandae? Aperiam illum nesciunt quam, sapiente temporibus ut. Cum impedit in
-                        possimus! Deserunt, iste, sunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque illo libero perspiciatis,
-                        possimus quas recusandae? Aperiam illum nesciunt quam, sapiente temporibus ut. Cum impedit in
-                        possimus! Deserunt, iste, sunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque illo libero perspiciatis,
-                        possimus quas recusandae? Aperiam illum nesciunt quam, sapiente temporibus ut. Cum impedit in
-                        possimus! Deserunt, iste, sunt.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eaque illo libero perspiciatis,
-                        possimus quas recusandae? Aperiam illum nesciunt quam, sapiente temporibus ut. Cum impedit in
-                        possimus! Deserunt, iste, sunt.</p>
+                    <p id="hint-holder">Your hints about the murder will be here</p>
+                    <ul id="hint-list">
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eos est exercitationem, itaque
+                            maxime molestias nam officia officiis omnis quaerat quo quos reiciendis rem repudiandae,
+                            tenetur voluptates voluptatibus. Accusantium, doloribus?
+                        </li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eos est exercitationem, itaque
+                            maxime molestias nam officia officiis omnis quaerat quo quos reiciendis rem repudiandae,
+                            tenetur voluptates voluptatibus. Accusantium, doloribus?
+                        </li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eos est exercitationem, itaque
+                            maxime molestias nam officia officiis omnis quaerat quo quos reiciendis rem repudiandae,
+                            tenetur voluptates voluptatibus. Accusantium, doloribus?
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -92,44 +96,132 @@
     <section class="printing">
         <div>
             <h2 class="printing_h2">Narrator</h2>
-            <p class="printing_text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+            <p class="printing_text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
+                ipsum
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
+                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
         </div>
     </section>
 
+    <h2>SUSPECTS</h2>
+    <div class="img_wrapper">
+        <div class="img_box1">
+            <img alt="suspect 1" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box2">
+            <img alt="suspect 2" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box3">
+            <img alt="suspect 3" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box4">
+            <img alt="suspect 4" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box5">
+            <img alt="suspect 5" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box6">
+            <img alt="suspect 6" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box7">
+            <img alt="suspect 7" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box8">
+            <img alt="suspect 8" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box9">
+            <img alt="suspect 9" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box10">
+            <img alt="suspect 10" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box11">
+            <img alt="suspect 11" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="img_box12">
+            <img alt="suspect 12" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+    </div>
+    <h2>WEAPONS</h2>
+    <div class="w_img_wrapper">
+        <div class="w_img_box1">
+            <img alt="weapon 1" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box2">
+            <img alt="weapon 2" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box3">
+            <img alt="weapon 3" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box4">
+            <img alt="weapon 4" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box5">
+            <img alt="weapon 5" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box6">
+            <img alt="weapon 6" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box7">
+            <img alt="weapon 7" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box8">
+            <img alt="weapon 8" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box9">
+            <img alt="weapon 9" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box10">
+            <img alt="weapon 10" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box11">
+            <img alt="weapon 11" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box12">
+            <img alt="weapon 12" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box13">
+            <img alt="weapon 13" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box14">
+            <img alt="weapon 14" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+        <div class="w_img_box15">
+            <img alt="weapon 15" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        </div>
+    </div>
     <footer>
         <p>&copy; 2024 J'accuse!</p>
     </footer>
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <h2>Start a new game by writing your name</h2>
-        <input type="text" id="player_nameInput" placeholder="Your name" />
+        <input type="text" id="player_nameInput" placeholder="Your name"/>
         <div>
             <button class="selection" id="start_newgame">Start</button>
             <button class="selection" id="cance_newgame">Cancel</button>

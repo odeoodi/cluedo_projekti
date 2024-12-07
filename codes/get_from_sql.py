@@ -1,6 +1,3 @@
-
-
-
 def from_sql_weapons(connector):
     connect = connector
     get_info = f"SELECT weapon, attribute1, attribute2  FROM weapons"
