@@ -151,8 +151,7 @@ async function enter_name(){
         await get_locations()
         await get_lists()
         loading_stuff = false
-        closepopup()
-}
+        closepopup()}
     input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {start_click()}})
     start_button.addEventListener('click', async () => {start_click()})
@@ -219,7 +218,6 @@ async function accuse() {
 
 document.querySelector('#newgame-button').addEventListener('click', async (e) => {
   enter_name()})
-
 
 
 function selectImage(img) {
