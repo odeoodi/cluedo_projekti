@@ -9,10 +9,10 @@ from codes.get_from_sql import from_sql_weapons, form_sql_suspects,from_sql_loca
 from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 from codes.check_money import check_money
 from codes.fly import flying_new_port, cost_of_flying
-from codes.gambling import Gambling, pay, add_money
+from codes.gambling import if_winning, pay, add_money
 from codes.api import api, get_api_data
 
-db_connection = db_connection
+
 
 thisgame = Game(codes.config.game_id, codes.config.name)
 
@@ -54,7 +54,7 @@ def locations_data(connector = db_connection):
 @app.route('/checkmoney')
 def check_money_sql(connector = db_connection):
     connect = connector
-    playermoney = check_money(thisgame.id, connector)
+    playermoney = check_money(1, connect)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
 
@@ -88,9 +88,9 @@ def in_game_fly(icao):
     return 'ok'
 
 @app.route('/gamble_winning/<int:dice1>/<int:dice2>/<int:dice3>')
-def gamble_winning(dice1, dice2, dice3):
+def gamble_winning(dice1, dice2, dice3,):
     try:
-        winpoint, wintext = Gambling.if_winning(dice1, dice2, dice3)
+        winpoint, wintext = if_winning(dice1, dice2, dice3)
         response = {
             'points': winpoint,
             'message': wintext
@@ -100,18 +100,20 @@ def gamble_winning(dice1, dice2, dice3):
         return jsonify({'error': str(e)}), 500
 
 @app.route('/pay/<cost>/<select_game>') # this function deducts the gambling cost from the players money amount
-def pay_gamble(cost,select_game):
+def pay_gamble(cost, connection = db_connection):
+    connect = connection
     cost = cost
-    select_game = select_game
-    payed = pay(cost,select_game)
+    select_game = thisgame.id
+    payed = pay(cost,select_game, connect)
     print("gamble payed")
     return payed
 
 @app.route('/add-money-gamble/<added>/<select_game>')
-def add_money_gamble(added,select_game):
+def add_money_gamble(added, connection = db_connection):
+    connect = connection
     added = added
-    select_game = select_game
-    ok_money = add_money(added,select_game)
+    select_game = thisgame.id
+    ok_money = add_money(added, select_game, connect)
     print('win money added')
     return ok_money
 

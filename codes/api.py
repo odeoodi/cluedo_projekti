@@ -43,20 +43,3 @@ def get_api_data(data):
         list_info = json.loads(info)
         pop_up_text.append(list_info)
     return pop_up_text
-
-
-
-
-'''
-
-longitude = -3.372288
-latitude = 55.950145
-
-result = api(longitude, latitude)
-
-if "Error" in result[0]:
-    print(result[0])
-else:
-    print(f"Capital: {result[0]}, Flag: {result[1]}, Country: {result[2]}")
-
-'''
