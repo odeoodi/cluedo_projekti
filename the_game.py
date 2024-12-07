@@ -1,4 +1,6 @@
 import mysql.connector
+
+from codes.config import game_id
 from codes.location_now import location_now
 from codes.start import start_location, start_money, start_accusations, insert_right_answers
 from codes.rules import rules
@@ -20,6 +22,11 @@ class Game:
         self.id = id
         self.name = name
         self.money_neede = codes.config.gamble_cost
+
+    def right_answer_add(self, num):
+        for i in range(num):
+            Game.right_answers += 1
+        return Game.right_answers
 
     def checkmony(self, connector):
         connect = connector
@@ -45,11 +52,6 @@ class Game:
             return True
         else:
             return False
-
-
-
-
-
 
 
 
