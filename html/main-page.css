@@ -76,6 +76,19 @@
     margin-right: auto;
 }
 
+.re-roll {
+    display: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: medium;
+    font-family: SpecialElite,sans-serif;
+    background-color: var(--bone);
+    padding: 0.7rem;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #end-gamble {
     display: none;
     cursor: pointer;

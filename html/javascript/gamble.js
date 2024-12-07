@@ -52,6 +52,10 @@ const url_py = 'http://127.0.0.1:3000'
 const gamble = document.getElementById('gamble-button');
 const rollDice = document.getElementById('roll')
 const gamble_alert = document.getElementById('gamble-text')
+const re_roll1 = document.getElementById('re-dice1')
+const re_roll2 = document.getElementById('re-dice2')
+const re_roll3 = document.getElementById('re-dice3')
+
 
 roll.addEventListener('click', () => {
   const new_dice1 = Math.floor(Math.random() * 6 + 1);
@@ -156,10 +160,13 @@ roll.addEventListener('click', () => {
     } else {
       console.log("Error occurred while fetching win stats.");
     }
-    if (win_points === 0) {
-      gamble_alert.textContent = 'Sorry, you lost.'
-      end_gamble.style.display = 'flex'
 
+    if (win_points === 0) {
+      gamble_alert.textContent = 'You have nothing, choose one dice to re-roll.'
+      end_gamble.style.display = 'flex'
+      re_roll1.style.display = 'flex'
+      re_roll2.style.display = 'flex'
+      re_roll3.style.display = 'flex'
     } else if (win_points === 1) {
       gamble_alert.textContent = 'You have two fives, you are winning 100€!'
       await add_money(100, 1)
@@ -167,6 +174,9 @@ roll.addEventListener('click', () => {
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
       end_gamble.style.display = 'flex'
+      re_roll1.style.display = 'none'
+      re_roll2.style.display = 'none'
+      re_roll3.style.display = 'none'
 
     } else if (win_points === 2) {
       gamble_alert.textContent = 'You have two sixes, you are winning 150€!'
@@ -175,6 +185,10 @@ roll.addEventListener('click', () => {
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
       end_gamble.style.display = 'flex'
+      re_roll1.style.display = 'none'
+      re_roll2.style.display = 'none'
+      re_roll3.style.display = 'none'
+
 
     } else if (win_points === 3) {
       gamble_alert.textContent = 'You have three ones, you are winning 250€!'
@@ -183,6 +197,10 @@ roll.addEventListener('click', () => {
       let budget = document.getElementById('budget')
       budget.textContent = await new_budget
       end_gamble.style.display = 'flex'
+      re_roll1.style.display = 'none'
+      re_roll2.style.display = 'none'
+      re_roll3.style.display = 'none'
+
     }
     else {
       console.log('Something went wrong with winning the gamble.')
@@ -202,4 +220,9 @@ rollDice.addEventListener('click', async () => {
   let new_budget = check_money()
   let budget = document.getElementById('budget')
   budget.textContent = await new_budget
+})
+
+  // ending gamble
+end_gamble.addEventListener('click',() => {
+  dicebox.style.display = 'none'
 })
