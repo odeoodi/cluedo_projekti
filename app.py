@@ -68,14 +68,6 @@ def game_status(connector = db_connection):
     else:
         return jsonify({'status': 'continue'})
 
-@app.route ('/hints/<weapon>/<suspect>/<location>')
-def hints(weapon, suspect, location):
-    weapon =(weapon)
-    suspect = (suspect)
-    location = (location)
-    # hint_list = (here iidas function which will take as parameter weapon, suspect and location.)
-                # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
-    # return hint_list
 
 @app.route('/fly/<icao>')
 def in_game_fly(icao, connector = db_connection):
@@ -115,8 +107,11 @@ def add_money_gamble(added, connection = db_connection):
     print('win money added')
     return ok_money
 
-@app.route('/accuse/<weapon>/<suspect>/<location>')
-def accuse(weapon, suspect, location, connector = db_connection):
+
+# Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
+    # joka lisää oikeen määrän oiketa vastauksii pelin classiin. siten pitäs runnaa sen classin thisgame.winning joka kattoo voitetaanko.
+# @app.route('/accuse/<weapon>/<suspect>/<location>')
+# def accuse(weapon, suspect, location, connector = db_connection):
     connect = connector
     weapon = weapon
     suspect = suspect
@@ -125,8 +120,15 @@ def accuse(weapon, suspect, location, connector = db_connection):
     is_suspect = check_if_correct_suspect(suspect, connect)
     is_location = check_if_correct_location(location, connect)
     jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
-    return jsonanwsver
-
+    # return jsonanwsver
+# @app.route ('/hints/<weapon>/<suspect>/<location>')
+# def hints(weapon, suspect, location):
+    weapon =(weapon)
+    suspect = (suspect)
+    location = (location)
+    # hint_list = (here iidas function which will take as parameter weapon, suspect and location.)
+                # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
+    # return hint_list
 
 
 if __name__ == '__main__':
