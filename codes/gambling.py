@@ -22,12 +22,12 @@ def pay(cost, select_game, connection):
     cursor = connect.cursor()
     cursor.execute(loose)
     connect.commit()
-    return {"status": "ok"}, 200
+    return cost
 
 def add_money(added,select_game, connection):
     connect = connection
-    money = f'UPDATE game SET money = money+{added} WHERE id = {select_game}'
+    money = f'UPDATE game SET money = money+ {added} WHERE id = {select_game}'
     cursor = connect.cursor()
     cursor.execute(money)
     connect.commit()
-    return 'ok'
+    return added
