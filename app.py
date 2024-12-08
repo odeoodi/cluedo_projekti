@@ -98,7 +98,7 @@ def pay_gamble(cost, select_game = thisgame.id, connection = db_connection):
     print("gamble payed")
     return payed
 
-@app.route('/add-money-gamble/<added>/<select_game>')
+@app.route('/add-money-gamble/<added>')
 def add_money_gamble(added, select_game = thisgame.id , connection = db_connection):
     connect = connection
     added = added
