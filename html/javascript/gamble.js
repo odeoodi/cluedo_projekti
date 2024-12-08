@@ -1,6 +1,7 @@
 'use strict';
 
 // FUNCTIONS
+
 async function gamble_win(new_dice1, new_dice2, new_dice3) {
   try {
     const response = await fetch(
@@ -118,7 +119,19 @@ roll.addEventListener('click', () => {
       dice2.src = '/html/img/dice-one.png';
       dice2.alt = 'Dice number one';
       break;
+    case 7:
+      dice2.src = '/html/img/dice-one.png';
+      dice2.alt = 'Dice number one';
+      break;
     case 2:
+      dice2.src = '/html/img/dice-two.png';
+      dice2.alt = 'Dice number two';
+      break;
+    case 8:
+      dice2.src = '/html/img/dice-two.png';
+      dice2.alt = 'Dice number two';
+      break;
+    case 9:
       dice2.src = '/html/img/dice-two.png';
       dice2.alt = 'Dice number two';
       break;
@@ -126,7 +139,19 @@ roll.addEventListener('click', () => {
       dice2.src = '/html/img/dice-three.png';
       dice2.alt = 'Dice number three';
       break;
+    case 10:
+      dice2.src = '/html/img/dice-three.png';
+      dice2.alt = 'Dice number three';
+      break;
     case 4:
+      dice2.src = '/html/img/dice-four.png';
+      dice2.alt = 'Dice number four';
+      break;
+    case 11:
+      dice2.src = '/html/img/dice-four.png';
+      dice2.alt = 'Dice number four';
+      break;
+    case 12:
       dice2.src = '/html/img/dice-four.png';
       dice2.alt = 'Dice number four';
       break;
@@ -144,7 +169,11 @@ roll.addEventListener('click', () => {
   }
   // third dice
   switch (new_dice3) {
-    case 1:
+      case 1:
+      dice3.src = '/html/img/dice-one.png';
+      dice3.alt = 'Dice number one';
+      break;
+    case 7:
       dice3.src = '/html/img/dice-one.png';
       dice3.alt = 'Dice number one';
       break;
@@ -152,11 +181,31 @@ roll.addEventListener('click', () => {
       dice3.src = '/html/img/dice-two.png';
       dice3.alt = 'Dice number two';
       break;
+    case 8:
+      dice3.src = '/html/img/dice-two.png';
+      dice3.alt = 'Dice number two';
+      break;
+    case 9:
+      dice3.src = '/html/img/dice-two.png';
+      dice3.alt = 'Dice number two';
+      break;
     case 3:
       dice3.src = '/html/img/dice-three.png';
       dice3.alt = 'Dice number three';
       break;
+    case 10:
+      dice3.src = '/html/img/dice-three.png';
+      dice3.alt = 'Dice number three';
+      break;
     case 4:
+      dice3.src = '/html/img/dice-four.png';
+      dice3.alt = 'Dice number four';
+      break;
+    case 11:
+      dice3.src = '/html/img/dice-four.png';
+      dice3.alt = 'Dice number four';
+      break;
+    case 12:
       dice3.src = '/html/img/dice-four.png';
       dice3.alt = 'Dice number four';
       break;
@@ -188,7 +237,7 @@ roll.addEventListener('click', () => {
       end_gamble.style.display = 'flex';
     } else if (win_points === 1) {
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
-      await add_money(100, 1);
+      await add_money(100,1);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -197,7 +246,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 2) {
       gamble_alert.textContent = 'You have two fives, you win 150€!';
-      await add_money(150, 1);
+      await add_money(150,1);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -206,7 +255,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 3) {
       gamble_alert.textContent = 'You have two sixes and a five, you are winning 250€!';
-      await add_money(250, 1);
+      await add_money(250,1);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -236,7 +285,7 @@ gamble.addEventListener('click', () => {
 
 // paying the gamble
 rollDice.addEventListener('click', async () => {
-  await pay_gambling(50, 1);
+  await pay_gambling(50,1);
   let new_budget = check_money();
   let budget = document.getElementById('budget');
   budget.textContent = await new_budget;
