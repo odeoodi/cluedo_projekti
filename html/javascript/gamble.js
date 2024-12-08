@@ -283,7 +283,8 @@ roll.addEventListener('click', () => {
 });
 
 // opening the gamble dice box and re-setting it for next gamble
-gamble.addEventListener('click', () => {
+gamble.addEventListener('click', async () => {
+  await game_status()
   dicebox.style.display = 'flex';
   end_gamble.style.display = 'none';
   roll.style.display = 'flex';
