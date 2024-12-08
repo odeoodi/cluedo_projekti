@@ -1,6 +1,3 @@
-
-
-
 def if_winning(dice1,dice2,dice3):
         if dice1 == 6 and dice2 == 6 or (dice3 == 6 and dice2 == 6) or(dice1 == 6 and dice3 == 6 ):
             wintext = "You have two sixes, you are winning 250€"
