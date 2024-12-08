@@ -68,7 +68,6 @@ def game_status(connector = db_connection):
     else:
         return jsonify({'status': 'continue'})
 
-
 @app.route('/fly/<icao>')
 def in_game_fly(icao, connector = db_connection):
     connect = connector
