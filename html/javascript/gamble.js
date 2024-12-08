@@ -19,7 +19,7 @@ async function gamble_win(new_dice1, new_dice2, new_dice3) {
 
 async function pay_gambling(cost) {
   try {
-    const response = await fetch(`${url_py}/pay/${cost}`);
+    const response = await fetch(`${url_py}/pay/${cost}/`);
     if (!response.ok) {
       throw new Error('Problem with paying gamble');
     }
