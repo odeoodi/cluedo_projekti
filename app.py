@@ -78,7 +78,7 @@ def in_game_fly(icao, connector = db_connection):
     return 'ok'
 
 @app.route('/gamble_winning/<int:dice1>/<int:dice2>/<int:dice3>')
-def gamble_winning(dice1, dice2, dice3,):
+def gamble_winning(dice1, dice2, dice3):
     try:
         winpoint, wintext = if_winning(dice1, dice2, dice3)
         response = {
@@ -89,14 +89,14 @@ def gamble_winning(dice1, dice2, dice3,):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/pay/<cost>') # this function deducts the gambling cost from the players money amount
+@app.route('/pay/<cost>/') # this function deducts the gambling cost from the players money amount
 def pay_gamble(cost, select_game = thisgame.id, connection = db_connection):
     connect = connection
     cost = int(cost)
     select_game = select_game
-    payed = pay(cost,select_game, connect)
+    pay(cost,select_game, connect)
     print("gamble payed")
-    return payed
+    return 'ok'
 
 @app.route('/add-money-gamble/<added>')
 def add_money_gamble(added, select_game = thisgame.id , connection = db_connection):
