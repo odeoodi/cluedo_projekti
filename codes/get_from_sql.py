@@ -6,7 +6,7 @@ def from_sql_weapons(connector):
     get_weapons = kursori.fetchall()
     return get_weapons
 
-def form_sql_suspects(connector):
+def fr0m_sql_suspects(connector):
     connect = connector
     get_info2 = f"SELECT names, sex, age, glasses  FROM suspects"
     kursori = connect.cursor()
