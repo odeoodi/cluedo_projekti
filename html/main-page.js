@@ -137,9 +137,6 @@ async function enter_name(){
     async function start_click() {
         const new_name = document.querySelector('#player_nameInput').value
         player_name.innerText = new_name
-        const stat_money = await check_money()
-        let budget = document.getElementById('budget')
-        budget.textContent = stat_money
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
         const narrator_text = document.querySelector('#printing_text')
@@ -150,6 +147,9 @@ async function enter_name(){
         await start_newgame()
         await get_locations()
         await get_lists()
+        const stat_money = await check_money()
+        let budget = document.getElementById('budget')
+        budget.textContent = stat_money
         loading_stuff = false
         closepopup()}
     input.addEventListener('keydown', (event) => {
