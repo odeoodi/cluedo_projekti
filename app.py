@@ -90,19 +90,19 @@ def gamble_winning(dice1, dice2, dice3,):
         return jsonify({'error': str(e)}), 500
 
 @app.route('/pay/<cost>/<select_game>') # this function deducts the gambling cost from the players money amount
-def pay_gamble(cost, connection = db_connection):
+def pay_gamble(cost, select_game, connection = db_connection):
     connect = connection
     cost = cost
-    select_game = thisgame.id
+    select_game = select_game
     payed = pay(cost,select_game, connect)
     print("gamble payed")
     return payed
 
 @app.route('/add-money-gamble/<added>/<select_game>')
-def add_money_gamble(added, connection = db_connection):
+def add_money_gamble(added, select_game, connection = db_connection):
     connect = connection
     added = added
-    select_game = thisgame.id
+    select_game = select_game
     ok_money = add_money(added, select_game, connect)
     print('win money added')
     return ok_money
