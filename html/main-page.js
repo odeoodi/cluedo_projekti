@@ -147,6 +147,7 @@ async function enter_name(){
         await start_newgame()
         await get_locations()
         await get_lists()
+        await CreateMap()
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
