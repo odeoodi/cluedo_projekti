@@ -11,3 +11,5 @@ newgameButton.addEventListener('click', () => {
   hintList.innerHTML = ''
 })
 
+
+
