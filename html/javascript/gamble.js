@@ -30,8 +30,7 @@ async function pay_gambling(cost) {
 
 async function add_money(added) {
   try {
-    const response = await fetch(
-        `${url_py}/add-money-gamble/${added}`);
+    const response = await fetch(`${url_py}/add-money-gamble/${added}`);
     if (!response.ok) {
       throw new Error('Could not add win money');
     }
@@ -232,35 +231,49 @@ roll.addEventListener('click', () => {
     }
 
     if (win_points === 0) {
+      await game_status()
+      await pay_gambling(50);
+      let new_budget = check_money();
+      let budget = document.getElementById('budget');
+      budget.textContent = await new_budget;
       gamble_alert.textContent = 'Sorry, you lost.';
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
-    } else if (win_points === 1) {
+    }
+
+    else if (win_points === 1) {
+      await game_status()
+      await pay_gambling(50);
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
       await add_money(100);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
 
     } else if (win_points === 2) {
+      await game_status()
+      await pay_gambling(50);
       gamble_alert.textContent = 'You have two fives, you win 150€!';
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
       await add_money(150);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
 
     } else if (win_points === 3) {
+      await game_status()
+      await pay_gambling(50);
       gamble_alert.textContent = 'You have two sixes, you are winning 250€!';
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
       await add_money(250);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
+
 
     } else {
       console.log('Something went wrong with winning the gamble.');
@@ -284,13 +297,14 @@ gamble.addEventListener('click', () => {
 });
 
 // paying the gamble
+/*
 rollDice.addEventListener('click', async () => {
   await game_status()
   await pay_gambling(50);
   let new_budget = check_money();
   let budget = document.getElementById('budget');
   budget.textContent = await new_budget;
-});
+});*/
 
 // ending gamble
 end_gamble.addEventListener('click', () => {

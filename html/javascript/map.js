@@ -6,13 +6,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
 const url_py = 'http://127.0.0.1:3000'
-const new_game = document.getElementById('newgame-button')
-const gamble_button = document.getElementById('gamble-button')
 
 // FUNCTIONS
 
-
-function CreateMap() {
+async function CreateMap() {
 let lat1, lat2, lat3, lat4, lat5, lat6, lat7
 let long1, long2, long3, long4, long5, long6, long7
 
@@ -25,12 +22,12 @@ console.log(lat1,long1)
     .bindPopup('Pop-up') //adds the pop-up, here we can add the airport info
     .openPopup() // opens the pop-up without the marker being clicked, when the marker is created
 
-  const marker2 = L.marker([lat2, long2]).addTo(map)
-  const marker3 = L.marker([lat3, long3]).addTo(map)
-  const marker4 = L.marker([lat4, long4]).addTo(map)
-  const marker5 = L.marker([lat5, long5]).addTo(map)
-  const marker6 = L.marker([lat6, long6]).addTo(map)
-  const marker7 = L.marker([lat7, long7]).addTo(map)
+  const marker2 = L.marker([lat2, long2]).addTo(map).bindPopup()
+  const marker3 = L.marker([lat3, long3]).addTo(map).bindPopup()
+  const marker4 = L.marker([lat4, long4]).addTo(map).bindPopup()
+  const marker5 = L.marker([lat5, long5]).addTo(map).bindPopup()
+  const marker6 = L.marker([lat6, long6]).addTo(map).bindPopup()
+  const marker7 = L.marker([lat7, long7]).addTo(map).bindPopup()
 
   marker1.on('click', () => {
   console.log(`marker 1 in ${locations_list[7][0][0]} clicked`)});
@@ -48,9 +45,9 @@ console.log(lat1,long1)
   console.log(`marker 7 in ${locations_list[7][6][0]} clicked`)});
 }
 
+function DeleteMap() {
 
-
-
+}
 
 
 
