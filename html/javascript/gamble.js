@@ -17,9 +17,9 @@ async function gamble_win(new_dice1, new_dice2, new_dice3) {
   return win_stats;
 }
 
-async function pay_gambling(cost, select_game) {
+async function pay_gambling(cost) {
   try {
-    const response = await fetch(`${url_py}/pay/${cost}/${select_game}`);
+    const response = await fetch(`${url_py}/pay/${cost}`);
     if (!response.ok) {
       throw new Error('Problem with paying gamble');
     }
@@ -28,10 +28,10 @@ async function pay_gambling(cost, select_game) {
   }
 }
 
-async function add_money(added, select_game) {
+async function add_money(added) {
   try {
     const response = await fetch(
-        `${url_py}/add-money-gamble/${added}/${select_game}`);
+        `${url_py}/add-money-gamble/${added}`);
     if (!response.ok) {
       throw new Error('Could not add win money');
     }
@@ -237,7 +237,7 @@ roll.addEventListener('click', () => {
       end_gamble.style.display = 'flex';
     } else if (win_points === 1) {
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
-      await add_money(100,1);
+      await add_money(100);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -246,7 +246,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 2) {
       gamble_alert.textContent = 'You have two fives, you win 150€!';
-      await add_money(150,1);
+      await add_money(150);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -255,7 +255,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 3) {
       gamble_alert.textContent = 'You have two sixes, you are winning 250€!';
-      await add_money(250,1);
+      await add_money(250);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -286,7 +286,7 @@ gamble.addEventListener('click', () => {
 // paying the gamble
 rollDice.addEventListener('click', async () => {
   await game_status()
-  await pay_gambling(50,1);
+  await pay_gambling(50);
   let new_budget = check_money();
   let budget = document.getElementById('budget');
   budget.textContent = await new_budget;
