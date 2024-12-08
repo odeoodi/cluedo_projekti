@@ -89,8 +89,8 @@ def gamble_winning(dice1, dice2, dice3,):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/pay/<cost>/<select_game>') # this function deducts the gambling cost from the players money amount
-def pay_gamble(cost, select_game, connection = db_connection):
+@app.route('/pay/<cost>') # this function deducts the gambling cost from the players money amount
+def pay_gamble(cost, select_game = thisgame.id, connection = db_connection):
     connect = connection
     cost = cost
     select_game = select_game
@@ -99,7 +99,7 @@ def pay_gamble(cost, select_game, connection = db_connection):
     return payed
 
 @app.route('/add-money-gamble/<added>/<select_game>')
-def add_money_gamble(added, select_game, connection = db_connection):
+def add_money_gamble(added, select_game = thisgame.id , connection = db_connection):
     connect = connection
     added = added
     select_game = select_game
