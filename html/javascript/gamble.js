@@ -55,7 +55,6 @@ const dicebox = document.getElementById('dicebox');
 const end_gamble = document.getElementById('end-gamble');
 //const url_py = 'http://127.0.0.1:3000'
 const gamble = document.getElementById('gamble-button');
-const rollDice = document.getElementById('roll');
 const gamble_alert = document.getElementById('gamble-text');
 
 roll.addEventListener('click', () => {
