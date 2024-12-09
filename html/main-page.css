@@ -99,6 +99,18 @@
     padding-left: 2rem;
 }
 
+.leaflet-popup-content-wrapper {
+    background-color: var(--eggshell);
+}
+
+.leaflet-popup-tip {
+    background-color: var(--eggshell);
+}
+
+#map-popup p {
+    margin: 2px;
+}
+
 body {
     background-color: var(--eggshell);
     display: flex;
