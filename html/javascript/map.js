@@ -17,8 +17,7 @@ async function playerLocation() {
     if (!response.ok) {
       throw new Error('Location now having issues...')
     }
-  const textResponse = await response.text();
-         const player_location_now = response
+    const player_location_now = await response.text()
         console.log(player_location_now)
         return player_location_now;
   } catch (error) {
