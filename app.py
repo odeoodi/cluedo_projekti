@@ -1,6 +1,8 @@
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
 from the_game import Game
@@ -106,25 +108,34 @@ def add_money_gamble(added, select_game = thisgame.id , connection = db_connecti
     print('win money added')
     return ok_money
 
+@app.route('/player-location-now')
+def player_location_now(select_game = thisgame.id, connection = db_connection):
+    connect = connection
+    select_game = select_game
+    player_location = location_now(select_game, connect)
+    print('location found')
+    return player_location
+
+
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
     # joka lisää oikeen määrän oiketa vastauksii pelin classiin. siten pitäs runnaa sen classin thisgame.winning joka kattoo voitetaanko.
 # @app.route('/accuse/<weapon>/<suspect>/<location>')
 # def accuse(weapon, suspect, location, connector = db_connection):
-    connect = connector
-    weapon = weapon
-    suspect = suspect
-    location = location
-    is_weapon = check_if_correct_weapon(weapon, connect)
-    is_suspect = check_if_correct_suspect(suspect, connect)
-    is_location = check_if_correct_location(location, connect)
-    jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
+  #  connect = connector
+   # weapon = weapon
+   # suspect = suspect
+   # location = location
+    #is_weapon = check_if_correct_weapon(weapon, connect)
+   # is_suspect = check_if_correct_suspect(suspect, connect)
+   # is_location = check_if_correct_location(location, connect)
+   # jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
     # return jsonanwsver
 # @app.route ('/hints/<weapon>/<suspect>/<location>')
 # def hints(weapon, suspect, location):
-    weapon =(weapon)
-    suspect = (suspect)
-    location = (location)
+   # weapon =(weapon)
+   # suspect = (suspect)
+   # location = (location)
     # hint_list = (here iidas function which will take as parameter weapon, suspect and location.)
                 # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
     # return hint_list

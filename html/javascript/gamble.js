@@ -301,15 +301,7 @@ gamble.addEventListener('click', async () => {
   gamble_alert.textContent = 'Roll the dice for a chance to get more money!';
 });
 
-// paying the gamble
-/*
-rollDice.addEventListener('click', async () => {
-  await game_status()
-  await pay_gambling(50);
-  let new_budget = check_money();
-  let budget = document.getElementById('budget');
-  budget.textContent = await new_budget;
-});*/
+
 
 // ending gamble
 end_gamble.addEventListener('click', () => {
