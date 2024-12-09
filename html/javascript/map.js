@@ -121,6 +121,7 @@ async function CreateMap() {
               </div>
           `).addTo(markerGroup)
 
+
 // gets the ICAO for the accusation or fly
   marker1.on('click', async () => {
     airport_name = locations_list[0][0]
@@ -189,6 +190,28 @@ markerGroup.clearLayers();
 }
 
 
+async function checkPinColor(marker_num,airport_name) {
+  if (await playerLocation() === airport_name) {
+    marker_num.setIcon(redPin);
+  }
+  // else if (airport_ICAO === accused_ICAO) {
+//    marker_num.setIcon(greyPin);
+// }
+  else {
+    marker_num.setIcon(bluePin);
+  }
+
+}
+async function changePins(){
+  const layers = markerGroup.getLayers();
+  for (let i = 0; i < layers.length; i++) {
+    if (locations_list[i]) {
+      await checkPinColor(layers[i], locations_list[i][0]);
+    } else {
+      console.error(`No data for marker at index ${i}`);
+    }
+  }
+}
 
 
 //const marker = L.marker([lat, long]).addTo(map) //makes a new marker and adds it on the map

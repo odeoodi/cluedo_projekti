@@ -149,6 +149,7 @@ async function enter_name(){
         await get_lists()
         await DeleteMap()
         await CreateMap()
+        await changePins()
         await closeGamble()
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
