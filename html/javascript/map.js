@@ -8,6 +8,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const url_py = 'http://127.0.0.1:3000'
 
+const markerGroup = L.layerGroup().addTo(map);
 
 // FUNCTIONS
 
@@ -30,6 +31,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                        style="width:30px;height:auto;">
 </div>
     `)
+    .addTo(markerGroup)
     .openPopup() // opens the pop-up without the marker being clicked, when the marker is created
 
   const marker2 = L.marker([lat2, long2]).addTo(map).bindPopup()
@@ -42,6 +44,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                 <img src="${locations_list[7][1][1]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
         `)
+        .addTo(markerGroup)
   const marker3 = L.marker([lat3, long3]).addTo(map).bindPopup()
     .bindPopup(`
             <div class= "flex-wrap" id="map-popup">
@@ -52,6 +55,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                 <img src="${locations_list[7][2][1]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
         `)
+          .addTo(markerGroup)
   const marker4 = L.marker([lat4, long4]).addTo(map).bindPopup()
     .bindPopup(`
               <div class= "flex-wrap" id="map-popup">
@@ -62,6 +66,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                   <img src="${locations_list[7][3][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `)
+          .addTo(markerGroup)
   const marker5 = L.marker([lat5, long5]).addTo(map).bindPopup()
       .bindPopup(`
               <div class= "flex-wrap" id="map-popup">
@@ -72,6 +77,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                   <img src="${locations_list[7][4][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `)
+          .addTo(markerGroup)
   const marker6 = L.marker([lat6, long6]).addTo(map).bindPopup()
       .bindPopup(`
               <div class= "flex-wrap" id="map-popup">
@@ -82,6 +88,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                   <img src="${locations_list[7][5][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `)
+          .addTo(markerGroup)
   const marker7 = L.marker([lat7, long7]).addTo(map).bindPopup()
       .bindPopup(`
               <div class= "flex-wrap" id="map-popup">
@@ -92,6 +99,7 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
                   <img src="${locations_list[7][6][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `)
+          .addTo(markerGroup)
 
   marker1.on('click', () => {
   console.log(`marker 1 in ${locations_list[7][0][0]} clicked`)});
@@ -117,8 +125,8 @@ const marker1 = L.marker([lat1, long1]).addTo(map)
 map.on('click', onMapClick);
 }
 
-function DeleteMap() {
-
+async function DeleteMap() {
+markerGroup.clearLayers();
 }
 
 

@@ -148,6 +148,7 @@ async function enter_name(){
         await get_locations()
         await get_lists()
         await CreateMap()
+        await closeGamble()
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
@@ -193,6 +194,7 @@ async function game_status () {
         console.log(game_status_is.status )
         switch (game_status_is.status) {
             case 'loose' :
+                await DeleteMap()
                 return fail()
             case 'win' :
                 return game_status_is

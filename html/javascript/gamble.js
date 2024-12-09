@@ -2,6 +2,10 @@
 
 // FUNCTIONS
 
+async function closeGamble() {
+  dicebox.style.display = 'none';
+}
+
 async function gamble_win(new_dice1, new_dice2, new_dice3) {
   try {
     const response = await fetch(
