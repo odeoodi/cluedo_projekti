@@ -101,14 +101,15 @@
 
 .leaflet-popup-content-wrapper {
     background-color: var(--eggshell);
+    width: 18rem;
 }
 
 .leaflet-popup-tip {
     background-color: var(--eggshell);
 }
-
 #map-popup p {
     margin: 2px;
+    width: 30%;
 }
 
 body {
