@@ -65,7 +65,7 @@ async function CreateMap() {
                 <img src="${locations_list[7][0][1]}" alt="Country Flag"
                        style="width:30px;height:auto;">
 </div>
-    `).openPopup().addTo(markerGroup)
+    `).addTo(markerGroup)
   const marker2 = L.marker([lat2, long2], { icon: redPin}).addTo(map).bindPopup(`
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[1][0]}</p>
