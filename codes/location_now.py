@@ -8,7 +8,7 @@ def location_now(game_id, connection):
     cursor.execute(sql)
     results = cursor.fetchall()
     if results:
-        print(results[0][0])
+        #print(results[0][0])
         current_location = results[0][0]
         return current_location
     else:

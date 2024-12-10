@@ -34,6 +34,18 @@
     flex-wrap: wrap;
 }
 
+button {
+   cursor: pointer;
+    box-sizing: border-box;
+    font-size: medium;
+    font-family: SpecialElite,sans-serif;
+    background-color: var(--bone);
+    padding: 0.4rem;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #dicebox {
     width: 50%;
     border-collapse: collapse;
@@ -111,6 +123,11 @@
     margin: 2px;
     width: 30%;
 }
+
+#fly-list {
+    list-style: none;
+}
+
 
 body {
     background-color: var(--eggshell);

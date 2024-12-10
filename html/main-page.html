@@ -84,6 +84,9 @@
                 <button class="selection" id="accuse-button">Accuse</button>
             </li>
             <li>
+                <button class="selection" id="fly-button">Fly</button>
+            </li>
+            <li>
                 <button class="selection" id="gamble-button">Gamble</button>
             </li>
             <li class="player-status">
@@ -218,6 +221,8 @@
     <footer>
         <p>&copy; 2024 J'accuse!</p>
     </footer>
+
+
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <h2 id="">Start a new game by writing your name</h2>
@@ -225,6 +230,15 @@
         <div>
             <button class="selection" id="start_newgame">Start</button>
             <button class="selection" id="cance_newgame">Cancel</button>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="popup" id="fly-popup">
+        <h2>Select where to fly</h2>
+        <div>
+            <ul id="fly-list">
+            </ul>
         </div>
     </div>
 </div>

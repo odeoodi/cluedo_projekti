@@ -12,6 +12,8 @@ let suspects_list = {}
 let locations_list = {}
 let player_name = document.querySelector('#player-id')
 
+const flyPopup = document.getElementById('fly-popup')
+
 let weapon = ''
 let suspect = ''
 let location_game = ''
@@ -232,3 +234,9 @@ function selectImage(img) {
         // Add 'pressed' class to the clicked image
         img.classList.add('pressed')
   }
+
+const fly_button = document.getElementById('fly-button')
+fly_button.addEventListener('click', async () => {
+    flyPopup.style.display = 'block'
+    await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
+})

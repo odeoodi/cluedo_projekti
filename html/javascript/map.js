@@ -32,16 +32,28 @@ const greyPin = L.icon({
     popupAnchor:  [0, -44] // point from which the popup should open relative to the iconAnchor
 });
 
+const flyList = document.getElementById('fly-list')
+
 // FUNCTIONS
+
+async function fly(airport_name) {
+  try {
+    const response = await fetch(`${url_py}/fly/${airport_name}`)
+    if (!response.ok) {
+      throw new Error('Problem flying in js')
+    }
+  } catch(error) {
+    console.log(error.message)
+  }
+}
+
 async function playerLocation() {
   try {
     const response = await fetch(`${url_py}/player-location-now`)
     if (!response.ok) {
       throw new Error('Location now having issues...')
     }
-    const player_location_now = await response.text()
-        console.log(player_location_now)
-        return player_location_now;
+        return await response.text();
   } catch (error) {
     console.log(error.message)
   }
@@ -120,70 +132,36 @@ async function CreateMap() {
                   <img src="${locations_list[7][6][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `).addTo(markerGroup)
-
-
-// gets the ICAO for the accusation or fly
-  marker1.on('click', async () => {
-    airport_name = locations_list[0][0]
-    airport_ICAO = locations_list[0][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-
-    console.log(`marker 1 ICAO ${airport_name} clicked`)
-  });
-  marker2.on('click', async () => {
-    airport_name = locations_list[1][0]
-    airport_ICAO = locations_list[1][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 2 ICAO ${locations_list[1][1]} clicked`)
-  });
-  marker3.on('click', async () => {
-    airport_name = locations_list[2][0]
-    airport_ICAO = locations_list[2][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 3 ICAO ${locations_list[2][1]} clicked`)
-  });
-  marker4.on('click', async () => {
-    airport_name = locations_list[3][0]
-    airport_ICAO = locations_list[3][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 4 ICAO ${locations_list[3][1]} clicked`)
-  });
-  marker5.on('click', async () => {
-    airport_name = locations_list[4][0]
-    airport_ICAO = locations_list[4][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 5 ICAO ${locations_list[4][1]} clicked`)
-  });
-  marker6.on('click', async () => {
-    airport_name = locations_list[5][0]
-    airport_ICAO = locations_list[5][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 6 ICAO ${locations_list[5][1]} clicked`)
-  });
-  marker7.on('click', async () => {
-    airport_name = locations_list[6][0]
-    airport_ICAO = locations_list[6][1]
-    if (await playerLocation() === airport_name) {
-      console.log('You are here!')
-    }
-    console.log(`marker 7 ICAO ${locations_list[6][1]} clicked`)
-  });
-
 }
 
+async function createIcaoButtons() {
+  for (let i = 0; i < 7; i++) {
+    if (flyList.querySelector('button')) {
+      flyList.removeChild(flyList.querySelector('button'))
+    }
+  }
 
+  for (let i = 0; i < 7; i++) {
+    if (await playerLocation() !== locations_list[i][0]) {
+      flyList.appendChild(document.createElement('button')).textContent = locations_list[i][0]
+    }
+  }
+  const icao_buttons = flyList.querySelectorAll('button')
+
+  icao_buttons.forEach(button => {
+  button.addEventListener('click', async () => {
+    await fly(button.textContent);
+    flyPopup.style.display = 'none'
+    await changePins()
+    showpopup()
+    popup.textContent = `Welcome to: ${button.textContent}`
+    setTimeout( () => {
+      popup.style.display = 'none'
+      overlay.style.display = 'none'
+    }, 2000)
+  });
+});
+}
 
 async function DeleteMap() {
 markerGroup.clearLayers();
@@ -214,7 +192,5 @@ async function changePins(){
 }
 
 
-//const marker = L.marker([lat, long]).addTo(map) //makes a new marker and adds it on the map
-    //.bindPopup('Pop-up') //adds the pop-up, here we can add the airport info
-    //.openPopup() // opens the pop-up without the marker being clicked, when the marker is created
+
 

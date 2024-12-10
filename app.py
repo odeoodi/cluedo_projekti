@@ -113,7 +113,7 @@ def player_location_now(select_game = thisgame.id, connection = db_connection):
     connect = connection
     select_game = select_game
     player_location = location_now(select_game, connect)
-    print('location found')
+    #print('location found')
     return player_location
 
 
