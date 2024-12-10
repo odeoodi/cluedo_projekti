@@ -24,6 +24,41 @@
     src: url("SpecialElite-Regular.ttf");
 }
 
+
+header{
+    background-color:#BEBDAD;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0.5rem;
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1.5rem;
+}
+
+ul li a {
+    color: #351B0C;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.5s ease;
+    border-radius: 5px;
+}
+
+ul li a:hover {
+    background-color: #755a3f;
+}
+
 .container {
     width: 70%;
     margin: auto;
