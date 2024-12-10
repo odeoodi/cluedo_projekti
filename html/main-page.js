@@ -252,7 +252,7 @@ async function accuse() {
 
 function selectImage(img) {
         // Remove 'pressed' class from all images
-        const allImages = document.querySelectorAll('.img_wrapper img');
+        const allImages = document.querySelectorAll('.image-container img');
         allImages.forEach(image => image.classList.remove('pressed'));
 
         // Add 'pressed' class to the clicked image
@@ -261,7 +261,7 @@ function selectImage(img) {
 
 function selectWImage(img) {
         // Remove 'pressed' class from all images
-        const allImages = document.querySelectorAll('.w_img_wrapper img');
+        const allImages = document.querySelectorAll('.image-container img');
         allImages.forEach(image => image.classList.remove('pressed'));
 
         // Add 'pressed' class to the clicked image
