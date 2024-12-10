@@ -238,5 +238,6 @@ function selectImage(img) {
 const fly_button = document.getElementById('fly-button')
 fly_button.addEventListener('click', async () => {
     flyPopup.style.display = 'block'
+    overlay.style.display = 'block'
     await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
 })
