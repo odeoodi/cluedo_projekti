@@ -151,6 +151,9 @@ async function createIcaoButtons() {
   icao_buttons.forEach(button => {
   button.addEventListener('click', async () => {
     await fly(button.textContent);
+    let new_budget = check_money();
+    let budget = document.getElementById('budget');
+    budget.textContent = await new_budget
     flyPopup.style.display = 'none'
     await changePins()
     showpopup()
