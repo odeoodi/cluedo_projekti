@@ -313,12 +313,36 @@ body {
 
 
 
-.image-container {
-    border: 0.5rem solid var(--noir);
-    width:100px;
-    height:100px;
-    object-fit:cover;
+/* Basic styles for the button */
+.img_wrapper button, .w_img_wrapper button {
+    border: 2rem solid  #57432E;
+    padding: 0;
+    background: none;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 0.3s ease; /* Smooth transition for border change */
+    border-radius: 0;
 }
+
+
+/* When the button is pressed, change the border color */
+button.pressed {
+    border-color: var(--noir); /* Use the --noir color when pressed */
+}
+
+/* Optional: Remove button outline when clicked */
+button:focus {
+    outline: none;
+}
+
+/* Optional: Add hover effect for buttons */
+.image-container:hover {
+    cursor: pointer;
+}
+
 
 
 

@@ -250,23 +250,15 @@ async function accuse() {
         } catch (error){
       console.log(error.message)}}
 
-function selectImage(img) {
-        // Remove 'pressed' class from all images
-        const allImages = document.querySelectorAll('.image-container img');
-        allImages.forEach(image => image.classList.remove('pressed'));
+function selectImage(imgElement) {
+    // Remove 'pressed' class from all images
+    const allImages = document.querySelectorAll('.image-container img');
+    allImages.forEach(image => image.classList.remove('pressed'));
 
-        // Add 'pressed' class to the clicked image
-        img.classList.add('pressed')
-  }
+    // Add 'pressed' class to the clicked image
+    imgElement.classList.add('pressed');
+}
 
-function selectWImage(img) {
-        // Remove 'pressed' class from all images
-        const allImages = document.querySelectorAll('.image-container img');
-        allImages.forEach(image => image.classList.remove('pressed'));
-
-        // Add 'pressed' class to the clicked image
-        img.classList.add('pressed')
-  }
 
 help_button.addEventListener('click', async () => {
     await help_pop()})
@@ -279,3 +271,17 @@ fly_button.addEventListener('click', async () => {
     overlay.style.display = 'block'
     await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
 })
+
+
+/*
+function changeText() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = "You clicked the button!";
+        }
+
+        function resetText() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = "Click the button to change this text.";
+        }
+
+        */
