@@ -250,14 +250,19 @@ async function accuse() {
         } catch (error){
       console.log(error.message)}}
 
-function selectImage(imgElement) {
-    // Remove 'pressed' class from all images
-    const allImages = document.querySelectorAll('.image-container img');
-    allImages.forEach(image => image.classList.remove('pressed'));
 
-    // Add 'pressed' class to the clicked image
-    imgElement.classList.add('pressed');
+function selectImage(imgElement) {
+    // Find the parent category (suspect or weapon) of the clicked image
+    const category = imgElement.closest('.image-container').parentElement;
+
+    // Remove 'pressed' class from all image containers in the same category
+    const allImageContainersInCategory = category.querySelectorAll('.image-container');
+    allImageContainersInCategory.forEach(container => container.classList.remove('pressed'));
+
+    // Add 'pressed' class to the clicked image container
+    imgElement.closest('.image-container').classList.add('pressed');
 }
+
 
 
 help_button.addEventListener('click', async () => {
