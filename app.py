@@ -1,7 +1,7 @@
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
+from codes.game_saves import save_game, load_game
 from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
@@ -115,7 +115,30 @@ def player_location_now(select_game = thisgame.id, connection = db_connection):
     player_location = location_now(select_game, connect)
     #print('location found')
     return player_location
+'''
+@app.route('/save/<notepad>/<narratortext>')
+def savey(notepad, narratortext, connector = db_connection):
+    connect = connector
+    #narratortext = narratortext
+    #notepad = notepad
+    save_game(notepad, narratortext, thisgame.id, connect)
+    return 'ok'
+'''
 
+@app.route('/save', methods=['POST'])
+def save():
+    data = request.get_json()
+    note_text = data.get('note_text')
+    narr_text = data.get('narr_text')
+    print(note_text)
+    print(narr_text)
+    save_game(note_text[0], narr_text[0], thisgame.id,db_connection)
+    return jsonify({'status': 'success'}), 200
+
+@app.route('/load')
+def load():
+    save_data = load_game(thisgame.id, db_connection)
+    return jsonify(save_data)
 
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
