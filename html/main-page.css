@@ -227,11 +227,12 @@ body {
 .printing_h2 {
     margin-top: 0;
     padding-top: 0;
+    margin-bottom: 5px;
     position: sticky;
     top: 0;
 }
 
-.printing_text {
+#narrator_text {
     color: var(--theblack);
     max-height: 200px;
     overflow-y: auto;
