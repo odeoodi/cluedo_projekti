@@ -259,6 +259,15 @@ function selectImage(img) {
         img.classList.add('pressed')
   }
 
+function selectWImage(img) {
+        // Remove 'pressed' class from all images
+        const allImages = document.querySelectorAll('.w_img_wrapper img');
+        allImages.forEach(image => image.classList.remove('pressed'));
+
+        // Add 'pressed' class to the clicked image
+        img.classList.add('pressed')
+  }
+
 help_button.addEventListener('click', async () => {
     await help_pop()})
 
