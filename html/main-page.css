@@ -339,5 +339,11 @@ img {
         border-color:#746953 ;
     }
 
-
+#help_ol, #help_ul {
+  list-style-position: inside;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+}
 

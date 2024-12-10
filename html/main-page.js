@@ -4,6 +4,10 @@
 // const url_py = 'http://127.0.0.1:3000'
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
+const fly_button = document.getElementById('fly-button')
+const help_button = document.querySelector('#help-button')
+const new_game_button = document.querySelector('#newgame-button')
+
 
 let loading_stuff = false
 
@@ -163,6 +167,30 @@ async function enter_name(){
     start_button.addEventListener('click', async () => {start_click()})
     cancel_button.addEventListener('click', async () => {closepopup()})}
 
+async function help_pop(){
+    showpopup()
+    const container = document.querySelector('#popup')
+    container.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    const header = document.createElement('h2')
+    Object.assign(header, {
+        id: 'popup_h2',
+        textContent: 'Need help?'
+    })
+    const close_button = document.createElement('button')
+        Object.assign(close_button, {
+            id: 'close_button',
+            className: "selection",
+            textContent: 'Close' })
+    close_button.addEventListener('click', async () => {closepopup()})
+    const help_text_container = document.createElement('div')
+    help_text_container.innerHTML = help_text_html
+    fragment.appendChild(help_text_container)
+    fragment.appendChild(close_button)
+    container.appendChild(fragment)
+
+}
+
 function fail(){
     const texts = document.querySelector('#popup')
     const fragment = document.createDocumentFragment()
@@ -222,10 +250,6 @@ async function accuse() {
         } catch (error){
       console.log(error.message)}}
 
-document.querySelector('#newgame-button').addEventListener('click', async (e) => {
-  enter_name()})
-
-
 function selectImage(img) {
         // Remove 'pressed' class from all images
         const allImages = document.querySelectorAll('.img_wrapper img');
@@ -235,7 +259,12 @@ function selectImage(img) {
         img.classList.add('pressed')
   }
 
-const fly_button = document.getElementById('fly-button')
+help_button.addEventListener('click', async () => {
+    await help_pop()})
+
+new_game_button.addEventListener('click', async (e) => {
+  enter_name()})
+
 fly_button.addEventListener('click', async () => {
     flyPopup.style.display = 'block'
     overlay.style.display = 'block'
