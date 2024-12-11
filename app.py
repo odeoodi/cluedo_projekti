@@ -156,10 +156,10 @@ def accuse():
     win_or_not = thisgame.winning()
     print(win_or_not)
     return_this = {
-        'suspect_is': accuse_suspect,
-        'weapon_is': accuse_weapon,
-        'location_is': accuse_location,
-        'win_is': win_or_not,
+        'Suspect': accuse_suspect,
+        'Weapon': accuse_weapon,
+        'Location': accuse_location,
+        'Win': win_or_not,
     }
     return jsonify(return_this), 200
 
