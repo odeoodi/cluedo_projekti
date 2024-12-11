@@ -72,7 +72,7 @@ async function CreateMap() {
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[0][0]}</p>
                 <p><strong>Country:</strong> ${locations_list[7][0][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][0][0]}</p>
+                <p><strong>Capital:</strong> ${locations_list[7][0][0]}</p>
                 <p><strong>Flag:</strong></p>
                 <img src="${locations_list[7][0][1]}" alt="Country Flag"
                        style="width:30px;height:auto;">
@@ -82,7 +82,7 @@ async function CreateMap() {
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[1][0]}</p>
                 <p><strong>Country:</strong> ${locations_list[7][1][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][1][0]}</p>
+                <p><strong>Capital:</strong> ${locations_list[7][1][0]}</p>
                 <p><strong>Flag:</strong></p>
                 <img src="${locations_list[7][1][1]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
@@ -91,7 +91,7 @@ async function CreateMap() {
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[2][0]}</p>
                 <p><strong>Country:</strong> ${locations_list[7][2][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][2][0]}</p>
+                <p><strong>Capital:</strong> ${locations_list[7][2][0]}</p>
                 <p><strong>Flag:</strong></p>
                 <img src="${locations_list[7][2][1]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
@@ -100,7 +100,7 @@ async function CreateMap() {
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[3][0]}</p>
                   <p><strong>Country:</strong> ${locations_list[7][3][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][3][0]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[7][3][0]}</p>
                   <p><strong>Flag:</strong></p>
                   <img src="${locations_list[7][3][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
@@ -109,7 +109,7 @@ async function CreateMap() {
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[4][0]}</p>
                   <p><strong>Country:</strong> ${locations_list[7][4][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][4][0]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[7][4][0]}</p>
                   <p><strong>Flag:</strong></p>
                   <img src="${locations_list[7][4][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
@@ -118,7 +118,7 @@ async function CreateMap() {
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[5][0]}</p>
                   <p><strong>Country:</strong> ${locations_list[7][5][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][5][0]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[7][5][0]}</p>
                   <p><strong>Flag:</strong></p>
                   <img src="${locations_list[7][5][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
@@ -127,7 +127,7 @@ async function CreateMap() {
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[6][0]}</p>
                   <p><strong>Country:</strong> ${locations_list[7][6][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][6][0]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[7][6][0]}</p>
                   <p><strong>Flag:</strong></p>
                   <img src="${locations_list[7][6][1]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
