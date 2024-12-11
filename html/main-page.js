@@ -394,7 +394,29 @@ glassShardButton.addEventListener('click', () => ButtonChooserWeapon(glassShardB
 
 
 
+function showImageDetails(event){
 
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+
+
+    document.body.appendChild(tooltip);
+
+    const mouseX = event.pageX;
+    const mouseY = event.pageY;
+    tooltip.style.position = 'absolute';
+    tooltip.style.top = mouseY + 10 + 'px';
+    tooltip.style.left = mouseX + 10 + 'px';
+    tooltip.style.backgroundColor = '#333';
+    tooltip.style.color = '#fff';
+    tooltip.style.padding = '5px 10px';
+    tooltip.style.borderRadius = '5px';
+    tooltip.style.zIndex = '1000';
+    tooltip.style.whiteSpace = 'nowrap';
+
+    event.currentTarget.addEventListener('mouseout', () => {
+        tooltip.remove();
+})}
 
 
 
