@@ -16,17 +16,19 @@ from codes.win import win
 import codes.config
 
 class Game:
-    right_answers = 0
+    right_answers_num = 0
 
     def __init__(self, id, name):
         self.id = id
         self.name = name
         self.money_neede = codes.config.gamble_cost
 
-    def right_answer_add(self, num):
-        for i in range(num):
-            Game.right_answers += 1
-        return Game.right_answers
+    def right_answer_add(self, list):
+        Game.right_answers_num = 0
+        for i in list:
+            if i:
+                Game.right_answers_num += 1
+        return Game.right_answers_num
 
     def checkmony(self, connector):
         connect = connector
@@ -48,7 +50,7 @@ class Game:
             return False
 
     def winning(self):
-        if Game.right_answers == 3:
+        if Game.right_answers_num == 3:
             return True
         else:
             return False
