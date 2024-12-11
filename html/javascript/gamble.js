@@ -2,6 +2,10 @@
 
 // FUNCTIONS
 
+async function closeGamble() {
+  dicebox.style.display = 'none';
+}
+
 async function gamble_win(new_dice1, new_dice2, new_dice3) {
   try {
     const response = await fetch(
@@ -17,9 +21,9 @@ async function gamble_win(new_dice1, new_dice2, new_dice3) {
   return win_stats;
 }
 
-async function pay_gambling(cost, select_game) {
+async function pay_gambling(cost) {
   try {
-    const response = await fetch(`${url_py}/pay/${cost}/${select_game}`);
+    const response = await fetch(`${url_py}/pay/${cost}/`);
     if (!response.ok) {
       throw new Error('Problem with paying gamble');
     }
@@ -28,10 +32,9 @@ async function pay_gambling(cost, select_game) {
   }
 }
 
-async function add_money(added, select_game) {
+async function add_money(added) {
   try {
-    const response = await fetch(
-        `${url_py}/add-money-gamble/${added}/${select_game}`);
+    const response = await fetch(`${url_py}/add-money-gamble/${added}`);
     if (!response.ok) {
       throw new Error('Could not add win money');
     }
@@ -52,7 +55,6 @@ const dicebox = document.getElementById('dicebox');
 const end_gamble = document.getElementById('end-gamble');
 //const url_py = 'http://127.0.0.1:3000'
 const gamble = document.getElementById('gamble-button');
-const rollDice = document.getElementById('roll');
 const gamble_alert = document.getElementById('gamble-text');
 
 roll.addEventListener('click', () => {
@@ -65,19 +67,7 @@ roll.addEventListener('click', () => {
       dice1.src = '/html/img/dice-one.png';
       dice1.alt = 'Dice number one';
       break;
-    case 7:
-      dice1.src = '/html/img/dice-one.png';
-      dice1.alt = 'Dice number one';
-      break;
     case 2:
-      dice1.src = '/html/img/dice-two.png';
-      dice1.alt = 'Dice number two';
-      break;
-    case 8:
-      dice1.src = '/html/img/dice-two.png';
-      dice1.alt = 'Dice number two';
-      break;
-    case 9:
       dice1.src = '/html/img/dice-two.png';
       dice1.alt = 'Dice number two';
       break;
@@ -85,19 +75,7 @@ roll.addEventListener('click', () => {
       dice1.src = '/html/img/dice-three.png';
       dice1.alt = 'Dice number three';
       break;
-    case 10:
-      dice1.src = '/html/img/dice-three.png';
-      dice1.alt = 'Dice number three';
-      break;
     case 4:
-      dice1.src = '/html/img/dice-four.png';
-      dice1.alt = 'Dice number four';
-      break;
-    case 11:
-      dice1.src = '/html/img/dice-four.png';
-      dice1.alt = 'Dice number four';
-      break;
-    case 12:
       dice1.src = '/html/img/dice-four.png';
       dice1.alt = 'Dice number four';
       break;
@@ -109,6 +87,30 @@ roll.addEventListener('click', () => {
       dice1.src = '/html/img/dice-six.png';
       dice1.alt = 'Dice number six';
       break;
+    case 7:
+      dice1.src = '/html/img/dice-one.png';
+      dice1.alt = 'Dice number one';
+      break;
+    case 8:
+      dice1.src = '/html/img/dice-two.png';
+      dice1.alt = 'Dice number two';
+      break;
+    case 9:
+      dice1.src = '/html/img/dice-two.png';
+      dice1.alt = 'Dice number two';
+      break;
+    case 10:
+      dice1.src = '/html/img/dice-three.png';
+      dice1.alt = 'Dice number three';
+      break;
+    case 11:
+      dice1.src = '/html/img/dice-four.png';
+      dice1.alt = 'Dice number four';
+      break;
+    case 12:
+      dice1.src = '/html/img/dice-four.png';
+      dice1.alt = 'Dice number four';
+      break;
     default:
       console.log('what??');
       break;
@@ -119,19 +121,7 @@ roll.addEventListener('click', () => {
       dice2.src = '/html/img/dice-one.png';
       dice2.alt = 'Dice number one';
       break;
-    case 7:
-      dice2.src = '/html/img/dice-one.png';
-      dice2.alt = 'Dice number one';
-      break;
     case 2:
-      dice2.src = '/html/img/dice-two.png';
-      dice2.alt = 'Dice number two';
-      break;
-    case 8:
-      dice2.src = '/html/img/dice-two.png';
-      dice2.alt = 'Dice number two';
-      break;
-    case 9:
       dice2.src = '/html/img/dice-two.png';
       dice2.alt = 'Dice number two';
       break;
@@ -139,19 +129,7 @@ roll.addEventListener('click', () => {
       dice2.src = '/html/img/dice-three.png';
       dice2.alt = 'Dice number three';
       break;
-    case 10:
-      dice2.src = '/html/img/dice-three.png';
-      dice2.alt = 'Dice number three';
-      break;
     case 4:
-      dice2.src = '/html/img/dice-four.png';
-      dice2.alt = 'Dice number four';
-      break;
-    case 11:
-      dice2.src = '/html/img/dice-four.png';
-      dice2.alt = 'Dice number four';
-      break;
-    case 12:
       dice2.src = '/html/img/dice-four.png';
       dice2.alt = 'Dice number four';
       break;
@@ -163,6 +141,30 @@ roll.addEventListener('click', () => {
       dice2.src = '/html/img/dice-six.png';
       dice2.alt = 'Dice number six';
       break;
+    case 7:
+      dice2.src = '/html/img/dice-one.png';
+      dice2.alt = 'Dice number one';
+      break;
+    case 8:
+      dice2.src = '/html/img/dice-two.png';
+      dice2.alt = 'Dice number two';
+      break;
+    case 9:
+      dice2.src = '/html/img/dice-two.png';
+      dice2.alt = 'Dice number two';
+      break;
+    case 10:
+      dice2.src = '/html/img/dice-three.png';
+      dice2.alt = 'Dice number three';
+      break;
+    case 11:
+      dice2.src = '/html/img/dice-four.png';
+      dice2.alt = 'Dice number four';
+      break;
+    case 12:
+      dice2.src = '/html/img/dice-four.png';
+      dice2.alt = 'Dice number four';
+      break;
     default:
       console.log('what??');
       break;
@@ -173,19 +175,7 @@ roll.addEventListener('click', () => {
       dice3.src = '/html/img/dice-one.png';
       dice3.alt = 'Dice number one';
       break;
-    case 7:
-      dice3.src = '/html/img/dice-one.png';
-      dice3.alt = 'Dice number one';
-      break;
     case 2:
-      dice3.src = '/html/img/dice-two.png';
-      dice3.alt = 'Dice number two';
-      break;
-    case 8:
-      dice3.src = '/html/img/dice-two.png';
-      dice3.alt = 'Dice number two';
-      break;
-    case 9:
       dice3.src = '/html/img/dice-two.png';
       dice3.alt = 'Dice number two';
       break;
@@ -193,19 +183,7 @@ roll.addEventListener('click', () => {
       dice3.src = '/html/img/dice-three.png';
       dice3.alt = 'Dice number three';
       break;
-    case 10:
-      dice3.src = '/html/img/dice-three.png';
-      dice3.alt = 'Dice number three';
-      break;
     case 4:
-      dice3.src = '/html/img/dice-four.png';
-      dice3.alt = 'Dice number four';
-      break;
-    case 11:
-      dice3.src = '/html/img/dice-four.png';
-      dice3.alt = 'Dice number four';
-      break;
-    case 12:
       dice3.src = '/html/img/dice-four.png';
       dice3.alt = 'Dice number four';
       break;
@@ -216,6 +194,30 @@ roll.addEventListener('click', () => {
     case 6:
       dice3.src = '/html/img/dice-six.png';
       dice3.alt = 'Dice number six';
+      break;
+    case 7:
+      dice3.src = '/html/img/dice-one.png';
+      dice3.alt = 'Dice number one';
+      break;
+    case 8:
+      dice3.src = '/html/img/dice-two.png';
+      dice3.alt = 'Dice number two';
+      break;
+    case 9:
+      dice3.src = '/html/img/dice-two.png';
+      dice3.alt = 'Dice number two';
+      break;
+    case 10:
+      dice3.src = '/html/img/dice-three.png';
+      dice3.alt = 'Dice number three';
+      break;
+    case 11:
+      dice3.src = '/html/img/dice-four.png';
+      dice3.alt = 'Dice number four';
+      break;
+    case 12:
+      dice3.src = '/html/img/dice-four.png';
+      dice3.alt = 'Dice number four';
       break;
     default:
       console.log('what??');
@@ -232,35 +234,49 @@ roll.addEventListener('click', () => {
     }
 
     if (win_points === 0) {
+      await game_status()
+      await pay_gambling(50);
+      let new_budget = check_money();
+      let budget = document.getElementById('budget');
+      budget.textContent = await new_budget;
       gamble_alert.textContent = 'Sorry, you lost.';
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
-    } else if (win_points === 1) {
+    }
+
+    else if (win_points === 1) {
+      await game_status()
+      await pay_gambling(50);
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
-      await add_money(100,1);
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
+      await add_money(100);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
 
     } else if (win_points === 2) {
+      await game_status()
+      await pay_gambling(50);
       gamble_alert.textContent = 'You have two fives, you win 150€!';
-      await add_money(150,1);
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
+      await add_money(150);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
 
     } else if (win_points === 3) {
-      gamble_alert.textContent = 'You have two sixes and a five, you are winning 250€!';
-      await add_money(250,1);
+      await game_status()
+      await pay_gambling(50);
+      gamble_alert.textContent = 'You have two sixes, you are winning 250€!';
+      roll.style.display = 'none';
+      end_gamble.style.display = 'flex';
+      await add_money(250);
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
-      roll.style.display = 'none';
-      end_gamble.style.display = 'flex';
+
 
     } else {
       console.log('Something went wrong with winning the gamble.');
@@ -270,7 +286,8 @@ roll.addEventListener('click', () => {
 });
 
 // opening the gamble dice box and re-setting it for next gamble
-gamble.addEventListener('click', () => {
+gamble.addEventListener('click', async () => {
+  await game_status()
   dicebox.style.display = 'flex';
   end_gamble.style.display = 'none';
   roll.style.display = 'flex';
@@ -283,13 +300,7 @@ gamble.addEventListener('click', () => {
   gamble_alert.textContent = 'Roll the dice for a chance to get more money!';
 });
 
-// paying the gamble
-rollDice.addEventListener('click', async () => {
-  await pay_gambling(50,1);
-  let new_budget = check_money();
-  let budget = document.getElementById('budget');
-  budget.textContent = await new_budget;
-});
+
 
 // ending gamble
 end_gamble.addEventListener('click', () => {

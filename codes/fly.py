@@ -42,7 +42,7 @@ def icao_in_locations(destination):
 def flying_new_port(destination, connection):
     # Uppdates a new location to the database where player has flown.
     connect = connection
-    flying = (f'UPDATE game SET location = (SELECT name FROM locations WHERE icao = "{destination}");')
+    flying = (f'UPDATE game SET location = "{destination}";')
     cursor = connect.cursor()
     cursor.execute(flying)
     connect.commit()

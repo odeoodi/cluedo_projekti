@@ -4,6 +4,10 @@
 // const url_py = 'http://127.0.0.1:3000'
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
+const fly_button = document.getElementById('fly-button')
+const help_button = document.querySelector('#help-button')
+const new_game_button = document.querySelector('#newgame-button')
+
 
 let loading_stuff = false
 
@@ -11,6 +15,8 @@ let weapons_list = {}
 let suspects_list = {}
 let locations_list = {}
 let player_name = document.querySelector('#player-id')
+
+const flyPopup = document.getElementById('fly-popup')
 
 let weapon = ''
 let suspect = ''
@@ -137,9 +143,6 @@ async function enter_name(){
     async function start_click() {
         const new_name = document.querySelector('#player_nameInput').value
         player_name.innerText = new_name
-        const stat_money = await check_money()
-        let budget = document.getElementById('budget')
-        budget.textContent = stat_money
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
         const narrator_text = document.querySelector('#printing_text')
@@ -150,12 +153,43 @@ async function enter_name(){
         await start_newgame()
         await get_locations()
         await get_lists()
+        await DeleteMap()
+        await CreateMap()
+        await changePins()
+        await closeGamble()
+        const stat_money = await check_money()
+        let budget = document.getElementById('budget')
+        budget.textContent = stat_money
         loading_stuff = false
         closepopup()}
     input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {start_click()}})
     start_button.addEventListener('click', async () => {start_click()})
     cancel_button.addEventListener('click', async () => {closepopup()})}
+
+async function help_pop(){
+    showpopup()
+    const container = document.querySelector('#popup')
+    container.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    const header = document.createElement('h2')
+    Object.assign(header, {
+        id: 'popup_h2',
+        textContent: 'Need help?'
+    })
+    const close_button = document.createElement('button')
+        Object.assign(close_button, {
+            id: 'close_button',
+            className: "selection",
+            textContent: 'Close' })
+    close_button.addEventListener('click', async () => {closepopup()})
+    const help_text_container = document.createElement('div')
+    help_text_container.innerHTML = help_text_html
+    fragment.appendChild(help_text_container)
+    fragment.appendChild(close_button)
+    container.appendChild(fragment)
+
+}
 
 function fail(){
     const texts = document.querySelector('#popup')
@@ -216,15 +250,43 @@ async function accuse() {
         } catch (error){
       console.log(error.message)}}
 
-document.querySelector('#newgame-button').addEventListener('click', async (e) => {
+
+function selectImage(imgElement) {
+    // Find the parent category (suspect or weapon) of the clicked image
+    const category = imgElement.closest('.image-container').parentElement;
+
+    // Remove 'pressed' class from all image containers in the same category
+    const allImageContainersInCategory = category.querySelectorAll('.image-container');
+    allImageContainersInCategory.forEach(container => container.classList.remove('pressed'));
+
+    // Add 'pressed' class to the clicked image container
+    imgElement.closest('.image-container').classList.add('pressed');
+}
+
+
+
+help_button.addEventListener('click', async () => {
+    await help_pop()})
+
+new_game_button.addEventListener('click', async (e) => {
   enter_name()})
 
+fly_button.addEventListener('click', async () => {
+    flyPopup.style.display = 'block'
+    overlay.style.display = 'block'
+    await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
+})
 
-function selectImage(img) {
-        // Remove 'pressed' class from all images
-        const allImages = document.querySelectorAll('.img_wrapper img');
-        allImages.forEach(image => image.classList.remove('pressed'));
 
-        // Add 'pressed' class to the clicked image
-        img.classList.add('pressed')
-  }
+/*
+function changeText() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = "You clicked the button!";
+        }
+
+        function resetText() {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = "Click the button to change this text.";
+        }
+
+        */

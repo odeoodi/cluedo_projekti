@@ -1,6 +1,8 @@
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from codes.game_saves import save_game, load_game
+from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
 from the_game import Game
@@ -68,7 +70,6 @@ def game_status(connector = db_connection):
     else:
         return jsonify({'status': 'continue'})
 
-
 @app.route('/fly/<icao>')
 def in_game_fly(icao, connector = db_connection):
     connect = connector
@@ -78,7 +79,7 @@ def in_game_fly(icao, connector = db_connection):
     return 'ok'
 
 @app.route('/gamble_winning/<int:dice1>/<int:dice2>/<int:dice3>')
-def gamble_winning(dice1, dice2, dice3,):
+def gamble_winning(dice1, dice2, dice3):
     try:
         winpoint, wintext = if_winning(dice1, dice2, dice3)
         response = {
@@ -89,17 +90,17 @@ def gamble_winning(dice1, dice2, dice3,):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/pay/<cost>/<select_game>') # this function deducts the gambling cost from the players money amount
-def pay_gamble(cost, select_game, connection = db_connection):
+@app.route('/pay/<cost>/') # this function deducts the gambling cost from the players money amount
+def pay_gamble(cost, select_game = thisgame.id, connection = db_connection):
     connect = connection
-    cost = cost
+    cost = int(cost)
     select_game = select_game
-    payed = pay(cost,select_game, connect)
+    pay(cost,select_game, connect)
     print("gamble payed")
-    return payed
+    return 'ok'
 
-@app.route('/add-money-gamble/<added>/<select_game>')
-def add_money_gamble(added, select_game, connection = db_connection):
+@app.route('/add-money-gamble/<added>')
+def add_money_gamble(added, select_game = thisgame.id , connection = db_connection):
     connect = connection
     added = added
     select_game = select_game
@@ -107,25 +108,57 @@ def add_money_gamble(added, select_game, connection = db_connection):
     print('win money added')
     return ok_money
 
+@app.route('/player-location-now')
+def player_location_now(select_game = thisgame.id, connection = db_connection):
+    connect = connection
+    select_game = select_game
+    player_location = location_now(select_game, connect)
+    #print('location found')
+    return player_location
+'''
+@app.route('/save/<notepad>/<narratortext>')
+def savey(notepad, narratortext, connector = db_connection):
+    connect = connector
+    #narratortext = narratortext
+    #notepad = notepad
+    save_game(notepad, narratortext, thisgame.id, connect)
+    return 'ok'
+'''
+
+@app.route('/save', methods=['POST'])
+def save():
+    data = request.get_json()
+    note_text = data.get('note_text')
+    narr_text = data.get('narr_text')
+    print(note_text)
+    print(narr_text)
+    save_game(note_text[0], narr_text[0], thisgame.id,db_connection)
+    return jsonify({'status': 'success'}), 200
+
+@app.route('/load')
+def load():
+    save_data = load_game(thisgame.id, db_connection)
+    return jsonify(save_data)
+
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
     # joka lisää oikeen määrän oiketa vastauksii pelin classiin. siten pitäs runnaa sen classin thisgame.winning joka kattoo voitetaanko.
 # @app.route('/accuse/<weapon>/<suspect>/<location>')
 # def accuse(weapon, suspect, location, connector = db_connection):
-    connect = connector
-    weapon = weapon
-    suspect = suspect
-    location = location
-    is_weapon = check_if_correct_weapon(weapon, connect)
-    is_suspect = check_if_correct_suspect(suspect, connect)
-    is_location = check_if_correct_location(location, connect)
-    jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
+  #  connect = connector
+   # weapon = weapon
+   # suspect = suspect
+   # location = location
+    #is_weapon = check_if_correct_weapon(weapon, connect)
+   # is_suspect = check_if_correct_suspect(suspect, connect)
+   # is_location = check_if_correct_location(location, connect)
+   # jsonanwsver = json.dumps([is_weapon, is_suspect, is_location])
     # return jsonanwsver
 # @app.route ('/hints/<weapon>/<suspect>/<location>')
 # def hints(weapon, suspect, location):
-    weapon =(weapon)
-    suspect = (suspect)
-    location = (location)
+   # weapon =(weapon)
+   # suspect = (suspect)
+   # location = (location)
     # hint_list = (here iidas function which will take as parameter weapon, suspect and location.)
                 # code will hints as return list with two paragraphs, 1. Text which comes to game box, 2. Text which goes to notebook.
     # return hint_list

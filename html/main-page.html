@@ -10,7 +10,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="javascript/map.js" defer></script>
     <script src="javascript/gamble.js" defer></script>
+    <script src="test.js" defer></script>
     <script src="javascript/notepad.js" defer></script>
+    <script src="javascript/help_text.js" defer></script>
     <script src="main-page.js" defer></script>
     <link rel="stylesheet" href="main-page.css">
     <link rel="icon" type="image/x-icon" href="/html/img/magnifier.png">
@@ -78,13 +80,20 @@
 
         <ul id="game-selections">
             <li>
-                <button class="selection" id="newgame-button">New game</button>
+                <button class="selection" id="accuse-button">Accuse</button>
+
             </li>
             <li>
-                <button class="selection" id="accuse-button">Accuse</button>
+                <button class="selection" id="fly-button">Fly</button>
             </li>
             <li>
                 <button class="selection" id="gamble-button">Gamble</button>
+            </li>
+            <li>
+                <button class="selection" id="help-button">Help</button>
+            </li>
+            <li>
+                <button class="selection" id="newgame-button">New game</button>
             </li>
             <li class="player-status">
                 <a>Budget: <span id="budget">500</span>€</a>
@@ -96,6 +105,7 @@
     <section class="printing">
         <div id="narrator_box">
             <h2 class="printing_h2">Narrator</h2>
+            <div id="narrator_text"> <!-- Insert here everything narrator says. -->
             <p class="printing_text" id="printing_text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
                 ipsum
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
@@ -125,99 +135,106 @@
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
                 Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
+                <p>3Lorem ipsumLorem ipsumLorem ipsum</p><p>3Lorem ipsumLorem ipsumLorem ipsum</p>
+                <p>3Lorem ipsumLorem ipsumLorem ipsum</p><p>3Lorem ipsumLorem ipsumLorem ipsum</p>
+                <p>3Lorem ipsumLorem ipsumLorem ipsum</p>
+                </div>
         </div>
     </section>
 
     <h2>SUSPECTS</h2>
-    <div class="img_wrapper">
-        <div class="img_box1">
-            <img alt="suspect 1" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box2">
-            <img alt="suspect 2" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box3">
-            <img alt="suspect 3" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box4">
-            <img alt="suspect 4" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box5">
-            <img alt="suspect 5" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box6">
-            <img alt="suspect 6" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box7">
-            <img alt="suspect 7" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box8">
-            <img alt="suspect 8" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box9">
-            <img alt="suspect 9" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box10">
-            <img alt="suspect 10" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box11">
-            <img alt="suspect 11" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
-        <div class="img_box12">
-            <img alt="suspect 12" src="https://picsum.photos/100/100" onclick="selectImage(this)">
-        </div>
+<div class="img_wrapper">
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 1" src="https://picsum.photos/100/100"></button>
     </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 2" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 3" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 4" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 5" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 6" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 7" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 8" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 9" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 10" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 11" src="https://picsum.photos/100/100"></button>
+    </div>
+    <div class="image-container" onclick="selectImage(this)">
+        <button><img alt="suspect 12" src="https://picsum.photos/100/100"></button>
+    </div>
+</div>
+
     <h2>WEAPONS</h2>
     <div class="w_img_wrapper">
-        <div class="w_img_box1">
-            <img alt="weapon 1" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box2">
-            <img alt="weapon 2" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box3">
-            <img alt="weapon 3" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box4">
-            <img alt="weapon 4" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box5">
-            <img alt="weapon 5" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box6">
-            <img alt="weapon 6" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box7">
-            <img alt="weapon 7" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box8">
-            <img alt="weapon 8" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box9">
-            <img alt="weapon 9" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box10">
-            <img alt="weapon 10" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box11">
-            <img alt="weapon 11" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box12">
-            <img alt="weapon 12" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box13">
-            <img alt="weapon 13" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box14">
-            <img alt="weapon 14" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="w_img_box15">
-            <img alt="weapon 15" src="https://picsum.photos/100/100" onclick="selectImage(this)">
+        <div class="image-container" onclick="selectImage(this)">
+            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
         </div>
     </div>
     <footer>
         <p>&copy; 2024 J'accuse!</p>
     </footer>
+
+
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <h2 id="">Start a new game by writing your name</h2>
@@ -225,6 +242,15 @@
         <div>
             <button class="selection" id="start_newgame">Start</button>
             <button class="selection" id="cance_newgame">Cancel</button>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="popup" id="fly-popup">
+        <h2>Select where to fly</h2>
+        <div>
+            <ul id="fly-list">
+            </ul>
         </div>
     </div>
 </div>

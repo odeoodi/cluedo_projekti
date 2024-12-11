@@ -1,3 +1,5 @@
+
+
 def location_now(game_id, connection):
     # Tells the user what airport they are at.
     connect = connection
@@ -6,6 +8,7 @@ def location_now(game_id, connection):
     cursor.execute(sql)
     results = cursor.fetchall()
     if results:
+        #print(results[0][0])
         current_location = results[0][0]
         return current_location
     else:

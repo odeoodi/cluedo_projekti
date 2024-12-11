@@ -24,6 +24,41 @@
     src: url("SpecialElite-Regular.ttf");
 }
 
+
+header{
+    background-color:#BEBDAD;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    padding:0.5rem;
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1.5rem;
+}
+
+ul li a {
+    color: #351B0C;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.5s ease;
+    border-radius: 5px;
+}
+
+ul li a:hover {
+    background-color: #755a3f;
+}
+
 .container {
     width: 70%;
     margin: auto;
@@ -32,6 +67,18 @@
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
+}
+
+button {
+   cursor: pointer;
+    box-sizing: border-box;
+    font-size: medium;
+    font-family: SpecialElite,sans-serif;
+    background-color: var(--bone);
+    padding: 0.4rem;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #dicebox {
@@ -98,6 +145,25 @@
     background-color: var(--eggshell);
     padding-left: 2rem;
 }
+
+.leaflet-popup-content-wrapper {
+    background-color: var(--eggshell);
+    width: 18rem;
+}
+
+.leaflet-popup-tip {
+    background-color: var(--eggshell);
+}
+#map-popup p {
+    margin: 2px;
+    width: 30%;
+}
+
+#fly-list {
+    list-style: none;
+}
+
+
 
 body {
     background-color: var(--eggshell);
@@ -196,11 +262,12 @@ body {
 .printing_h2 {
     margin-top: 0;
     padding-top: 0;
+    margin-bottom: 5px;
     position: sticky;
     top: 0;
 }
 
-.printing_text {
+#narrator_text {
     color: var(--theblack);
     max-height: 200px;
     overflow-y: auto;
@@ -244,53 +311,40 @@ body {
     object-fit:cover;
 }
 
-.img_box1:hover::after,
-.img_box2:hover::after,
-.img_box3:hover::after,
-.img_box4:hover::after,
-.img_box5:hover::after,
-.img_box6:hover::after,
-.img_box7:hover::after,
-.img_box8:hover::after,
-.img_box9:hover::after,
-.img_box10:hover::after,
-.img_box11:hover::after,
-.img_box12:hover::after {
-    font-size:1rem;
-    background-color:#57432E;
-    color:white;
-    content:"- Blonde ";
 
+
+/* Basic styles for the button */
+.img_wrapper button, .w_img_wrapper button {
+    border: 2rem solid  #57432E;
+    padding: 0;
+    background: none;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 0.3s ease;
+    border-radius: 0;
 }
 
-.w_img_box1, .w_img_box2, .w_img_box3, .w_img_box4, .w_img_box5, .w_img_box6, .w_img_box7, .w_img_box8, .w_img_box9, .w_img_box10, .w_img_box11, .w_img_box12, .w_img_box13, .w_img_box14, .w_img_box15 {
-    border: 0.5rem solid var(--noir);
-    width:100px;
-    height:100px;
-    object-fit:cover;
+
+/* When the button is pressed, change the border color */
+button.pressed {
+    border-color: var(--noir); /* Use the --noir color when pressed */
 }
 
-.w_img_box1:hover::after,
-.w_img_box2:hover::after,
-.w_img_box3:hover::after,
-.w_img_box4:hover::after,
-.w_img_box5:hover::after,
-.w_img_box6:hover::after,
-.w_img_box7:hover::after,
-.w_img_box8:hover::after,
-.w_img_box9:hover::after,
-.w_img_box10:hover::after,
-.w_img_box11:hover::after,
-.w_img_box12:hover::after,
-.w_img_box13:hover::after ,
-.w_img_box14:hover::after,
-.w_img_box15:hover::after{
-    font-size:1rem;
-    background-color:#57432E;
-    color:white;
-    content:"- Blonde ";
-
+/* Optional: Remove button outline when clicked */
+button:focus {
+    outline: none;
 }
+
+/* Optional: Add hover effect for buttons */
+.image-container:hover {
+    cursor: pointer;
+}
+
+
+
 
 img {
         transition: transform 0.1s, border-color 0.1s;
@@ -307,6 +361,16 @@ img {
         transform: scale(0.95);
         border-color:#746953 ;
     }
+
+#help_ol, #help_ul {
+  list-style-position: inside;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
 
 
 
