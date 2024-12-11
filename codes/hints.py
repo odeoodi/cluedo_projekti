@@ -8,6 +8,8 @@ from codes.get_from_sql import from_sql_suspects, from_sql_weapons
 '''
 EI OLE VIELÄ VALMIS
 '''
+
+
 class Hint:
     def __init__(self, db_connection):
         self.db_connection = db_connection
@@ -74,9 +76,11 @@ class Hint:
             matching_attributes.append(accused_attr2)
 
         if matching_attributes:
+            # Select one matching attribute to reveal
+            revealed_attribute = random.choice(matching_attributes)
             return (
-                f"{weapon_accusation} is not the murder weapon, but it shares the following attributes "
-                f"with the correct weapon: {', '.join(matching_attributes)}."
+                f"HINT: {weapon_accusation} is not the murder weapon, but it shares the attribute: '{revealed_attribute}' "
+                f"with the correct weapon. It might be useful later!"
             )
         else:
             return f"{weapon_accusation} is not the murder weapon. It shares no attributes with the correct weapon."
@@ -122,9 +126,11 @@ class Hint:
             matching_attributes.append("glasses")
 
         if matching_attributes:
+            # Select one matching attribute to reveal
+            revealed_attribute = random.choice(matching_attributes)
             return (
-                f"{suspect_accusation} is not the murderer, but they share the following attributes with the real suspect: "
-                f"{', '.join(matching_attributes)}."
+                f"{suspect_accusation} is not the murderer, but they share the attribute: '{revealed_attribute}' "
+                f"with the real suspect."
             )
         else:
             return f"{suspect_accusation} is not the murderer. They have no matching attributes with the real suspect."
@@ -144,73 +150,56 @@ class Hint:
         """
         cursor = self.db_connection.cursor()
 
-        # Get the ID of the accused weapon
-        accusation_query = f"SELECT id FROM weapons WHERE weapon = '{weapon_accusation}'"
-        cursor.execute(accusation_query)
-        accusation_result = cursor.fetchone()
-
-        if not accusation_result:
-            return f"No information found for weapon '{weapon_accusation}'."
-
-        accusation_id = accusation_result[0]
-
-        # Get the correct weapon's ID
-        correct_weapon_query = "SELECT id_weapons FROM right_answers"
-        cursor.execute(correct_weapon_query)
-        correct_weapon_result = cursor.fetchone()
-
-        if not correct_weapon_result:
-            return "No correct weapon data found for hints."
-
-        correct_weapon_id = correct_weapon_result[0]
-
         # Fetch the correct weapon's attributes
-        correct_weapon_attributes_query = f"SELECT weapon, attribute1, attribute2 FROM weapons WHERE id = {correct_weapon_id}"
-        cursor.execute(correct_weapon_attributes_query)
+        correct_weapon_query = "SELECT attribute1, attribute2 FROM weapons WHERE id = (SELECT id_weapons FROM right_answers)"
+        cursor.execute(correct_weapon_query)
         correct_weapon_data = cursor.fetchone()
 
         if not correct_weapon_data:
             return "No attributes found for the correct weapon."
 
-        correct_weapon, attribute1, attribute2 = correct_weapon_data
+        attribute1, attribute2 = correct_weapon_data
 
         # Randomly pick one of the correct weapon's attributes to reveal
-        attribute = random.choice([attribute1, attribute2])
+        return f"The correct weapon is associated with the attribute '{random.choice([attribute1, attribute2])}'."
 
-        return (
-            f"The correct weapon is associated with the attribute '{attribute}'. "
-            f"Keep this in mind for your investigation!"
-        )
+    def get_random_suspect_hint(self):
+        """
+        Provide a hint by revealing a random attribute of the murderer.
+        """
+        cursor = self.db_connection.cursor()
 
-    def get_random_suspect_hint(self, suspect_accusation):
-        def get_random_suspect_hint(self, suspect_accusation):
-            """
-            Provide a hint by revealing a random attribute of the murderer.
-            """
-            cursor = self.db_connection.cursor()
+        # Fetch the correct suspect's attributes
+        correct_suspect_query = "SELECT sex, age, glasses FROM suspects WHERE id = (SELECT id_suspects FROM right_answers)"
+        cursor.execute(correct_suspect_query)
+        correct_suspect_data = cursor.fetchone()
 
-            # First, check if the accusation is correct by checking the correct suspect
-            correct = check_if_correct_suspect(suspect_accusation)
+        if not correct_suspect_data:
+            return "No attributes found for the murderer."
 
-            if correct:
-                # Fetch the attributes of the murderer
-                suspect_query = f"SELECT names, sex, age, glasses FROM suspects WHERE names = '{suspect_accusation}'"
-                cursor.execute(suspect_query)
-                suspect_data = cursor.fetchone()
+        sex, age, glasses = correct_suspect_data
 
-                if not suspect_data:
-                    return f"No information found for suspect '{suspect_accusation}'."
+        # Randomly pick one of the murderer's attributes to reveal
+        return f"The murderer has the following attribute: '{random.choice(['sex: ' + sex, 'age: ' + str(age), 'glasses: ' + glasses])}'."
 
-                name, sex, age, glasses = suspect_data
 
-                # Randomly select one of the suspect's attributes
-                random_attribute = random.choice(
-                    [f"sex: {sex}", f"age: {age}", f"wears glasses: {glasses}"]
-                )
 
-                return (
-                    f"Hint: The murderer, {suspect_accusation}, has the following characteristic: {random_attribute}. "
-                    f"Keep this in mind as you investigate further!"
-                )
-            else:
-                return f"Your accusation of {suspect_accusation} is incorrect. Keep searching for the murderer!"
+
+# Assuming you have a SQLite database called "game.db"
+db_connection = sqlite3.connect("detective_game2")
+
+# Initialize the Hint class
+hint_system = Hint(db_connection)
+
+# Example accusations
+weapon_accusation = "Knife"  # Player's accused weapon
+suspect_accusation = "Iida"  # Player's accused suspect
+
+# Call the hint_or_no_hint method to evaluate accusations and possibly give a clue
+result = hint_system.hint_or_no_hint(weapon_accusation, suspect_accusation)
+
+# Display the result to the player
+print(result)
+
+# Close the database connection when done
+db_connection.close()
