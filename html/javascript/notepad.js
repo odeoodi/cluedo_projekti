@@ -11,5 +11,8 @@ newgameButton.addEventListener('click', () => {
   hintList.innerHTML = ''
 })
 
+// making list items to notepad
+
+
 
 
