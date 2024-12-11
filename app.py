@@ -23,6 +23,7 @@ cors = CORS(app)
 def new_game(connection = db_connection):
     connect = connection
     start_location(connect)
+    get_api_data(connect)
     start_accusations(connect)
     start_money(thisgame.id,codes.config.money, connect)
     insert_right_answers(connect)
@@ -46,8 +47,6 @@ def suspects_data(connector = db_connection):
 def locations_data(connector = db_connection):
     connect = connector
     data = from_sql_locations(connect)
-    pop_up_text=get_api_data(data)
-    data.append(pop_up_text)
     jsondata = json.dumps(data)
     return jsondata
 
@@ -115,15 +114,6 @@ def player_location_now(select_game = thisgame.id, connection = db_connection):
     player_location = location_now(select_game, connect)
     #print('location found')
     return player_location
-'''
-@app.route('/save/<notepad>/<narratortext>')
-def savey(notepad, narratortext, connector = db_connection):
-    connect = connector
-    #narratortext = narratortext
-    #notepad = notepad
-    save_game(notepad, narratortext, thisgame.id, connect)
-    return 'ok'
-'''
 
 @app.route('/save', methods=['POST'])
 def save():

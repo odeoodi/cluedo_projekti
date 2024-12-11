@@ -16,7 +16,7 @@ def from_sql_suspects(connector):
 
 def from_sql_locations(connector):
     connect = connector
-    get_info3 = f"SELECT name, icao, latitude_deg,longitude_deg   FROM locations"
+    get_info3 = f"SELECT name, icao, latitude_deg, longitude_deg, city, country, flag FROM locations"
     kursori = connect.cursor()
     kursori.execute(get_info3)
     get_locations = kursori.fetchall()

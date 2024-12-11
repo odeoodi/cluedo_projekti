@@ -1,5 +1,3 @@
-
-
 def location_now(game_id, connection):
     # Tells the user what airport they are at.
     connect = connection
