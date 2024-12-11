@@ -344,10 +344,10 @@ async function accuser() {
             body: JSON.stringify(dataToSend) })
         if (!response.ok) throw new Error("Something went wrong while fetching hints.")
         const result = await response.json()
-        Object.entries(result).forEach(([key, value]) => {
+        if (!result[0]) {
             const listItem = document.createElement('li')
-            hintList.appendChild(listItem).textContent = `${key} is ${value}`
-        })
+            hintList.appendChild(listItem).textContent = ``
+        }
         console.log(result); // For debugging
     } catch (error) {
         console.log(error.message);

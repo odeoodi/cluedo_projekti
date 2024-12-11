@@ -158,13 +158,9 @@ def accuse():
     thisgame.right_answer_add(answers_list)
     win_or_not = thisgame.winning()
     print(win_or_not)
-    return_this = {
-        'Suspect': accuse_suspect,
-        'Weapon': accuse_weapon,
-        'Location': accuse_location,
-        'Win': win_or_not,
-    }
-    return jsonify(return_this), 200
+    return_thisplz = [win_or_not,gethints]
+    print(return_thisplz)
+    return jsonify(return_thisplz), 200
 
 @app.route ('/hints/<weapon>/<suspect>/<location>')
 def hints(weapon, suspect, location):

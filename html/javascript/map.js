@@ -173,7 +173,7 @@ markerGroup.clearLayers();
 
 async function checkPinColor(marker_num,airport_name) {
   const the_loc = await playerLocation()
-  for (let i = 0; i<locations_list.length-1;i++){
+  for (let i = 0; i<locations_list.length;i++){
     if (the_loc === airport_name[i][0]) {
     marker_num[i].setIcon(redPin);}
     else {

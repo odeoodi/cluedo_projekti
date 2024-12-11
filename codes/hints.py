@@ -1,7 +1,6 @@
 import random
 import mysql.connector
 import mysql
-
 from app import thisgame
 from codes.check_if_correct import check_if_correct_weapon, check_if_correct_suspect, check_if_correct_location
 from database_connector import db_connection
@@ -10,7 +9,6 @@ from codes.get_from_sql import from_sql_suspects, from_sql_weapons
 '''
 EI OLE VIELÄ VALMIS
 '''
-
 class Hint:
     def __init__(self, connector):
         self.db_connection = connector
@@ -40,8 +38,8 @@ class Hint:
 
         # Combine feedback and optionally include a clue
         return (
-            f"{weapon_feedback}\n{suspect_feedback}\n{location_feedback}"
-            + (f"\nAdditional clue: {clue}" if clue else "")
+            f"{weapon_feedback.capitalize()} {suspect_feedback.capitalize()} {location_feedback}"
+            + (f"Additional clue: {clue}" if clue else "")
         )
 
     def get_accusation_feedback(self, weapon_accusation, suspect_accusation, location_accusation):
@@ -85,11 +83,11 @@ class Hint:
             if matching_attributes:
                 revealed_attribute = random.choice(matching_attributes)
                 return (
-                    f"HINT: {weapon_accusation} is not the murder weapon, but it shares the attribute: '{revealed_attribute}' "
+                    f"HINT: {weapon_accusation} is not the murder weapon, but it shares the attribute: '{revealed_attribute.capitalize()}'.' "
                     f"with the correct weapon."
                 )
 
-        return f"{weapon_accusation} is not the murder weapon. It shares no attributes with the correct weapon."
+        return f"{weapon_accusation} is not the murder weapon, it shares no attributes with the correct weapon."
 
     def get_suspect_feedback(self, suspect_accusation):
         """
@@ -132,6 +130,10 @@ class Hint:
 
             if matching_attributes:
                 revealed_attribute = random.choice(matching_attributes)
+                if revealed_attribute == accused_glasses:
+                    revealed_attribute = 'has glasses'
+                else:
+                    revealed_attribute = 'does not have glasses'
                 return (
                     f"{suspect_accusation} is not the murderer, but they share the attribute: '{revealed_attribute}' "
                     f"with the real suspect."
@@ -191,12 +193,7 @@ class Hint:
         """
         feedback = self.get_accusation_feedback(weapon, suspect, location)
 
-        game_box_text = f"Game Box:\n{feedback}"
-        notebook_text = (
-            f"Notebook Entry:\nWeapon: {weapon}\nSuspect: {suspect}\nLocation: {location}"
-        )
-
-        return [game_box_text.strip(), notebook_text.strip()]
+        return feedback
 
 # Assuming you have a SQLite database called "game.db"
 #db_connection = db_connection
