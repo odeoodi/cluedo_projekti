@@ -236,6 +236,16 @@ async function game_status () {
         } catch (error){
       console.log(error.message)}}
 
+async function hintThis(weapon, suspect, location) {
+    try {
+        const response = await fetch(`${url_py}/hints/${weapon}/${suspect}/${location}`)
+        if (!response.ok) throw new Error("something went wrong hints")
+        let result = await response.json()
+        console.log(result)
+    } catch (error){
+      console.log(error.message)}
+}
+
 async function accuse(weapon,suspect) {
     try {
         const response = await fetch( `${url_py}/accuse/${weapon}/${suspect}/${location_game}`)

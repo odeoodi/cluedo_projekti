@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 from codes.config import gamble_cost
 from codes.game_saves import save_game, load_game
+from codes.hints import Hint
 from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
@@ -162,6 +163,16 @@ def accuse():
         'Win': win_or_not,
     }
     return jsonify(return_this), 200
+
+@app.route ('/hints/<weapon>/<suspect>/<location>')
+def hints(weapon, suspect, location):
+    connect = db_connection
+    hint_system = Hint(connect)
+    gethints = hint_system.generate_hints(weapon, suspect, location)
+    return jsonify({
+        "game_box": gethints[0],
+        "notebook": gethints[1]
+    })
 
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
