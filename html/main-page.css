@@ -354,6 +354,10 @@ button:focus {
     cursor: pointer;
 }
 
+button img{
+    width:110px;
+    height:110px;
+}
 
 
 
