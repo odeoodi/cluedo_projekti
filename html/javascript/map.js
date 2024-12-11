@@ -151,6 +151,7 @@ async function createIcaoButtons() {
 
   icao_buttons.forEach(button => {
   button.addEventListener('click', async () => {
+    await game_status()
     await fly(button.textContent);
     let new_budget = check_money();
     let budget = document.getElementById('budget');
