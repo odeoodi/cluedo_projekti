@@ -12,7 +12,7 @@ EI OLE VIELÄ VALMIS
 '''
 
 class Hint:
-    def __init__(self, connector=db_connection):
+    def __init__(self, connector):
         self.db_connection = connector
 
     def get_location_feedback(self, location_accusation):
@@ -202,6 +202,7 @@ class Hint:
 #db_connection = db_connection
 
 # Initialize the Hint class
+'''
 hint_system = Hint() # täällä oli parametrina db_connection
 
 # Example accusations
@@ -218,3 +219,4 @@ print(result)
 
 # Close the database connection when done
 #db_connection.close()
+'''

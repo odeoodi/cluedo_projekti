@@ -342,12 +342,11 @@ async function accuser() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(dataToSend) })
-        if (!response.ok) throw new Error("Something went wrong while saving data.")
+        if (!response.ok) throw new Error("Something went wrong while fetching hints.")
         const result = await response.json()
         Object.entries(result).forEach(([key, value]) => {
             const listItem = document.createElement('li')
-            const clue = `${key} is ${value}`
-            hintList.appendChild(listItem).textContent = clue
+            hintList.appendChild(listItem).textContent = `${key} is ${value}`
         })
         console.log(result); // For debugging
     } catch (error) {

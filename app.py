@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 from codes.config import gamble_cost
 from codes.game_saves import save_game, load_game
-from codes.hints import Hint
+from codes.hints import *
 from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
@@ -152,6 +152,8 @@ def accuse():
     print(accuse_location)
     print(suspect)
     print(weapon)
+    gethints = Hint(db_connection).generate_hints(weapon, suspect, location_now(thisgame.id, db_connection))
+    print(gethints)
     answers_list = [accuse_location, accuse_suspect, accuse_weapon]
     thisgame.right_answer_add(answers_list)
     win_or_not = thisgame.winning()
