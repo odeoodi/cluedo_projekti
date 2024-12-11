@@ -1,6 +1,8 @@
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+from codes.config import gamble_cost
 from codes.game_saves import save_game, load_game
 from codes.location_now import location_now
 from database_connector import db_connection
@@ -89,12 +91,11 @@ def gamble_winning(dice1, dice2, dice3):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/pay/<cost>/') # this function deducts the gambling cost from the players money amount
-def pay_gamble(cost, select_game = thisgame.id, connection = db_connection):
+@app.route('/pay/') # this function deducts the gambling cost from the players money amount
+def pay_gamble(select_game = thisgame.id, connection = db_connection):
     connect = connection
-    cost = int(cost)
     select_game = select_game
-    pay(cost,select_game, connect)
+    pay(select_game, connect)
     print("gamble payed")
     return 'ok'
 

@@ -172,26 +172,22 @@ markerGroup.clearLayers();
 
 
 async function checkPinColor(marker_num,airport_name) {
-  if (await playerLocation() === airport_name) {
-    marker_num.setIcon(redPin);
+  const the_loc = await playerLocation()
+  for (let i = 0; i<locations_list.length-1;i++){
+    if (the_loc === airport_name[i][0]) {
+    marker_num[i].setIcon(redPin);}
+    else {
+    marker_num[i].setIcon(bluePin);
   }
-  // else if (airport_ICAO === accused_ICAO) {
-//    marker_num.setIcon(greyPin);
-// }
-  else {
-    marker_num.setIcon(bluePin);
-  }
+  }}
 
-}
 async function changePins(){
   const layers = markerGroup.getLayers();
-  for (let i = 0; i < layers.length; i++) {
-    if (locations_list[i]) {
-      await checkPinColor(layers[i], locations_list[i][0]);
+    if (locations_list) {
+      await checkPinColor(layers, locations_list);
     } else {
-      console.error(`No data for marker at index ${i}`);
+      console.error(`No data for marker`);
     }
-  }
 }
 
 

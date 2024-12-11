@@ -1,3 +1,6 @@
+from codes.config import gamble_cost
+
+
 def if_winning(dice1,dice2,dice3):
         if dice1 == 6 and dice2 == 6 or (dice3 == 6 and dice2 == 6) or(dice1 == 6 and dice3 == 6 ):
             wintext = "You have two sixes, you are winning 250€"
@@ -16,8 +19,9 @@ def if_winning(dice1,dice2,dice3):
             winpoint = 0
             return winpoint, wintext
 
-def pay(cost, select_game, connection):
+def pay(select_game, connection):
     connect = connection
+    cost = gamble_cost
     loose = f'UPDATE game SET money = money- {cost} WHERE id = {select_game}'
     cursor = connect.cursor()
     cursor.execute(loose)
