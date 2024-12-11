@@ -236,6 +236,16 @@ async function game_status () {
         } catch (error){
       console.log(error.message)}}
 
+async function hintThis(weapon, suspect, location) {
+    try {
+        const response = await fetch(`${url_py}/hints/${weapon}/${suspect}/${location}`)
+        if (!response.ok) throw new Error("something went wrong hints")
+        let result = await response.json()
+        console.log(result)
+    } catch (error){
+      console.log(error.message)}
+}
+
 async function accuse(weapon,suspect) {
     try {
         const response = await fetch( `${url_py}/accuse/${weapon}/${suspect}/${location_game}`)
@@ -334,13 +344,12 @@ async function accuser() {
             body: JSON.stringify(dataToSend) })
         if (!response.ok) throw new Error("Something went wrong while saving data.")
         const result = await response.json()
-        const suspect = result.suspect_is
-        const weapon = result.weapon_is
-        const location = result.location_is
-        const win = result.win_is
-
+        Object.entries(result).forEach(([key, value]) => {
+            const listItem = document.createElement('li')
+            const clue = `${key} is ${value}`
+            hintList.appendChild(listItem).textContent = clue
+        })
         console.log(result); // For debugging
-
     } catch (error) {
         console.log(error.message);
     }
