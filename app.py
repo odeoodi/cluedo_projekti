@@ -8,7 +8,7 @@ from codes.location_now import location_now
 from database_connector import db_connection
 import codes.config
 from the_game import Game
-from codes.start import start_money, start_location, start_accusations, insert_right_answers
+from codes.start import start_money, start_location, start_accusations, insert_right_answers, player_insert
 from codes.get_from_sql import from_sql_weapons, from_sql_suspects,from_sql_locations
 from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 from codes.check_money import check_money
@@ -30,6 +30,13 @@ def new_game(connection = db_connection):
     start_money(thisgame.id,codes.config.money, connect)
     insert_right_answers(connect)
     return 'ok'
+
+@app.route('/save_name/<player_name>')
+def save_name(player_name):
+    connect = db_connection
+    player_name = player_name
+    player_insert(connect, player_name, thisgame.id)
+    return 'saved'
 
 @app.route('/getweapons')
 def weapons_data(connector = db_connection):
