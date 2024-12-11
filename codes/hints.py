@@ -200,7 +200,7 @@ weapon_accusation = "Knife"  # Player's accused weapon
 suspect_accusation = "Iida"  # Player's accused suspect
 
 # Call the hint_or_no_hint method to evaluate accusations and possibly give a clue
-result = hint_system.hint_or_no_hint(weapon_accusation, suspect_accusation)
+result = hint_system.hint_or_no_hint(weapon_accusation, suspect_accusation, location_accusation)
 
 # Display the result to the player
 print(result)
