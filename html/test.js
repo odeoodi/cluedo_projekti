@@ -77,3 +77,32 @@ async function load_game() {
         const load_name = document.querySelector('#player-id')
         load_name.innerText = player_name[0]
     } catch (error) {console.log(error.message)}}
+
+
+async function win() {
+    showpopup()
+    const container = document.querySelector('#popup')
+    container.innerHTML = ''
+    const fragment = document.createDocumentFragment()
+    const header = document.createElement('h2')
+    Object.assign(header, {
+        id: 'popup_h2',
+        textContent: 'You have found the murderer!!!'
+    })
+    const text = document.createElement('p')
+    Object.assign(text, {
+        id: 'popup_text',
+        textContent: `Congratulations! You've identified the culprit, and the police can now press charges. You've done an amazing job, and I hope you're proud of yourself. Keep up the great work!`
+    })
+    const close_button = document.createElement('button')
+        Object.assign(close_button, {
+            id: 'close_button',
+            className: "selection",
+            textContent: 'Close' })
+    close_button.addEventListener('click', async () => {closepopup()})
+    fragment.appendChild(header)
+    fragment.appendChild(text)
+    fragment.appendChild(close_button)
+    container.appendChild(fragment)
+
+}
