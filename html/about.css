@@ -89,3 +89,21 @@ a {
 #back-button p {
     margin-top: 1rem;
 }
+
+.tooltip {
+    display: none;
+    position: absolute !important;
+    background-color: rgba(0, 0, 0) !important;
+    color: #fff !important;
+    padding: 8px !important;
+    border-radius: 5px !important;
+    white-space: nowrap !important;
+    z-index: 1000 !important;
+    font-size: 12px !important;
+    pointer-events: none!important;
+}
+
+.tooltip p {
+    margin: 0;
+    padding: 0;
+}
