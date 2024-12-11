@@ -17,7 +17,7 @@ const weapon_correct = "You have the correct weapon!"
 const suspect_correct = "You have the correct suspect!"
 const location_correct = "You have the correct airport!"
 const location_incorrect = "The murder did not happen here."
-const location_welcome ="You are currently at the {location_now(1)}." // this no work//
+const location_welcome =`You are currently at the ${airport_name}.`
 const check_acc = "You have accused:"
 addtext(story_text)
 addtext(begin_text)
