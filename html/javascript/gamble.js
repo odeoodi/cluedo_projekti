@@ -234,7 +234,7 @@ roll.addEventListener('click', () => {
     }
 
     if (win_points === 0) {
-      await game_status()
+      await game_status();
       await pay_gambling();
       let new_budget = check_money();
       let budget = document.getElementById('budget');
