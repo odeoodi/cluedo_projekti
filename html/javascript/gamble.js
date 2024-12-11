@@ -240,6 +240,7 @@ roll.addEventListener('click', () => {
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
       gamble_alert.textContent = 'Sorry, you lost.';
+      await addtext(gamble_lose_text)
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
     }
@@ -248,6 +249,7 @@ roll.addEventListener('click', () => {
       await game_status()
       await pay_gambling();
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
+      await addtext(gamble_win_text1);
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
       await add_money(100);
@@ -259,6 +261,7 @@ roll.addEventListener('click', () => {
       await game_status()
       await pay_gambling();
       gamble_alert.textContent = 'You have two fives, you win 150€!';
+      await addtext(gamble_win_text2);
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
       await add_money(150);
@@ -270,6 +273,7 @@ roll.addEventListener('click', () => {
       await game_status()
       await pay_gambling();
       gamble_alert.textContent = 'You have two sixes, you are winning 250€!';
+      await addtext(gamble_win_text3);
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
       await add_money(250);
