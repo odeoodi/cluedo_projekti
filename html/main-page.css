@@ -39,13 +39,13 @@ nav {
     justify-content: right;
 }
 
-ul {
+header ul {
     display: flex;
     list-style-type: none;
     gap: 1.5rem;
 }
 
-ul li a {
+header ul li a {
     color: #351B0C;
     font-size: 2rem;
     font-weight: bold;
@@ -55,7 +55,7 @@ ul li a {
     border-radius: 5px;
 }
 
-ul li a:hover {
+header ul li a:hover {
     background-color: #755a3f;
 }
 
@@ -304,7 +304,7 @@ body {
     overflow-y: scroll;
 
 }
-.img_box1, .img_box2, .img_box3, .img_box4, .img_box5, .img_box6, .img_box7, .img_box8, .img_box9, .img_box10, .img_box11, .img_box12 {
+.img-container {
     border: 0.5rem solid var(--noir);
     width:100px;
     height:100px;

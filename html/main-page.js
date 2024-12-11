@@ -290,3 +290,38 @@ function changeText() {
         }
 
         */
+
+// Function to fetch and show image details on hover
+async function showImageDetails(event) {
+    const imageId = event.target.closest('.image-container').dataset.id; // Get the image ID from the data attribute
+
+    // Call a backend API to fetch the image details
+    const response = await fetch(`/getImageDetails?id=${imageId}`); // Assuming your backend exposes an endpoint like this
+    const data = await response.json();
+
+    // If data is successfully fetched, show it in the tooltip
+    if (data) {
+        const tooltip = document.getElementById('details-tooltip');
+        const imageTitle = document.getElementById('image-title');
+        const imageDescription = document.getElementById('image-description');
+
+        imageTitle.textContent = data.title || "No title available"; // Show title or default text
+        imageDescription.textContent = data.description || "No description available"; // Show description or default text
+
+        // Position the tooltip near the mouse pointer
+        tooltip.style.left = `${event.pageX + 10}px`; // Add a little offset to the right
+        tooltip.style.top = `${event.pageY + 10}px`; // Add a little offset below
+        tooltip.style.display = 'block'; // Make the tooltip visible
+    }
+}
+
+// Hide the tooltip when the mouse leaves the button
+function hideTooltip() {
+    const tooltip = document.getElementById('details-tooltip');
+    tooltip.style.display = 'none'; // Hide the tooltip
+}
+
+// Attach a mouseout event to hide the tooltip
+document.querySelectorAll('.image-container').forEach(container => {
+    container.addEventListener('mouseout', hideTooltip);
+});
