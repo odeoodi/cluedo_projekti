@@ -120,7 +120,6 @@ def player_location_now(select_game = thisgame.id, connection = db_connection):
     connect = connection
     select_game = select_game
     player_location = location_now(select_game, connect)
-    #print('location found')
     return player_location
 
 @app.route('/save', methods=['POST'])
@@ -147,6 +146,9 @@ def accuse():
     accuse_location = check_if_correct_location(db_connection, thisgame.id)
     accuse_weapon = check_if_correct_weapon(weapon, db_connection)
     accuse_suspect = check_if_correct_suspect(suspect, db_connection)
+    print(accuse_location)
+    print(accuse_suspect)
+    print(accuse_weapon)
     print(suspect)
     print(weapon)
     return jsonify({'status': 'success'}), 200
