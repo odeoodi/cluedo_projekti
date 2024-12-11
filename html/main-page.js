@@ -151,6 +151,7 @@ async function enter_name(){
         loading_stuff = true
         loading()
         await start_newgame()
+        await player_name_save()
         await get_locations()
         await get_lists()
         await DeleteMap()
@@ -234,12 +235,6 @@ async function game_status () {
         }
         } catch (error){
       console.log(error.message)}}
-
-function first_start() {
-    if (player_name.textContent === 'ID'){
-        enter_name()
-    }}
-// let's use it when we need it: first_start()
 
 async function accuse(weapon,suspect) {
     try {

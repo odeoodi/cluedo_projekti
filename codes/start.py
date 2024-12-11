@@ -91,3 +91,9 @@ def insert_right_answers(connection):
     random_location(connect)
 
     return
+
+def player_insert(connection, playername, game_id):
+    connect = connection
+    name_upp = "update game set name = %s WHERE id = %s"
+    cursor = connect.cursor()
+    cursor.execute(name_upp, (playername, game_id))
