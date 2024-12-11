@@ -161,7 +161,7 @@ def accuse():
         'location': accuse_location,
         'win': win_or_not,
     }
-    return jsonify({'status': 'success'},return_this), 200
+    return jsonify(return_this), 200
 
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
