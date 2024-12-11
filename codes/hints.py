@@ -39,7 +39,6 @@ class Hint:
         # Combine feedback and optionally include a clue
         return (
             f"{weapon_feedback.capitalize()} {suspect_feedback.capitalize()} {location_feedback}"
-            + (f"Additional clue: {clue}" if clue else "")
         )
 
     def get_accusation_feedback(self, weapon_accusation, suspect_accusation, location_accusation):
@@ -83,7 +82,7 @@ class Hint:
             if matching_attributes:
                 revealed_attribute = random.choice(matching_attributes)
                 return (
-                    f"HINT: {weapon_accusation} is not the murder weapon, but it shares the attribute: '{revealed_attribute.capitalize()}'.' "
+                    f"HINT: {weapon_accusation} is not the murder weapon, but it shares the attribute: '{revealed_attribute.capitalize()}'. "
                     f"with the correct weapon."
                 )
 
@@ -125,15 +124,14 @@ class Hint:
             if correct_age == accused_age:
                 matching_attributes.append(accused_age)
             if correct_glasses == accused_glasses:
-                matching_attributes.append(accused_glasses)
+                if correct_glasses == 'true':
+                    matching_attributes.append(accused_glasses)
 
 
             if matching_attributes:
                 revealed_attribute = random.choice(matching_attributes)
                 if revealed_attribute == accused_glasses:
                     revealed_attribute = 'has glasses'
-                else:
-                    revealed_attribute = 'does not have glasses'
                 return (
                     f"{suspect_accusation} is not the murderer, but they share the attribute: '{revealed_attribute}' "
                     f"with the real suspect."

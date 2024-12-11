@@ -8,10 +8,12 @@ const listItem = document.createElement('li')
 // emptying the notepad for a new game
 newgameButton.addEventListener('click', () => {
   hintList.innerHTML = ''
-hintList.appendChild(listItem).textContent = clue})
+})
+
 const clue = 'moiiii'
+
 // making list items to notepad
-hintList.appendChild(listItem).textContent = clue
+//hintList.appendChild(listItem).textContent = clue
 
 
 

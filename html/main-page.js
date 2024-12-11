@@ -145,8 +145,7 @@ async function enter_name(){
         player_name.innerText = new_name
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
-        const narrator_text = document.querySelector('#narrator_text')
-        narrator_text.innerHTML = ''
+        printing_text.innerHTML = ''
         closepopup()
         loading_stuff = true
         loading()
@@ -161,6 +160,8 @@ async function enter_name(){
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
+        await addtext(new_game_text)
+        await addtext(story_text)
         loading_stuff = false
         closepopup()}
     input.addEventListener('keydown', (event) => {
@@ -346,7 +347,9 @@ async function accuser() {
         const result = await response.json()
         if (!result[0]) {
             const listItem = document.createElement('li')
-            hintList.appendChild(listItem).textContent = ``
+            hintList.appendChild(listItem).textContent = result[1]
+            const li = document.createElement('li');
+            printing_text.appendChild(li).textContent = result[1]
         }
         console.log(result); // For debugging
     } catch (error) {
