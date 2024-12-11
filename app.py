@@ -132,6 +132,19 @@ def load():
     return jsonify(save_data)
 
 
+@app.route('/accuse/', methods=['POST'])
+def accuse():
+    data = request.get_json()
+    suspect = data.get('suspect')
+    weapon = data.get('weapon')
+    accuse_location = check_if_correct_location(db_connection, thisgame.id)
+    accuse_weapon = check_if_correct_weapon(weapon, db_connection)
+    accuse_suspect = check_if_correct_suspect(suspect, db_connection)
+    print(suspect)
+    print(weapon)
+    return jsonify({'status': 'success'}), 200
+
+
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
     # joka lisää oikeen määrän oiketa vastauksii pelin classiin. siten pitäs runnaa sen classin thisgame.winning joka kattoo voitetaanko.
 # @app.route('/accuse/<weapon>/<suspect>/<location>')
