@@ -317,7 +317,7 @@ body {
 
 }
 .img-container {
-    border: 0.5rem solid var(--noir);
+
     width:100px;
     height:100px;
     object-fit:cover;
@@ -327,7 +327,7 @@ body {
 
 /* Basic styles for the button */
 .img_wrapper button, .w_img_wrapper button {
-    border: 2rem solid  #57432E;
+
     padding: 0;
     background: none;
     width: 120px;
@@ -336,7 +336,6 @@ body {
     justify-content: center;
     align-items: center;
     transition: border-color 0.3s ease;
-    border-radius: 0;
 }
 
 
