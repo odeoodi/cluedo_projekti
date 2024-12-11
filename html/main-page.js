@@ -289,7 +289,7 @@ function changeText() {
             messageElement.textContent = "Click the button to change this text.";
         }
 
-        */
+
 
 // Function to fetch and show image details on hover
 async function showImageDetails(event) {
@@ -325,3 +325,4 @@ function hideTooltip() {
 document.querySelectorAll('.image-container').forEach(container => {
     container.addEventListener('mouseout', hideTooltip);
 });
+*/
