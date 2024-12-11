@@ -151,6 +151,7 @@ async function enter_name(){
         loading_stuff = true
         loading()
         await start_newgame()
+        await player_name_save()
         await get_locations()
         await get_lists()
         await DeleteMap()
