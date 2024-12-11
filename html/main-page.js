@@ -334,11 +334,11 @@ async function accuser() {
             body: JSON.stringify(dataToSend) })
         if (!response.ok) throw new Error("Something went wrong while saving data.")
         const result = await response.json()
-        const suspect = result.suspect
-        const weapon = result.weapon
-        const location = result.location
-        const win = result.win
-        print(suspect)
+        const suspect = result.suspect_is
+        const weapon = result.weapon_is
+        const location = result.location_is
+        const win = result.win_is
+
         console.log(result); // For debugging
 
     } catch (error) {
