@@ -43,6 +43,7 @@ header ul {
     display: flex;
     list-style-type: none;
     gap: 1.5rem;
+    padding:0 8rem 0 0;
 }
 
 header ul li a {
