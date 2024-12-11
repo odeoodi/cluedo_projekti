@@ -280,6 +280,11 @@ body {
     overflow-y: auto;
 }
 
+#printing_text {
+    list-style: none;
+    padding: 0;
+}
+
 .popup {
     display: none;
     justify-content: center;
