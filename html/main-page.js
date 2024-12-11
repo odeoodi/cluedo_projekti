@@ -299,7 +299,7 @@ const drowningButton = document.getElementById('drowning')
 const pushedDownButton = document.getElementById('pushedDown')
 const fountainPenButton = document.getElementById('fountainPen')
 const spoonButton = document.getElementById('spoon')
-const brokenGlassBottleButton = document.getElementById('brokenGlassBottleButton')
+const brokenGlassBottleButton = document.getElementById('brokenGlassBottle')
 const glassTrophyButton = document.getElementById('glassTrophy')
 const strawButton = document.getElementById('straw')
 const hammerButton = document.getElementById('hammer')
@@ -375,7 +375,7 @@ glassTrophyButton.addEventListener('click', () => ButtonChooserWeapon(glassTroph
 drowningButton.addEventListener('click', () => ButtonChooserWeapon(drowningButton))
 ropeButton.addEventListener('click', () => ButtonChooserWeapon(ropeButton))
 pushedDownButton.addEventListener('click', () => ButtonChooserWeapon(pushedDownButton))
-
+glassShardButton.addEventListener('click', () => ButtonChooserWeapon(glassShardButton))
 
 
 
