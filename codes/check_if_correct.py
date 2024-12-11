@@ -44,4 +44,3 @@ def check_if_correct_suspect(suspect_accusation, connector):
         return False
     elif accusations:
         return True
-
