@@ -42,6 +42,7 @@ async function fly(airport_name) {
     if (!response.ok) {
       throw new Error('Problem flying in js')
     }
+    document.querySelector('#accuse-button').disabled = false
   } catch(error) {
     console.log(error.message)
   }

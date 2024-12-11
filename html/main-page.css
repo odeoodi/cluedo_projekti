@@ -282,7 +282,11 @@ body {
 
 #printing_text {
     list-style: none;
-    padding: 0;
+    padding-left: 0;
+}
+
+#printing_text li {
+    margin-top: 14px;
 }
 
 .popup {

@@ -160,8 +160,8 @@ async function enter_name(){
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
-        await addtext(new_game_text)
         await addtext(story_text)
+        await addtext(begin_text)
         loading_stuff = false
         closepopup()}
     input.addEventListener('keydown', (event) => {
@@ -351,7 +351,8 @@ async function accuser() {
             const li = document.createElement('li');
             printing_text.appendChild(li).textContent = result[1]
         }
-        console.log(result); // For debugging
+        console.log(result);// For debugging
+        document.querySelector('#accuse-button').disabled = true
     } catch (error) {
         console.log(error.message);
     }
