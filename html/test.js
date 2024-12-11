@@ -104,5 +104,7 @@ async function win() {
     fragment.appendChild(text)
     fragment.appendChild(close_button)
     container.appendChild(fragment)
-
+    document.querySelector('#accuse-button').disabled = true
+    document.querySelector('#gamble-button').disabled = true
+    document.querySelector('#fly-button').disabled = true
 }
