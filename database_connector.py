@@ -10,6 +10,7 @@ db_connection = mysql.connector.connect(
     database=os.environ.get('DB_NAME'),
     user=os.environ.get('DB_USER'),
     password=os.environ.get('DB_PASS'),
-    autocommit=True
+    autocommit=True,
+    collation='utf8mb3_general_ci'
 )
 
