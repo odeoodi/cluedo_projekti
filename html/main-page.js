@@ -236,12 +236,6 @@ async function game_status () {
         } catch (error){
       console.log(error.message)}}
 
-function first_start() {
-    if (player_name.textContent === 'ID'){
-        enter_name()
-    }}
-// let's use it when we need it: first_start()
-
 async function accuse(weapon,suspect) {
     try {
         const response = await fetch( `${url_py}/accuse/${weapon}/${suspect}/${location_game}`)
