@@ -1,6 +1,8 @@
 import random
 import mysql.connector
 import mysql
+
+from app import thisgame
 from codes.check_if_correct import check_if_correct_weapon, check_if_correct_suspect, check_if_correct_location
 from database_connector import db_connection
 from codes.get_from_sql import from_sql_suspects, from_sql_weapons
@@ -17,7 +19,7 @@ class Hint:
         """
         Check if the location accusation is correct.
         """
-        if check_if_correct_location(location_accusation):
+        if check_if_correct_location(connector=self.db_connection,game_id=thisgame.id):
             return f"Correct! {location_accusation} is the location where the murder occurred."
         else:
             return f"{location_accusation} is not the correct location of the murder."
@@ -98,7 +100,10 @@ class Hint:
         # Fetch the accused suspect's ID and attributes
         sql1 = f"SELECT suspects.id, suspects.sex, suspects.age, suspects.glasses FROM suspects WHERE names = %s"
         cursor.execute(sql1, (suspect_accusation,))
-        accused_suspect = cursor.fetchone()
+        accused_suspect = cursor.fetchall()[0]
+        accused_sex = accused_suspect[0]
+        accused_age = accused_suspect[1]
+        accused_glasses = accused_suspect[2]
         is_correct_suspect = check_if_correct_suspect(suspect_accusation,connector=self.db_connection)
 
         if not accused_suspect:
@@ -110,16 +115,20 @@ class Hint:
             return f"Correct! {suspect_accusation} is the murderer."
 
         # Fetch attributes of the correct suspect
-        sql2 = f"SELECT suspects.id, suspects.sex, suspects.age, suspects.glasses FROM suspects WHERE id = (SELECT id_suspects FROM right_answers)"
+        sql2 = f"SELECT suspects.sex, suspects.age, suspects.glasses FROM suspects WHERE id = (SELECT id_suspects FROM right_answers)"
         cursor.execute(sql2)
-        correct_attributes = cursor.fetchone()
+        correct_attributes = cursor.fetchall()[0]
 
+        matching_attributes = []
         if correct_attributes:
             correct_sex, correct_age, correct_glasses = correct_attributes
-            matching_attributes = [
-                attr for attr in ["sex", "age", "glasses"]
-                if locals()[f"accused_{attr}"] == locals()[f"correct_{attr}"]
-            ]
+            if correct_sex == accused_sex:
+                matching_attributes.append(accused_sex)
+            if correct_age == accused_age:
+                matching_attributes.append(accused_age)
+            if correct_glasses == accused_glasses:
+                matching_attributes.append(accused_glasses)
+
 
             if matching_attributes:
                 revealed_attribute = random.choice(matching_attributes)

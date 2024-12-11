@@ -299,7 +299,7 @@ const drowningButton = document.getElementById('drowning')
 const pushedDownButton = document.getElementById('pushedDown')
 const fountainPenButton = document.getElementById('fountainPen')
 const spoonButton = document.getElementById('spoon')
-const brokenGlassBottleButton = document.getElementById('brokenGlassBottleButton')
+const brokenGlassBottleButton = document.getElementById('brokenGlassBottle')
 const glassTrophyButton = document.getElementById('glassTrophy')
 const strawButton = document.getElementById('straw')
 const hammerButton = document.getElementById('hammer')
@@ -331,11 +331,14 @@ async function accuser() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataToSend)
-        });
-
-        if (!response.ok) throw new Error("Something went wrong while saving data.");
+            body: JSON.stringify(dataToSend) })
+        if (!response.ok) throw new Error("Something went wrong while saving data.")
         const result = await response.json()
+        const suspect = result.suspect_is
+        const weapon = result.weapon_is
+        const location = result.location_is
+        const win = result.win_is
+
         console.log(result); // For debugging
 
     } catch (error) {
@@ -372,7 +375,7 @@ glassTrophyButton.addEventListener('click', () => ButtonChooserWeapon(glassTroph
 drowningButton.addEventListener('click', () => ButtonChooserWeapon(drowningButton))
 ropeButton.addEventListener('click', () => ButtonChooserWeapon(ropeButton))
 pushedDownButton.addEventListener('click', () => ButtonChooserWeapon(pushedDownButton))
-
+glassShardButton.addEventListener('click', () => ButtonChooserWeapon(glassShardButton))
 
 
 

@@ -120,7 +120,6 @@ def player_location_now(select_game = thisgame.id, connection = db_connection):
     connect = connection
     select_game = select_game
     player_location = location_now(select_game, connect)
-    #print('location found')
     return player_location
 
 @app.route('/save', methods=['POST'])
@@ -144,12 +143,25 @@ def accuse():
     data = request.get_json()
     suspect = data.get('suspect')
     weapon = data.get('weapon')
-    accuse_location = check_if_correct_location(db_connection, thisgame.id)
-    accuse_weapon = check_if_correct_weapon(weapon, db_connection)
     accuse_suspect = check_if_correct_suspect(suspect, db_connection)
+    accuse_weapon = check_if_correct_weapon(weapon, db_connection)
+    accuse_location = check_if_correct_location(db_connection, thisgame.id)
+    print(accuse_suspect)
+    print(accuse_weapon)
+    print(accuse_location)
     print(suspect)
     print(weapon)
-    return jsonify({'status': 'success'}), 200
+    answers_list = [accuse_location, accuse_suspect, accuse_weapon]
+    thisgame.right_answer_add(answers_list)
+    win_or_not = thisgame.winning()
+    print(win_or_not)
+    return_this = {
+        'suspect_is': accuse_suspect,
+        'weapon_is': accuse_weapon,
+        'location_is': accuse_location,
+        'win_is': win_or_not,
+    }
+    return jsonify(return_this), 200
 
 
 # Vanhoja, vois yhdistää nää kaks funktioo accuse ja hints yhdeksi. Tässä pitäs kans runna thisgame.right_answer_add() class funktio
