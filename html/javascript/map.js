@@ -71,65 +71,65 @@ async function CreateMap() {
   const marker1 = L.marker([lat1, long1], { icon: redPin}).addTo(map).bindPopup(`
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[0][0]}</p>
-                <p><strong>Country:</strong> ${locations_list[7][0][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][0][0]}</p>
+                <p><strong>Country:</strong> ${locations_list[0][5]}</p>
+                <p><strong>Capital:</strong> ${locations_list[0][4]}</p>
                 <p><strong>Flag:</strong></p>
-                <img src="${locations_list[7][0][1]}" alt="Country Flag"
+                <img src="${locations_list[0][6]}" alt="Country Flag"
                        style="width:30px;height:auto;">
-</div>
+            </div>
     `).addTo(markerGroup)
   const marker2 = L.marker([lat2, long2], { icon: redPin}).addTo(map).bindPopup(`
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[1][0]}</p>
-                <p><strong>Country:</strong> ${locations_list[7][1][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][1][0]}</p>
+                <p><strong>Country:</strong> ${locations_list[1][5]}</p>
+                <p><strong>Capital:</strong> ${locations_list[1][4]}</p>
                 <p><strong>Flag:</strong></p>
-                <img src="${locations_list[7][1][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                <img src="${locations_list[1][6]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
         `).addTo(markerGroup)
   const marker3 = L.marker([lat3, long3], { icon: redPin}).addTo(map).bindPopup(`
             <div class= "flex-wrap" id="map-popup">
                 <p><strong>Airport:</strong> ${locations_list[2][0]}</p>
-                <p><strong>Country:</strong> ${locations_list[7][2][2]}</p>
-                <p><strong>City:</strong> ${locations_list[7][2][0]}</p>
+                <p><strong>Country:</strong> ${locations_list[2][5]}</p>
+                <p><strong>Capital:</strong> ${locations_list[2][4]}</p>
                 <p><strong>Flag:</strong></p>
-                <img src="${locations_list[7][2][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                <img src="${locations_list[2][6]}" alt="Country Flag" style="width:30px;height:auto;">
             </div>
         `).addTo(markerGroup)
   const marker4 = L.marker([lat4, long4], { icon: redPin}).addTo(map).bindPopup(`
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[3][0]}</p>
-                  <p><strong>Country:</strong> ${locations_list[7][3][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][3][0]}</p>
+                  <p><strong>Country:</strong> ${locations_list[3][5]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[3][4]}</p>
                   <p><strong>Flag:</strong></p>
-                  <img src="${locations_list[7][3][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                  <img src="${locations_list[3][6]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `).addTo(markerGroup)
   const marker5 = L.marker([lat5, long5], { icon: redPin}).addTo(map).bindPopup(`
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[4][0]}</p>
-                  <p><strong>Country:</strong> ${locations_list[7][4][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][4][0]}</p>
+                  <p><strong>Country:</strong> ${locations_list[4][5]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[4][4]}</p>
                   <p><strong>Flag:</strong></p>
-                  <img src="${locations_list[7][4][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                  <img src="${locations_list[4][6]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `).addTo(markerGroup)
   const marker6 = L.marker([lat6, long6], { icon: redPin}).addTo(map).bindPopup(`
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[5][0]}</p>
-                  <p><strong>Country:</strong> ${locations_list[7][5][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][5][0]}</p>
+                  <p><strong>Country:</strong> ${locations_list[5][5]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[5][4]}</p>
                   <p><strong>Flag:</strong></p>
-                  <img src="${locations_list[7][5][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                  <img src="${locations_list[5][6]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `).addTo(markerGroup)
   const marker7 = L.marker([lat7, long7], { icon: redPin}).addTo(map).bindPopup(`
               <div class= "flex-wrap" id="map-popup">
                   <p><strong>Airport:</strong> ${locations_list[6][0]}</p>
-                  <p><strong>Country:</strong> ${locations_list[7][6][2]}</p>
-                  <p><strong>City:</strong> ${locations_list[7][6][0]}</p>
+                  <p><strong>Country:</strong> ${locations_list[6][5]}</p>
+                  <p><strong>Capital:</strong> ${locations_list[6][4]}</p>
                   <p><strong>Flag:</strong></p>
-                  <img src="${locations_list[7][6][1]}" alt="Country Flag" style="width:30px;height:auto;">
+                  <img src="${locations_list[6][6]}" alt="Country Flag" style="width:30px;height:auto;">
               </div>
           `).addTo(markerGroup)
 }

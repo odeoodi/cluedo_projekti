@@ -26,7 +26,8 @@
 
 
 header{
-    background-color:#BEBDAD;
+    background-color: var(--lion);
+    color: var(--eggshell);
     display:flex;
     justify-content:space-evenly;
     align-items:center;
@@ -43,10 +44,15 @@ header ul {
     display: flex;
     list-style-type: none;
     gap: 1.5rem;
+    padding-right: 4.5rem;
+}
+
+header h1 {
+    margin-left: 3rem;
 }
 
 header ul li a {
-    color: #351B0C;
+    color: var(--eggshell);
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
@@ -236,6 +242,7 @@ body {
 
 .player-status {
     padding: 4px;
+    margin-top: 5px;
 }
 
 .overlay {
@@ -271,6 +278,11 @@ body {
     color: var(--theblack);
     max-height: 200px;
     overflow-y: auto;
+}
+
+#printing_text {
+    list-style: none;
+    padding: 0;
 }
 
 .popup {

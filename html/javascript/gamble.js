@@ -21,9 +21,9 @@ async function gamble_win(new_dice1, new_dice2, new_dice3) {
   return win_stats;
 }
 
-async function pay_gambling(cost) {
+async function pay_gambling() {
   try {
-    const response = await fetch(`${url_py}/pay/${cost}/`);
+    const response = await fetch(`${url_py}/pay/`);
     if (!response.ok) {
       throw new Error('Problem with paying gamble');
     }
@@ -235,7 +235,7 @@ roll.addEventListener('click', () => {
 
     if (win_points === 0) {
       await game_status()
-      await pay_gambling(50);
+      await pay_gambling();
       let new_budget = check_money();
       let budget = document.getElementById('budget');
       budget.textContent = await new_budget;
@@ -246,7 +246,7 @@ roll.addEventListener('click', () => {
 
     else if (win_points === 1) {
       await game_status()
-      await pay_gambling(50);
+      await pay_gambling();
       gamble_alert.textContent = 'You got a six, you are winning 100€!';
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
@@ -257,7 +257,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 2) {
       await game_status()
-      await pay_gambling(50);
+      await pay_gambling();
       gamble_alert.textContent = 'You have two fives, you win 150€!';
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';
@@ -268,7 +268,7 @@ roll.addEventListener('click', () => {
 
     } else if (win_points === 3) {
       await game_status()
-      await pay_gambling(50);
+      await pay_gambling();
       gamble_alert.textContent = 'You have two sixes, you are winning 250€!';
       roll.style.display = 'none';
       end_gamble.style.display = 'flex';

@@ -14,6 +14,7 @@
     <script src="javascript/notepad.js" defer></script>
     <script src="javascript/help_text.js" defer></script>
     <script src="main-page.js" defer></script>
+    <script src="javascript/narrator_text.js" defer></script>
     <link rel="stylesheet" href="main-page.css">
     <link rel="icon" type="image/x-icon" href="/html/img/magnifier.png">
 </head>
@@ -106,128 +107,100 @@
         <div id="narrator_box">
             <h2 class="printing_h2">Narrator</h2>
             <div id="narrator_text"> <!-- Insert here everything narrator says. -->
-            <p class="printing_text" id="printing_text">Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum</p>
-                <p>3Lorem ipsumLorem ipsumLorem ipsum</p><p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-                <p>3Lorem ipsumLorem ipsumLorem ipsum</p><p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-                <p>3Lorem ipsumLorem ipsumLorem ipsum</p>
+            <ul class="printing_text" id="printing_text">
+
+            </ul>
                 </div>
         </div>
     </section>
 
+
     <h2>SUSPECTS</h2>
 <div class="img_wrapper">
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 1" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="ode" onclick="selectImage(this)" onmouseover="showImageDetails(event)" >
+        <button><img alt="Ode" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 2" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="iida" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Iida" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 3" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="angelina" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Angelina" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 4" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="ville" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Ville" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 5" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="make" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Make" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 6" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="emmet" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Emmet" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 7" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="nea" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Nea" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 8" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="roope" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Roope" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 9" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="oskari" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Oskari" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 10" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="luca" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Luca" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 11" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="moriarty" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="Moriarty" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-        <button><img alt="suspect 12" src="https://picsum.photos/100/100"></button>
+    <div class="image-container" id="the-Ghost-of-the-Late-Queen-of-England" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <button><img alt="the Ghost of the Late Queen of England" src="https://picsum.photos/100/100"></button>
     </div>
 </div>
 
     <h2>WEAPONS</h2>
     <div class="w_img_wrapper">
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 1" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="knife" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="knife" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 2" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="spoon" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="spoon" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 3" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="rope" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="rope" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 4" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="poison" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="poison" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 5" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="fountainPen" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="fountain pen" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 6" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="pistol" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="pistol" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 7" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="plasticBag" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="plastic bag" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 8" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="hammer" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="hammer" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 9" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="straw" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="straw" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 10" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="brokenGlassBottle" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="broken glass bottle" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 11" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="glassShard" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="glass shard" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 12" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="glassAngel" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="glass angel" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 13" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="glassTrophy" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="glass trophy" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 14" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="drowning" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="drowning" src="https://picsum.photos/100/100"></button>
         </div>
-        <div class="image-container" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="weapon 15" src="https://picsum.photos/100/100"></button>
+        <div class="image-container" id="pushedDown" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+            <button><img alt="pushed down" src="https://picsum.photos/100/100"></button>
         </div>
     </div>
     <footer>
