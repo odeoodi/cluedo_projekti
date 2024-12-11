@@ -145,8 +145,8 @@ async function enter_name(){
         player_name.innerText = new_name
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
-        const narrator_text = document.querySelector('#printing_text')
-        narrator_text.textContent = ''
+        const narrator_text = document.querySelector('#narrator_text')
+        narrator_text.innerHTML = ''
         closepopup()
         loading_stuff = true
         loading()
