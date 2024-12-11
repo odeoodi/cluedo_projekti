@@ -55,7 +55,6 @@ def get_api_data( connection = db_connection):
     for i in results:
         info = api(i[0], i[1])
         loca_data.append(info)
-    #loca_data = json.loads(loca_data_json)
     for d in loca_data:
         city = d["city"]
         country = d["country"]
