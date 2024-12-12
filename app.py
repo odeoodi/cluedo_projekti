@@ -1,7 +1,6 @@
 import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 from codes.config import gamble_cost
 from codes.game_saves import save_game, load_game
 from codes.hints import *
@@ -23,8 +22,8 @@ app = Flask(__name__)
 cors = CORS(app)
 
 @app.route('/new_game')
-def new_game(connection = db_connection):
-    connect = connection
+def new_game():
+    connect = db_connection
     start_location(connect)
     get_api_data(connect)
     start_accusations(connect)
@@ -40,36 +39,36 @@ def save_name(player_name):
     return 'saved'
 
 @app.route('/getweapons')
-def weapons_data(connector = db_connection):
-    connect = connector
+def weapons_data():
+    connect = db_connection
     data = from_sql_weapons(connect)
     jsondata = json.dumps(data)
     return jsondata
 
 @app.route('/getsuspects')
-def suspects_data(connector = db_connection):
-    connect = connector
+def suspects_data():
+    connect = db_connection
     data = from_sql_suspects(connect)
     jsondata = json.dumps(data)
     return jsondata
 
 @app.route('/getlocations')
-def locations_data(connector = db_connection):
-    connect = connector
+def locations_data():
+    connect = db_connection
     data = from_sql_locations(connect)
     jsondata = json.dumps(data)
     return jsondata
 
 @app.route('/checkmoney')
-def check_money_sql(connector = db_connection):
-    connect = connector
+def check_money_sql():
+    connect = db_connection
     playermoney = check_money(thisgame.id, connect)
     jsonmoney = json.dumps(playermoney)
     return jsonmoney
 
 @app.route('/game_status')
-def game_status(connector = db_connection):
-    connect = connector
+def game_status():
+    connect = db_connection
     winnig = thisgame.winning()
     loosing = thisgame.losing(connect)
     if winnig:
@@ -80,8 +79,8 @@ def game_status(connector = db_connection):
         return jsonify({'status': 'continue'})
 
 @app.route('/fly/<icao>')
-def in_game_fly(icao, connector = db_connection):
-    connect = connector
+def in_game_fly(icao):
+    connect = db_connection
     icao = icao
     flying_new_port(icao, connect)
     cost_of_flying(codes.config.fly_cost, connect)
@@ -100,26 +99,26 @@ def gamble_winning(dice1, dice2, dice3):
         return jsonify({'error': str(e)}), 500
 
 @app.route('/pay/') # this function deducts the gambling cost from the players money amount
-def pay_gamble(select_game = thisgame.id, connection = db_connection):
-    connect = connection
-    select_game = select_game
+def pay_gamble():
+    connect = db_connection
+    select_game = thisgame.id
     pay(select_game, connect)
     print("gamble payed")
     return 'ok'
 
 @app.route('/add-money-gamble/<added>')
-def add_money_gamble(added, select_game = thisgame.id , connection = db_connection):
-    connect = connection
+def add_money_gamble(added):
+    connect = db_connection
     added = added
-    select_game = select_game
+    select_game = thisgame.id
     ok_money = add_money(added, select_game, connect)
     print('win money added')
     return ok_money
 
 @app.route('/player-location-now')
-def player_location_now(select_game = thisgame.id, connection = db_connection):
-    connect = connection
-    select_game = select_game
+def player_location_now():
+    connect = db_connection
+    select_game = thisgame.id
     player_location = location_now(select_game, connect)
     return player_location
 
