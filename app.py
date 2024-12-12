@@ -130,7 +130,7 @@ def save():
     narr_text = data.get('narr_text')
     print(note_text)
     print(narr_text)
-    save_game(note_text[0], narr_text[0], thisgame.id,db_connection)
+    save_game(note_text, narr_text, thisgame.id,db_connection)
     return jsonify({'status': 'success'}), 200
 
 @app.route('/load')
