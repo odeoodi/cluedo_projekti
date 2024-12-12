@@ -20,9 +20,9 @@ def start_location(connection):
                 continue
         if dubles <= 0:
             break
-    sql2= f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name LIMIT 1);"
-    sql4= f"UPDATE locations SET latitude_deg = (SELECT latitude_deg FROM airport WHERE locations.name = airport.name LIMIT 1);"
-    sql5 = f"UPDATE locations SET longitude_deg = (SELECT longitude_deg FROM airport WHERE locations.name = airport.name LIMIT 1);"
+    sql2= f"UPDATE locations SET icao = (SELECT ident FROM airport WHERE locations.name = airport.name AND airport.continent = 'EU' LIMIT 1);"
+    sql4= f"UPDATE locations SET latitude_deg = (SELECT latitude_deg FROM airport WHERE locations.name = airport.name AND airport.continent = 'EU' LIMIT 1);"
+    sql5 = f"UPDATE locations SET longitude_deg = (SELECT longitude_deg FROM airport WHERE locations.name = airport.name AND airport.continent = 'EU' LIMIT 1);"
     sql3= f"UPDATE game SET location = (SELECT name FROM locations ORDER BY RAND() limit 1);"
     cursor = connect.cursor()
     cursor.execute(sql2)

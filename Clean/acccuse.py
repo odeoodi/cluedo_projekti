@@ -1,6 +1,6 @@
 import mysql.connector
 from codes.location_now import location_now
-from codes.press_enter import press_enter_to_continue
+from Clean.press_enter import press_enter_to_continue
 from codes.check_if_correct import check_if_correct_location, check_if_correct_weapon, check_if_correct_suspect
 
 

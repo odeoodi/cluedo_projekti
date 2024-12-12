@@ -1,30 +1,3 @@
-let note_padtext= `
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-<li>Lorem ipsumLorem ipsumLorem ipsum</li>
-`
-let narrtext= `
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-<p>3Lorem ipsumLorem ipsumLorem ipsum</p>
-`
 
 
 
@@ -45,11 +18,14 @@ async function player_name_save (){
     }catch(error){console.log(error)}}
 
 async function save() {
-    let list_note_text = [note_padtext]
-    let list_narrtext = [narrtext]
+    const narrElements = document.querySelectorAll('#printing_text li')
+     const hints_text = Array.from(hintElements).map(li => li.textContent.trim());
+    const hintElements = document.querySelectorAll('#hint-list li')
+    const hints_text = Array.from(hintElements).map(li => li.textContent.trim());
+
     let dataToSend = {
-        note_text: list_note_text,
-        narr_text: list_narrtext }
+        note_text: hints_text,
+        narr_text: narrator_text }
     try {
         const response = await fetch(`${url_py}/save`, {
             method: 'POST',

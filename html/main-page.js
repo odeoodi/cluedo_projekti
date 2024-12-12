@@ -347,8 +347,9 @@ async function accuser() {
             const listItem = document.createElement('li')
             hintList.appendChild(listItem).textContent = result[1]
             const li = document.createElement('li');
-            printing_text.appendChild(li).textContent = result[1]
-        }
+            printing_text.appendChild(li).textContent = result[1]}
+        else
+            await win()
         console.log(result);// For debugging
         document.querySelector('#accuse-button').disabled = true
     } catch (error) {

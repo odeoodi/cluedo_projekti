@@ -8,7 +8,7 @@ const gamble_win_text1 = `Scoffs* Beginner's luck.`
 const gamble_win_text2 = `Well ain't you a lucky feller.`
 const gamble_win_text3 = `Lady Luck must really like ya.`
 const location_welcome =`You have landed.`
-
+const out_of_monney = `You have run out of money to fly. Try gambling to win some more.`
 async function addtext(content) {
     const li = document.createElement('li');
     printing_text.appendChild(li).textContent = content;

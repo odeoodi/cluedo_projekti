@@ -42,6 +42,11 @@ async function fly(airport_name) {
     if (!response.ok) {
       throw new Error('Problem flying in js')
     }
+    const moneey = await check_money()
+    if (moneey < 75 ) {
+      document.querySelector('#fly-button').disabled = true
+      await addtext(out_of_monney)
+    }
     document.querySelector('#accuse-button').disabled = false
   } catch(error) {
     console.log(error.message)
