@@ -15,13 +15,14 @@ async function player_name_save (){
         console.log(response)
     }catch(error){console.log(error)}}
 
-async function save() {
-    const printingTextHTML = document.querySelector('#printing_text').innerHTML
+/*async function save() {
+    const printingTextHTML = document.querySelector('#narrator_text').innerHTML
     const hintsHTML = document.querySelector('#hint-list').innerHTML;
 
     let dataToSend = {
-        note_text: hintsHTML,
-        narr_text: printingTextHTML }
+        note_text1: hintsHTML,
+        narr_text1: printingTextHTML }
+    console.log (dataToSend)
     try {
         const response = await fetch(`${url_py}/save`, {
             method: 'POST',
@@ -42,11 +43,11 @@ async function load_game() {
         const load_data = await response.json()
         console.log(load_data)
         const nottext = load_data.note_text
-        const nartext = load_data.narrator_text
-        const player_name = load_data.player_name
+        const nartext = load_data.narr_text
+        const playername = load_data.playername
         await add_to_note_padd_load(nottext[0])
         await add_to_narrator_load(nartext[0])
-        console.log(player_name[0])
+        console.log(playername[0])
         const load_name = document.querySelector('#player-id')
         load_name.innerText = player_name[0]
         await get_locations()
@@ -60,7 +61,7 @@ async function load_game() {
         await add_to_narrator_load(load_game_text)
     } catch (error) {console.log(error.message)}}
 
-
+*/
 async function win() {
     showpopup()
     const container = document.querySelector('#popup')

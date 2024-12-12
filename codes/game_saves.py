@@ -22,7 +22,7 @@ def load_game(game_id, connection):
     name_load = cursor.fetchall()
     data_to_send = {
         'note_text': note_text,
-        'narrator_text': narrator_text,
-        'player_name': name_load,
+        'nartext': narrator_text,
+        'playername': name_load,
     }
     return data_to_send

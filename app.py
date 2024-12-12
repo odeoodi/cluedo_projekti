@@ -135,6 +135,7 @@ def save():
 @app.route('/load')
 def load():
     save_data = load_game(thisgame.id, db_connection)
+    print (save_data)
     return jsonify(save_data)
 
 

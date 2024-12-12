@@ -5,8 +5,8 @@ const popup = document.querySelector('#popup')
 const fly_button = document.getElementById('fly-button')
 const help_button = document.querySelector('#help-button')
 const new_game_button = document.querySelector('#newgame-button')
-const save_button = document.querySelector('#save-button')
-const load_button = document.querySelector('#load-button')
+//const save_button = document.querySelector('#save-button')
+//const load_button = document.querySelector('#load-button'
 
 let loading_stuff = false
 
@@ -28,9 +28,9 @@ help_button.addEventListener('click', async () => {
 new_game_button.addEventListener('click', async (e) => {
   enter_name()})
 
-save_button.addEventListener('click', async (e) => {await save()})
-
-load_button.addEventListener('click', async (e) => {await load_game()})
+//save_button.addEventListener('click', async (e) => {await save()})
+//Not working :(
+//load_button.addEventListener('click', async (e) => {await load_game()})
 
 fly_button.addEventListener('click', async () => {
     await game_status()
