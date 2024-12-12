@@ -8,7 +8,7 @@ const listItem = document.createElement('li')
 // emptying the notepad for a new game
 newgameButton.addEventListener('click', () => {
   const listItem = document.createElement('li')
-            hintList.appendChild(listItem).textContent = clue
+
 })
 
 const clue = 'You dont have any clues.'
