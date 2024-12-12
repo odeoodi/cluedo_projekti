@@ -7,7 +7,7 @@ async function add_to_note_padd_load(list_text){
 
 async function add_to_narrator_load(list_text){
     const narator_box = document.querySelector('#narrator_text')
-    narator_box.innerHTML=`${list_text}`}
+    narator_box.innerText=`${list_text}`}
 
 async function player_name_save (){
     const player_name = document.querySelector('#player-id').textContent
@@ -19,7 +19,7 @@ async function player_name_save (){
 
 async function save() {
     const narrElements = document.querySelectorAll('#printing_text li')
-     const hints_text = Array.from(hintElements).map(li => li.textContent.trim());
+     const narrator_text = Array.from(narrElements).map(li => li.textContent.trim());
     const hintElements = document.querySelectorAll('#hint-list li')
     const hints_text = Array.from(hintElements).map(li => li.textContent.trim());
 
@@ -35,6 +35,7 @@ async function save() {
             body: JSON.stringify(dataToSend)
         })
         if (!response.ok) throw new Error("Something went wrong while saving data.");
+        await addtext(saved_game)
         console.log('ok')
         } catch (error) {console.log(error.message)}}
 
@@ -48,10 +49,19 @@ async function load_game() {
         const nartext = load_data.narrator_text
         const player_name = load_data.player_name
         await add_to_note_padd_load(nottext[0])
-        await add_to_narrator_load(nartext[0])
+        await addtext(nartext)
         console.log(player_name[0])
         const load_name = document.querySelector('#player-id')
         load_name.innerText = player_name[0]
+        await get_locations()
+        await get_lists()
+        await add_to_hover()
+        await CreateMap()
+        await changePins()
+        const stat_money = await check_money()
+        let budget = document.getElementById('budget')
+        budget.textContent = stat_money
+        await add_to_narrator_load(load_game_text)
     } catch (error) {console.log(error.message)}}
 
 

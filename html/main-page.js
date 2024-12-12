@@ -1,12 +1,12 @@
 'use strict'
 
-// this is url to python and after this add the flask address
-// const url_py = 'http://127.0.0.1:3000'
 const overlay = document.querySelector('#overlay')
 const popup = document.querySelector('#popup')
 const fly_button = document.getElementById('fly-button')
 const help_button = document.querySelector('#help-button')
 const new_game_button = document.querySelector('#newgame-button')
+const save_button = document.querySelector('#save-button')
+const load_button = document.querySelector('#load-button')
 
 let loading_stuff = false
 
@@ -63,15 +63,12 @@ function loading() {
 
 async function get_locations(){
     loading_stuff = true
-
     try {
         const response3 = await fetch(`${url_py}/getlocations`)
         if (!response3.ok) throw new Error("something went wrong locations")
         locations_list = await response3.json()
         console.log(locations_list)
-
         return locations_list
-
     }catch(error){console.log(error)}}
 
 async function get_lists() {
@@ -270,50 +267,29 @@ function selectImage(imgElement) {
     imgElement.closest('.image-container').classList.add('pressed');
 }
 
-help_button.addEventListener('click', async () => {
-    await help_pop()})
+function moveTooltip(event, element) {
+    const tooltip = element.querySelector('.tooltip');
+    tooltip.style.position = 'absolute'
+    tooltip.style.backgroundColor = '#57432E'
+    tooltip.style.color = '#EEE9DA'
+    tooltip.style.padding = '8px'
+    tooltip.style.borderRadius = '5px'
+    tooltip.style.whiteSpace = 'nowrap'
+    tooltip.style.zIndex = '10'
+    tooltip.style.fontSize = '12px'
+    tooltip.style.pointerEvents = 'none'
+    tooltip.style.display = 'block'
+    const mouseX = event.pageX;
+    const mouseY = event.pageY;
+    tooltip.style.top = mouseY + 10 + 'px';
+    tooltip.style.left = mouseX + 10 + 'px';
+    }
 
-new_game_button.addEventListener('click', async (e) => {
-  enter_name()})
+function hideTooltip(element) {
+    const tooltip = element.querySelector('.tooltip');
+    tooltip.style.display = 'none';
 
-fly_button.addEventListener('click', async () => {
-    await game_status()
-    flyPopup.style.display = 'block'
-    overlay.style.display = 'block'
-    await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
-})
-
-const odeButton = document.getElementById('ode')
-const iidaButton = document.getElementById('iida')
-const angelinaButton = document.getElementById('angelina')
-const villeButton = document.getElementById('ville')
-const makeButton = document.getElementById('make')
-const roopeButton = document.getElementById('roope')
-const oskariButton = document.getElementById('oskari')
-const lucaButton = document.getElementById('luca')
-const neaButton = document.getElementById('nea')
-const emmetButton = document.getElementById('emmet')
-const moriartyButton = document.getElementById('moriarty')
-const ghostButton = document.getElementById('the-Ghost-of-the-Late-Queen-of-England')
-
-
-
-
-const poisonButton = document.getElementById('poison')
-const ropeButton = document.getElementById('rope')
-const pistolButton = document.getElementById('pistol')
-const glassAngelButton = document.getElementById('glassAngel')
-const glassShardButton = document.getElementById('glassShard')
-const drowningButton = document.getElementById('drowning')
-const pushedDownButton = document.getElementById('pushedDown')
-const fountainPenButton = document.getElementById('fountainPen')
-const spoonButton = document.getElementById('spoon')
-const brokenGlassBottleButton = document.getElementById('brokenGlassBottle')
-const glassTrophyButton = document.getElementById('glassTrophy')
-const strawButton = document.getElementById('straw')
-const hammerButton = document.getElementById('hammer')
-const knifeButton = document.getElementById('knife')
-const plasticBagButton = document.getElementById('plasticBag')
+}
 
 const idList = ["suspect","weapon"]
 
@@ -357,6 +333,50 @@ async function accuser() {
     }
 }
 
+help_button.addEventListener('click', async () => {
+    await help_pop()})
+
+new_game_button.addEventListener('click', async (e) => {
+  enter_name()})
+
+save_button.addEventListener('click', async (e) => {await save()})
+
+load_button.addEventListener('click', async (e) => {await load_game()})
+
+fly_button.addEventListener('click', async () => {
+    await game_status()
+    flyPopup.style.display = 'block'
+    overlay.style.display = 'block'
+    await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
+})
+
+const odeButton = document.getElementById('ode')
+const iidaButton = document.getElementById('iida')
+const angelinaButton = document.getElementById('angelina')
+const villeButton = document.getElementById('ville')
+const makeButton = document.getElementById('make')
+const roopeButton = document.getElementById('roope')
+const oskariButton = document.getElementById('oskari')
+const lucaButton = document.getElementById('luca')
+const neaButton = document.getElementById('nea')
+const emmetButton = document.getElementById('emmet')
+const moriartyButton = document.getElementById('moriarty')
+const ghostButton = document.getElementById('the-Ghost-of-the-Late-Queen-of-England')
+const poisonButton = document.getElementById('poison')
+const ropeButton = document.getElementById('rope')
+const pistolButton = document.getElementById('pistol')
+const glassAngelButton = document.getElementById('glassAngel')
+const glassShardButton = document.getElementById('glassShard')
+const drowningButton = document.getElementById('drowning')
+const pushedDownButton = document.getElementById('pushedDown')
+const fountainPenButton = document.getElementById('fountainPen')
+const spoonButton = document.getElementById('spoon')
+const brokenGlassBottleButton = document.getElementById('brokenGlassBottle')
+const glassTrophyButton = document.getElementById('glassTrophy')
+const strawButton = document.getElementById('straw')
+const hammerButton = document.getElementById('hammer')
+const knifeButton = document.getElementById('knife')
+const plasticBagButton = document.getElementById('plasticBag')
 
 document.getElementById('accuse-button').addEventListener('click', () => accuser())
 odeButton.addEventListener('click', () => ButtonChooserSuspect(odeButton))
@@ -387,32 +407,3 @@ drowningButton.addEventListener('click', () => ButtonChooserWeapon(drowningButto
 ropeButton.addEventListener('click', () => ButtonChooserWeapon(ropeButton))
 pushedDownButton.addEventListener('click', () => ButtonChooserWeapon(pushedDownButton))
 glassShardButton.addEventListener('click', () => ButtonChooserWeapon(glassShardButton))
-
-
-
-
-
-function moveTooltip(event, element) {
-    const tooltip = element.querySelector('.tooltip');
-    tooltip.style.position = 'absolute'
-    tooltip.style.backgroundColor = '#57432E'
-    tooltip.style.color = '#EEE9DA'
-    tooltip.style.padding = '8px'
-    tooltip.style.borderRadius = '5px'
-    tooltip.style.whiteSpace = 'nowrap'
-    tooltip.style.zIndex = '10'
-    tooltip.style.fontSize = '12px'
-    tooltip.style.pointerEvents = 'none'
-    tooltip.style.display = 'block'
-    const mouseX = event.pageX;
-    const mouseY = event.pageY;
-    tooltip.style.top = mouseY + 10 + 'px';
-    tooltip.style.left = mouseX + 10 + 'px';
-    }
-
-
-function hideTooltip(element) {
-    const tooltip = element.querySelector('.tooltip');
-    tooltip.style.display = 'none';
-
-}

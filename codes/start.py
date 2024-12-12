@@ -1,5 +1,3 @@
-
-
 def start_location(connection):
     # Selects 7 random location from airport tabel, checks that they are all uniques and adds them to locations table,
     # selects one of the airports as starting airport.
