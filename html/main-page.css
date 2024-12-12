@@ -343,6 +343,8 @@ body {
 }
 
 
+
+
 /* When the button is pressed, change the border color */
 button.pressed {
     border-color: var(--noir); /* Use the --noir color when pressed */
@@ -370,15 +372,16 @@ img {
     }
 
     .pressed {
-        transform: scale(0.95);
+        transform: scale(0.90);
     }img {
         transition: transform 0.1s, border-color 0.1s;
     }
 
 
     .pressed {
-        transform: scale(0.95);
+        transform: scale(0.90);
         border-color:#746953 ;
+
     }
 
 #help_ol, #help_ul {

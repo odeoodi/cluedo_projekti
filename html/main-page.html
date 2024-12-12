@@ -11,7 +11,7 @@
     <script src="javascript/narrator_text.js" defer></script>
     <script src="javascript/map.js" defer></script>
     <script src="javascript/gamble.js" defer></script>
-    <script src="test.js" defer></script>
+    <script src="javascript/test.js" defer></script>
     <script src="javascript/notepad.js" defer></script>
     <script src="javascript/help_text.js" defer></script>
     <script src="main-page.js" defer></script>
@@ -107,89 +107,89 @@
 
     <h2>SUSPECTS</h2>
 <div class="img_wrapper">
-    <div class="image-container" id="ode" onclick="selectImage(this)" onmouseover="showImageDetails(event)" >
+    <div class="image-container" id="ode" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)" >
         <button><img alt="Ode" src="img/ode.png"></button>
     </div>
-    <div class="image-container" id="iida" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="iida" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Iida" src="img/iida.png"></button>
     </div>
-    <div class="image-container" id="angelina" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="angelina" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Angelina" src="img/angie.png"></button>
     </div>
-    <div class="image-container" id="ville" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="ville" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Ville" src="img/ville.png"></button>
     </div>
-    <div class="image-container" id="make" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="make" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Make" src="img/make.png"></button>
     </div>
-    <div class="image-container" id="emmet" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="emmet" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Emmet" src="img/emmet.png"></button>
     </div>
-    <div class="image-container" id="nea" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="nea" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Nea" src="img/nea.png"></button>
     </div>
-    <div class="image-container" id="roope" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="roope" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Roope" src="img/roope.png"></button>
     </div>
-    <div class="image-container" id="oskari" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="oskari" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Oskari" src="img/osku.png"></button>
     </div>
-    <div class="image-container" id="luca" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="luca" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Luca" src="img/luca.png"></button>
     </div>
-    <div class="image-container" id="moriarty" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="moriarty" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="Moriarty" src="https://picsum.photos/100/100"></button>
     </div>
-    <div class="image-container" id="the-Ghost-of-the-Late-Queen-of-England" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+    <div class="image-container" id="the-Ghost-of-the-Late-Queen-of-England" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
         <button><img alt="the Ghost of the Late Queen of England" src="img/ghost.png"></button>
     </div>
 </div>
 
     <h2>WEAPONS</h2>
     <div class="w_img_wrapper">
-        <div class="image-container" id="knife" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="knife" src="img/knife.png"></button>
-        </div>
-        <div class="image-container" id="spoon" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="spoon" src="img/spoon.png"></button>
-        </div>
-        <div class="image-container" id="rope" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="rope" src="img/rope.png"></button>
-        </div>
-        <div class="image-container" id="poison" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
-            <button><img alt="poison" src="img/poison.png"></button>
-        </div>
-        <div class="image-container" id="fountainPen" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="fountainPen" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="fountain pen" src="img/fountainPen.png"></button>
         </div>
-        <div class="image-container" id="pistol" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="knife" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
+            <button><img alt="knife" src="img/knife.png"></button>
+        </div>
+        <div class="image-container" id="pistol" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="pistol" src="img/pistol.png"></button>
         </div>
-        <div class="image-container" id="plasticBag" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="spoon" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
+            <button><img alt="spoon" src="img/spoon.png"></button>
+        </div>
+        <div class="image-container" id="poison" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
+            <button><img alt="poison" src="img/poison.png"></button>
+        </div>
+        <div class="image-container" id="plasticBag" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="plastic bag" src="img/plasticBag.png"></button>
         </div>
-        <div class="image-container" id="hammer" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="hammer" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="hammer" src="img/hammer.png"></button>
         </div>
-        <div class="image-container" id="straw" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="straw" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="straw" src="img/starw.png"></button>
         </div>
-        <div class="image-container" id="brokenGlassBottle" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="brokenGlassBottle" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="broken glass bottle" src=img/bgb.png></button>
         </div>
-        <div class="image-container" id="glassShard" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="glassShard" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="glass shard" src="img/gs.png"></button>
         </div>
-        <div class="image-container" id="glassAngel" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="glassAngel" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="glass angel" src="img/ga.png"></button>
         </div>
-        <div class="image-container" id="glassTrophy" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="glassTrophy" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="glass trophy" src="img/gt.png"></button>
         </div>
-        <div class="image-container" id="drowning" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="drowning" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="drowning" src="img/drowning.png"></button>
         </div>
-        <div class="image-container" id="pushedDown" onclick="selectImage(this)" onmouseover="showImageDetails(event)">
+        <div class="image-container" id="rope" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
+            <button><img alt="rope" src="img/rope.png"></button>
+        </div>
+        <div class="image-container" id="pushedDown" onclick="selectImage(this)" onmousemove="moveTooltip(event, this)" onmouseout="hideTooltip(this)">
             <button><img alt="pushed down" src="img/pushed.png"></button>
         </div>
     </div>

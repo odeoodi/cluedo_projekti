@@ -97,3 +97,4 @@ def player_insert(connection, playername, game_id):
     name_upp = "update game set name = %s WHERE id = %s"
     cursor = connect.cursor()
     cursor.execute(name_upp, (playername, game_id))
+

@@ -108,3 +108,64 @@ async function win() {
     document.querySelector('#gamble-button').disabled = true
     document.querySelector('#fly-button').disabled = true
 }
+
+
+async function add_to_hover() {
+    const suspects_button_list = [
+        villeButton,
+        iidaButton,
+        odeButton,
+        makeButton,
+        angelinaButton,
+        emmetButton,
+        neaButton,
+        roopeButton,
+        oskariButton,
+        lucaButton,
+        moriartyButton,
+        ghostButton]
+    const weapons_listButtons = [fountainPenButton, knifeButton, pistolButton, spoonButton, poisonButton, plasticBagButton, hammerButton, strawButton, brokenGlassBottleButton, glassShardButton, glassAngelButton,  glassTrophyButton, drowningButton, ropeButton, pushedDownButton, ]
+    let num1 = 0
+    suspects_button_list.forEach(button => {
+        let num2 = 0
+        const container = document.createElement('div')
+        const fragment = document.createDocumentFragment()
+        while (num2 < 4) {
+            const text = document.createElement('p');
+            if ( num2 === 3 ){
+                Object.assign(text, {
+                    textContent:`Glasses : ${suspects_list[num1][num2]}`});}
+            else {
+                Object.assign(text, {
+                    textContent: suspects_list[num1][num2] });}
+        fragment.appendChild(text);
+        num2 += 1 }
+        container.appendChild(fragment)
+        container.classList.add('tooltip')
+        container.style.display = 'none'
+        container.appendChild(fragment)
+        button.appendChild(container)
+        num1 += 1 })
+    num1 = 0
+    weapons_listButtons.forEach(button => {
+        console.log(button)
+        let num2 = 0
+        const container = document.createElement('div')
+        const fragment = document.createDocumentFragment()
+        while (num2 < 3) {
+            const text = document.createElement('p');
+                Object.assign(text, {
+                    textContent: weapons_list[num1][num2] })
+            console.log(weapons_list[num1][num2])
+        fragment.appendChild(text);
+        num2 += 1 }
+        container.appendChild(fragment)
+        container.classList.add('tooltip')
+        container.style.display = 'none'
+        container.appendChild(fragment)
+        button.appendChild(container)
+        num1 += 1})
+            console.log(weapons_listButtons)
+
+}
+

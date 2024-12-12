@@ -8,7 +8,6 @@ const fly_button = document.getElementById('fly-button')
 const help_button = document.querySelector('#help-button')
 const new_game_button = document.querySelector('#newgame-button')
 
-
 let loading_stuff = false
 
 let weapons_list = {}
@@ -145,6 +144,7 @@ async function enter_name(){
         player_name.innerText = new_name
         document.querySelector('#accuse-button').disabled = false
         document.querySelector('#gamble-button').disabled = false
+        document.querySelector('#fly-button').disabled = false
         printing_text.innerHTML = ''
         closepopup()
         loading_stuff = true
@@ -157,6 +157,7 @@ async function enter_name(){
         await CreateMap()
         await changePins()
         await closeGamble()
+        await add_to_hover()
         const stat_money = await check_money()
         let budget = document.getElementById('budget')
         budget.textContent = stat_money
@@ -217,6 +218,7 @@ function fail(){
     document.querySelector('#dicebox').style.display = 'none'
     document.querySelector('#accuse-button').disabled = true
     document.querySelector('#gamble-button').disabled = true
+    document.querySelector('#fly-button').disabled = true
     showpopup()
 }
 
@@ -256,7 +258,6 @@ async function accuse(weapon,suspect) {
         } catch (error){
       console.log(error.message)}}
 
-
 function selectImage(imgElement) {
     // Find the parent category (suspect or weapon) of the clicked image
     const category = imgElement.closest('.image-container').parentElement;
@@ -269,8 +270,6 @@ function selectImage(imgElement) {
     imgElement.closest('.image-container').classList.add('pressed');
 }
 
-
-
 help_button.addEventListener('click', async () => {
     await help_pop()})
 
@@ -278,12 +277,11 @@ new_game_button.addEventListener('click', async (e) => {
   enter_name()})
 
 fly_button.addEventListener('click', async () => {
+    await game_status()
     flyPopup.style.display = 'block'
     overlay.style.display = 'block'
     await createIcaoButtons() // also adds an event listener for icao buttons, where we can use the fly function
 })
-
-
 
 const odeButton = document.getElementById('ode')
 const iidaButton = document.getElementById('iida')
@@ -393,88 +391,27 @@ glassShardButton.addEventListener('click', () => ButtonChooserWeapon(glassShardB
 
 
 
-
-
-
-
-
-function showImageDetails(event){
-
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-
-
-    document.body.appendChild(tooltip);
-
+function moveTooltip(event, element) {
+    const tooltip = element.querySelector('.tooltip');
+    tooltip.style.position = 'absolute'
+    tooltip.style.backgroundColor = '#57432E'
+    tooltip.style.color = '#EEE9DA'
+    tooltip.style.padding = '8px'
+    tooltip.style.borderRadius = '5px'
+    tooltip.style.whiteSpace = 'nowrap'
+    tooltip.style.zIndex = '10'
+    tooltip.style.fontSize = '12px'
+    tooltip.style.pointerEvents = 'none'
+    tooltip.style.display = 'block'
     const mouseX = event.pageX;
     const mouseY = event.pageY;
-    tooltip.style.position = 'absolute';
     tooltip.style.top = mouseY + 10 + 'px';
     tooltip.style.left = mouseX + 10 + 'px';
-    tooltip.style.backgroundColor = '#333';
-    tooltip.style.color = '#fff';
-    tooltip.style.padding = '5px 10px';
-    tooltip.style.borderRadius = '5px';
-    tooltip.style.zIndex = '1000';
-    tooltip.style.whiteSpace = 'nowrap';
-
-    event.currentTarget.addEventListener('mouseout', () => {
-        tooltip.remove();
-})}
-
-
-
-
-
-
-
-
-
-/*
-function changeText() {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = "You clicked the button!";
-        }
-
-        function resetText() {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = "Click the button to change this text.";
-        }
-
-
-
-// Function to fetch and show image details on hover
-async function showImageDetails(event) {
-    const imageId = event.target.closest('.image-container').dataset.id; // Get the image ID from the data attribute
-
-    // Call a backend API to fetch the image details
-    const response = await fetch(`/getImageDetails?id=${imageId}`); // Assuming your backend exposes an endpoint like this
-    const data = await response.json();
-
-    // If data is successfully fetched, show it in the tooltip
-    if (data) {
-        const tooltip = document.getElementById('details-tooltip');
-        const imageTitle = document.getElementById('image-title');
-        const imageDescription = document.getElementById('image-description');
-
-        imageTitle.textContent = data.title || "No title available"; // Show title or default text
-        imageDescription.textContent = data.description || "No description available"; // Show description or default text
-
-        // Position the tooltip near the mouse pointer
-        tooltip.style.left = `${event.pageX + 10}px`; // Add a little offset to the right
-        tooltip.style.top = `${event.pageY + 10}px`; // Add a little offset below
-        tooltip.style.display = 'block'; // Make the tooltip visible
     }
-}
 
-// Hide the tooltip when the mouse leaves the button
-function hideTooltip() {
-    const tooltip = document.getElementById('details-tooltip');
-    tooltip.style.display = 'none'; // Hide the tooltip
-}
 
-// Attach a mouseout event to hide the tooltip
-document.querySelectorAll('.image-container').forEach(container => {
-    container.addEventListener('mouseout', hideTooltip);
-});
-*/
+function hideTooltip(element) {
+    const tooltip = element.querySelector('.tooltip');
+    tooltip.style.display = 'none';
+
+}
