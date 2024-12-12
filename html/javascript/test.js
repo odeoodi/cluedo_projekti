@@ -148,7 +148,6 @@ async function add_to_hover() {
         num1 += 1 })
     num1 = 0
     weapons_listButtons.forEach(button => {
-        console.log(button)
         let num2 = 0
         const container = document.createElement('div')
         const fragment = document.createDocumentFragment()
@@ -156,7 +155,6 @@ async function add_to_hover() {
             const text = document.createElement('p');
                 Object.assign(text, {
                     textContent: weapons_list[num1][num2] })
-            console.log(weapons_list[num1][num2])
         fragment.appendChild(text);
         num2 += 1 }
         container.appendChild(fragment)
@@ -165,7 +163,6 @@ async function add_to_hover() {
         container.appendChild(fragment)
         button.appendChild(container)
         num1 += 1})
-            console.log(weapons_listButtons)
 
 }
 

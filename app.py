@@ -142,6 +142,7 @@ def load():
 @app.route('/accuse/', methods=['POST'])
 def accuse():
     data = request.get_json()
+    print(data)
     suspect = data.get('suspect')
     weapon = data.get('weapon')
     accuse_suspect = check_if_correct_suspect(suspect, db_connection)
